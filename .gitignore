@@ -1,0 +1,13 @@
+# Sistema
+.DS_Store
+
+# Build para la preview de claude.ai (referencia /_blob; no se despliega)
+_artifact_build.html
+
+# Diseño antiguo de referencia (sustituido por index.html)
+index-gemini.html
+
+# Vídeos/imágenes duplicados no usados por index.html
+videos/vsl.mp4
+videos/clip-*.mp4
+videos/clip-*.jpg

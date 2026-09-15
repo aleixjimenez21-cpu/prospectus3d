@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prospectus.</title>
+<meta name="description" content="Prospectus 3D convierte los planos de una promoción inmobiliaria en un showroom 3D interactivo para promotoras.">
+<style>
+    /* ==========================================================================
+       SISTEMA DE VARIABLES — ESTILO ORIGINAL (Tecnológico / Violeta)
+       ========================================================================== */
+    :root {
+        --bg-base: #09090b;
+        --bg-surface: #18181b;
+        --bg-surface-hover: #27272a;
+        --text-main: #ffffff;
+        --text-muted: #a1a1aa;
+        --accent: #8b5cf6;
+        --accent-hover: #7c3aed;
+        --border-color: #27272a;
+
+        --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        --font-head: var(--font-sans);
+        --radius: 12px;
+        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --bg-base: #ffffff;
+            --bg-surface: #f4f4f5;
+            --bg-surface-hover: #e4e4e7;
+            --text-main: #09090b;
+            --text-muted: #52525b;
+            --border-color: #e4e4e7;
+        }
+    }
+
+    /* ==========================================================================
+       RESET Y BASE
+       ========================================================================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+        font-family: var(--font-sans);
+        background-color: var(--bg-base);
+        color: var(--text-main);
+        line-height: 1.6;
+        overflow-x: hidden;
+        transition: background-color var(--transition), color var(--transition);
+    }
+    h1, h2, h3, h4, .font-head { font-family: var(--font-head); font-weight: 500; text-wrap: balance; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button, input, textarea { font-family: inherit; border: none; outline: none; }
+    img, video { max-width: 100%; display: block; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    .skip-link { position: absolute; top: -40px; left: 0; background: var(--accent); color: #fff; padding: 8px; z-index: 9999; }
+    .skip-link:focus { top: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+        * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    }
+
+    /* ==========================================================================
+       UTILIDADES Y LAYOUT
+       ========================================================================== */
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+    .section-pad { padding: 120px 0; }
+    .text-center { text-align: center; }
+    .mb-2 { margin-bottom: 0.5rem; } .mb-4 { margin-bottom: 1.5rem; } .mb-8 { margin-bottom: 3rem; }
+    .mt-4 { margin-top: 1.5rem; } .mt-8 { margin-top: 3rem; }
+    .grid { display: grid; gap: 2rem; }
+
+    .btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        padding: 14px 28px; border-radius: var(--radius); font-weight: 500;
+        cursor: pointer; transition: var(--transition); font-size: 1rem;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-secondary { background: var(--bg-surface); border: 1px solid var(--border-color); color: var(--text-main); }
+    .btn-secondary:hover { background: var(--border-color); }
+
+    .wordmark { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.02em; }
+    .wordmark .dot { color: var(--accent); }
+
+    /* ==========================================================================
+       NAVEGACIÓN
+       ========================================================================== */
+    header {
+        position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+        background: color-mix(in srgb, var(--bg-base) 85%, transparent);
+        backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color);
+    }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { font-size: 0.95rem; font-weight: 500; opacity: 0.8; transition: var(--transition); }
+    .nav-links a:hover { opacity: 1; color: var(--accent); }
+    .nav-ctas { display: flex; gap: 1rem; align-items: center; }
+    .menu-toggle { display: none; background: transparent; color: var(--text-main); font-size: 1.5rem; cursor: pointer; }
+
+    @media (max-width: 992px) {
+        .nav-links, .nav-ctas .btn-secondary { display: none; }
+        .menu-toggle { display: block; }
+        .nav-links.active {
+            display: flex; flex-direction: column; position: absolute; top: 80px; left: 0;
+            width: 100%; background: var(--bg-base); padding: 2rem; border-bottom: 1px solid var(--border-color);
+        }
+    }
+
+    /* ==========================================================================
+       HERO / INICIO
+       ========================================================================== */
+    .hero { min-height: 100vh; padding-top: 120px; display: flex; flex-direction: column; justify-content: center; }
+    .hero-content { max-width: 800px; margin: 0 auto 4rem auto; }
+    .eyebrow { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 600; display: block; margin-bottom: 1rem; }
+    .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+    .hero p { font-size: clamp(1.1rem, 2vw, 1.25rem); color: var(--text-muted); margin-bottom: 2.5rem; }
+
+    /* ==========================================================================
+       VSL / PORTADA
+       ========================================================================== */
+    .vsl-container {
+        position: relative; width: 100%; aspect-ratio: 16/9; max-width: 1200px; margin: 0 auto;
+        border-radius: var(--radius); overflow: hidden; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .vsl-video { width: 100%; height: 100%; object-fit: cover; }
+
+    .vsl-overlay {
+        position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center;
+        background: linear-gradient(135deg, rgba(10,10,10,0.72) 0%, rgba(30,30,30,0.5) 100%);
+        z-index: 10; cursor: pointer; transition: opacity 0.4s ease; text-align: center; padding: 6%;
+    }
+    .vsl-overlay:hover .play-btn { transform: scale(1.08); }
+    .vsl-tag { position: absolute; top: 2rem; left: 2rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(4px); padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+    .vsl-duration { position: absolute; bottom: 2rem; right: 2rem; font-size: 0.9rem; color: rgba(255,255,255,0.85); font-weight: 500; }
+    .vsl-brand { position: absolute; bottom: 2rem; left: 2rem; font-size: 1.5rem; color: #fff; }
+
+    .play-btn {
+        width: 84px; height: 84px; border-radius: 50%; background: #fff;
+        display: flex; justify-content: center; align-items: center;
+        box-shadow: 0 12px 36px rgba(0,0,0,0.28); transition: var(--transition);
+    }
+    .play-btn svg { width: 30px; height: 30px; fill: #111; margin-left: 5px; }
+    .vsl-title { color: #fff; font-family: var(--font-head); font-weight: 600; font-size: clamp(1.4rem, 2.6vw, 2.2rem); letter-spacing: -0.02em; margin-top: 1.35rem; }
+    .vsl-hint { display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 0.7rem; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.9); font-weight: 600; }
+    .vsl-hint::before { content: ''; border-left: 8px solid currentColor; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+    .vsl-caption { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 1.5rem; }
+
+    /* ==========================================================================
+       DEMO EN VIVO
+       ========================================================================== */
+    .demo-browser {
+        background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius);
+        overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 1200px; margin: 0 auto;
+    }
+    .browser-bar {
+        padding: 12px 16px; background: var(--bg-surface-hover); border-bottom: 1px solid var(--border-color);
+        display: flex; align-items: center; gap: 8px;
+    }
+    .browser-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--border-color); }
+    .browser-url { margin-left: auto; margin-right: auto; font-size: 0.8rem; color: var(--text-muted); opacity: 0.7; }
+    .demo-iframe-container { position: relative; aspect-ratio: 16/9; width: 100%; background: #0b0b0d center/cover no-repeat; background-image: url("videos/demo-preview.jpg"); }
+    .demo-iframe-container iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .demo-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding: 2rem; background: linear-gradient(to top, rgba(0,0,0,0.78), rgba(0,0,0,0.15) 55%, transparent); }
+    .demo-overlay-card { text-align: center; max-width: 460px; background: color-mix(in srgb, var(--bg-base) 82%, transparent); backdrop-filter: blur(8px); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem 1.75rem; }
+    .demo-overlay-card h3 { font-size: 1.3rem; margin: 0.4rem 0 0.5rem; }
+    .demo-overlay-card p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.1rem; }
+    .demo-fallback { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 1.25rem; }
+    .demo-fallback a { color: var(--accent); text-decoration: underline; }
+
+    /* ==========================================================================
+       UN SOLO ENLACE
+       ========================================================================== */
+    .features-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .card { background: var(--bg-surface); padding: 3rem 2rem; border-radius: var(--radius); border: 1px solid var(--border-color); transition: var(--transition); }
+    .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+
+    /* ==========================================================================
+       SECCIÓN AUDIOVISUAL (HORIZONTAL)
+       ========================================================================== */
+    .video-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .video-card { border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; background: var(--bg-surface); }
+    .video-card video { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: #000; }
+    .video-info { padding: 1.25rem 1.5rem 1.5rem; }
+    .video-info h4 { font-size: 1.15rem; margin-bottom: 0.25rem; }
+    .video-info p { color: var(--text-muted); font-size: 0.9rem; }
+    @media (max-width: 768px) { .video-grid { grid-template-columns: 1fr; } }
+
+    /* ==========================================================================
+       CÓMO FUNCIONA
+       ========================================================================== */
+    .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .feature-list li { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+    .feature-list li::before { content: "✓"; color: var(--accent); font-weight: bold; }
+    @media (max-width: 768px) { .works-grid { grid-template-columns: 1fr; } }
+
+    /* ==========================================================================
+       COMPARADOR INTERACTIVO
+       ========================================================================== */
+    .comparator-ui { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; overflow-x: auto; }
+    .comparator-controls { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .comp-btn { padding: 8px 16px; border: 1px solid var(--border-color); background: var(--bg-base); border-radius: 20px; cursor: pointer; color: var(--text-muted); transition: var(--transition); }
+    .comp-btn[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .comp-table { width: 100%; border-collapse: collapse; min-width: 600px; font-variant-numeric: tabular-nums; }
+    .comp-table th, .comp-table td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+    .comp-table th { font-weight: 500; color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; }
+    .comp-table td { font-weight: 500; }
+    .col-p2a, .col-p3d, .col-p1c { transition: opacity 0.3s; }
+
+    /* ==========================================================================
+       PANEL DE CLIENTE (DASHBOARD)
+       ========================================================================== */
+    .dashboard-mockup {
+        background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius);
+        padding: 2rem; display: grid; grid-template-columns: 250px 1fr; gap: 2rem;
+    }
+    .dash-sidebar { border-right: 1px solid var(--border-color); padding-right: 2rem; }
+    .dash-nav { display: flex; flex-direction: column; gap: 1rem; }
+    .dash-nav div { padding: 8px 12px; border-radius: 6px; font-size: 0.9rem; color: var(--text-muted); }
+    .dash-nav div.active { background: var(--accent); color: #fff; }
+    .dash-main .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .metric-card { padding: 1.5rem; background: var(--bg-base); border: 1px solid var(--border-color); border-radius: 8px; }
+    .metric-val { font-size: 1.8rem; font-family: var(--font-head); font-weight: 600; }
+    .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .status-disp { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+    .status-res { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+    .status-ven { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+    .dash-main .comp-table { min-width: 0; }
+    @media (max-width: 768px) { .dashboard-mockup { grid-template-columns: 1fr; } .dash-sidebar { border-right: none; border-bottom: 1px solid var(--border-color); padding-right: 0; padding-bottom: 1rem; } .dash-main .metrics { grid-template-columns: 1fr; } }
+
+    /* ==========================================================================
+       FAQ
+       ========================================================================== */
+    .faq-item { border-bottom: 1px solid var(--border-color); }
+    .faq-item details { padding: 1.5rem 0; cursor: pointer; }
+    .faq-item summary { font-size: 1.2rem; font-weight: 500; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: "+"; font-size: 1.5rem; color: var(--accent); }
+    .faq-item details[open] summary::after { content: "−"; }
+    .faq-item p { margin-top: 1rem; color: var(--text-muted); }
+
+    /* ==========================================================================
+       NOSOTROS
+       ========================================================================== */
+    .editorial { max-width: 800px; margin: 0 auto; font-size: 1.2rem; line-height: 1.8; color: var(--text-muted); }
+    .editorial p { margin-bottom: 1.5rem; }
+    .editorial strong { color: var(--text-main); }
+
+    /* ==========================================================================
+       BANDA CTA
+       ========================================================================== */
+    .cta-band { background: var(--accent); color: #fff; }
+    .cta-band .container { text-align: center; }
+    .cta-band h2 { max-width: 900px; margin: 0 auto 2rem; font-size: clamp(1.8rem, 3.5vw, 3rem); }
+    .cta-band .btn { background: #fff; color: var(--accent); }
+    .cta-band .btn:hover { transform: translateY(-2px); }
+
+    /* ==========================================================================
+       CONTACTO
+       ========================================================================== */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
+    .form-control { width: 100%; padding: 12px 16px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); font-size: 1rem; transition: var(--transition); }
+    .form-control:focus { border-color: var(--accent); }
+    textarea.form-control { resize: vertical; min-height: 120px; }
+    .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+    .contact-card { padding: 2rem; background: var(--bg-surface); border-radius: var(--radius); border: 1px solid var(--border-color); }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer { padding: 4rem 5%; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+    .footer-logo { margin-bottom: 1rem; }
+
+    /* ==========================================================================
+       ANIMACIONES
+       ========================================================================== */
+    .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+<!-- NAVEGACIÓN -->
+<header>
+    <div class="container nav-container">
+        <a href="#inicio" class="wordmark" aria-label="Inicio Prospectus">Prospectus<span class="dot">.</span></a>
+
+        <nav class="nav-links" id="main-nav">
+            <a href="#inicio">Inicio</a>
+            <a href="#como-funciona">Cómo funciona</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+
+        <div class="nav-ctas">
+            <a href="#demo" class="btn btn-secondary">Ver demo</a>
+            <a href="#contacto" class="btn btn-primary">Pide tu demo</a>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+        </div>
+    </div>
+</header>
+
+<main id="main">
+    <!-- INICIO Y VSL -->
+    <section id="inicio" class="hero container text-center section-pad">
+        <div class="hero-content animate-on-scroll">
+            <span class="eyebrow">Showrooms 3D para promotoras</span>
+            <h1>Vende tu promoción antes de construirla</h1>
+            <p>Convierte tus planos en una experiencia arquitectónica interactiva. Un único entorno para que tus compradores exploren, entiendan y decidan.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+                <a href="#contacto" class="btn btn-primary">Solicitar demo</a>
+                <a href="#demo" class="btn btn-secondary">Explorar producto</a>
+            </div>
+        </div>
+
+        <!-- VSL -->
+        <div class="vsl-container animate-on-scroll" aria-label="Vídeo: cómo funciona Prospectus">
+            <div class="vsl-overlay" id="vsl-overlay" role="button" tabindex="0" aria-label="Reproducir vídeo: cómo funciona Prospectus">
+                <div class="vsl-tag">Product film</div>
+                <div class="play-btn">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="vsl-title">Cómo funciona Prospectus</div>
+                <div class="vsl-hint">Play · 2 min</div>
+                <div class="vsl-brand wordmark">Prospectus<span class="dot">.</span></div>
+                <div class="vsl-duration">02:17</div>
+            </div>
+            <video id="vsl-video" class="vsl-video" preload="none" playsinline data-asset="vsl" poster="videos/vsl.jpg">
+                <source src="videos/Prospectus_VSL_Product_Film_v2.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de vídeo.
+            </video>
+        </div>
+        <p class="vsl-caption">Descubre cómo Prospectus transforma la comercialización inmobiliaria.</p>
+    </section>
+
+    <!-- DEMO EN VIVO -->
+    <section id="demo" class="container section-pad">
+        <div class="text-center mb-8 animate-on-scroll">
+            <h2>Experimenta la diferencia</h2>
+            <p style="color: var(--text-muted); margin-top: 1rem;">Navega por una promoción real integrada directamente en la web.</p>
+        </div>
+
+        <div class="demo-browser animate-on-scroll">
+            <div class="browser-bar">
+                <div class="browser-dot" style="background:#ff5f56"></div>
+                <div class="browser-dot" style="background:#ffbd2e"></div>
+                <div class="browser-dot" style="background:#27c93f"></div>
+                <div class="browser-url">serraresidencial.com/promocion</div>
+            </div>
+            <div class="demo-iframe-container" id="demoStage">
+                <iframe id="demoIframe" title="Demo interactiva de Prospectus 3D" loading="lazy" data-src="https://serraresidencial.netlify.app/"></iframe>
+                <div class="demo-overlay" id="demoOverlay" hidden>
+                    <div class="demo-overlay-card">
+                        <span class="eyebrow">Showroom interactivo</span>
+                        <h3>Serra Residencial en 3D</h3>
+                        <p>Vista previa del showroom. Ábrela a pantalla completa para navegarla.</p>
+                        <a class="btn btn-primary" href="https://serraresidencial.netlify.app/" target="_blank" rel="noopener noreferrer">Abrir demo →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="demo-fallback">¿No se carga la demo aquí? <a href="https://serraresidencial.netlify.app/" target="_blank" rel="noopener noreferrer">Ábrela en una pestaña nueva</a>.</p>
+    </section>
+
+    <!-- UN SOLO ENLACE, TODA LA PROMOCIÓN -->
+    <section id="beneficios" class="container section-pad animate-on-scroll">
+        <div class="text-center mb-8">
+            <h2>Toda la promoción en un enlace</h2>
+            <p style="color: var(--text-muted);">Centraliza la información comercial en una única experiencia inmersiva.</p>
+        </div>
+        <div class="grid features-grid">
+            <div class="card">
+                <h3>De planos a experiencia</h3>
+                <p style="color: var(--text-muted);">El comprador deja de imaginar. Recorre el edificio, entiende los volúmenes y siente el espacio antes de la primera piedra.</p>
+            </div>
+            <div class="card">
+                <h3>Integración directa</h3>
+                <p style="color: var(--text-muted);">Sin descargas ni aplicaciones externas. El showroom vive dentro de tu propia página web comercializadora.</p>
+            </div>
+            <div class="card">
+                <h3>Comparador de viviendas</h3>
+                <p style="color: var(--text-muted);">Facilita la toma de decisión. Permite al cliente poner lado a lado métricas, precios y características de sus opciones favoritas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN AUDIOVISUAL -->
+    <section id="audiovisual" class="container section-pad">
+        <h2 class="mb-8 animate-on-scroll">En movimiento</h2>
+        <div class="grid video-grid">
+            <div class="video-card animate-on-scroll">
+                <video preload="none" playsinline controls data-asset="explorar" poster="videos/explorar.jpg">
+                    <source src="videos/explorar.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h4>Explorar antes de existir</h4>
+                    <p>De la planta al recorrido.</p>
+                </div>
+            </div>
+            <div class="video-card animate-on-scroll">
+                <video preload="none" playsinline controls data-asset="despues" poster="videos/despues-del-clic.jpg">
+                    <source src="videos/despues-del-clic.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h4>Después del clic</h4>
+                    <p>Cuando la web responde como un comercial.</p>
+                </div>
+            </div>
+            <div class="video-card animate-on-scroll">
+                <video preload="none" playsinline controls data-asset="masalla" poster="videos/mas-alla-del-3d.jpg">
+                    <source src="videos/mas-alla-del-3d.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h4>Más allá del 3D</h4>
+                    <p>Precio, disponibilidad y contexto.</p>
+                </div>
+            </div>
+            <div class="video-card animate-on-scroll">
+                <video preload="none" playsinline controls data-asset="creative" poster="videos/prospectus-30s.jpg">
+                    <source src="videos/prospectus-30s.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <h4>Prospectus en 30 segundos</h4>
+                    <p>La experiencia completa, comprimida.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section id="como-funciona" class="container section-pad">
+        <div class="works-grid">
+            <div class="animate-on-scroll">
+                <h2 class="mb-4">Un proceso sencillo</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Transformamos la documentación técnica en tu mejor herramienta de ventas.</p>
+                <div class="grid" style="gap: 1.5rem;">
+                    <div>
+                        <strong style="color: var(--accent);">1. Recopilación</strong>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Nos proporcionas los planos arquitectónicos y memoria de calidades.</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--accent);">2. Desarrollo 3D</strong>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Convertimos la promoción en una experiencia digital completa.</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--accent);">3. Despliegue</strong>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">La integras en tu web con un simple fragmento de código.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card animate-on-scroll">
+                <h3 class="mb-4">¿Qué incluye?</h3>
+                <ul class="feature-list">
+                    <li>Modelo 3D integral</li>
+                    <li>Navegación por edificio</li>
+                    <li>Navegación por plantas</li>
+                    <li>Fichas de viviendas</li>
+                    <li>Control de disponibilidad</li>
+                    <li>Comparador interactivo</li>
+                    <li>Integración web fluida</li>
+                    <li>Gestión comercial</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARADOR INTERACTIVO -->
+    <section id="comparador" class="container section-pad">
+        <div class="text-center mb-8 animate-on-scroll">
+            <h2>Comparador de viviendas</h2>
+            <p style="color: var(--text-muted);">Una herramienta real para la toma de decisiones.</p>
+        </div>
+
+        <div class="comparator-ui animate-on-scroll">
+            <div class="comparator-controls" aria-label="Seleccionar viviendas para comparar">
+                <button class="comp-btn" aria-pressed="true" data-target="col-p2a">Vivienda P2-A</button>
+                <button class="comp-btn" aria-pressed="true" data-target="col-p3d">Vivienda P3-D</button>
+                <button class="comp-btn" aria-pressed="false" data-target="col-p1c">Vivienda P1-C</button>
+            </div>
+
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th class="col-p2a">P2-A</th>
+                        <th class="col-p3d">P3-D</th>
+                        <th class="col-p1c" style="display:none;">P1-C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Precio</td>
+                        <td class="col-p2a">470.000 €</td>
+                        <td class="col-p3d">525.000 €</td>
+                        <td class="col-p1c" style="display:none;">395.000 €</td>
+                    </tr>
+                    <tr>
+                        <td>Planta</td>
+                        <td class="col-p2a">Planta 2</td>
+                        <td class="col-p3d">Planta 3</td>
+                        <td class="col-p1c" style="display:none;">Planta 1</td>
+                    </tr>
+                    <tr>
+                        <td>Superficie</td>
+                        <td class="col-p2a">102 m²</td>
+                        <td class="col-p3d">105 m²</td>
+                        <td class="col-p1c" style="display:none;">85 m²</td>
+                    </tr>
+                    <tr>
+                        <td>Ratio (€/m²)</td>
+                        <td class="col-p2a">4.607 €/m²</td>
+                        <td class="col-p3d">5.000 €/m²</td>
+                        <td class="col-p1c" style="display:none;">4.647 €/m²</td>
+                    </tr>
+                    <tr>
+                        <td>Orientación</td>
+                        <td class="col-p2a">Mar</td>
+                        <td class="col-p3d">Mar</td>
+                        <td class="col-p1c" style="display:none;">Montaña</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- PANEL DE CLIENTE -->
+    <section id="panel" class="container section-pad">
+        <h2 class="mb-2 animate-on-scroll">Control total <span style="font-size: 1rem; color: var(--accent); vertical-align: middle; border: 1px solid var(--accent); padding: 2px 8px; border-radius: 12px; margin-left: 10px;">Ejemplo</span></h2>
+        <p style="color: var(--text-muted); margin-bottom: 3rem;" class="animate-on-scroll">Gestiona la disponibilidad en tiempo real.</p>
+
+        <div class="dashboard-mockup animate-on-scroll">
+            <div class="dash-sidebar">
+                <div class="wordmark mb-8">Prospectus<span class="dot">.</span> <span style="font-size:0.8rem; font-weight:normal; opacity:0.6;">Admin</span></div>
+                <div class="dash-nav">
+                    <div class="active">Visión general</div>
+                    <div>Disponibilidad</div>
+                    <div>Métricas</div>
+                    <div>Configuración</div>
+                </div>
+            </div>
+            <div class="dash-main">
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Viviendas totales</div>
+                        <div class="metric-val">24</div>
+                    </div>
+                    <div class="metric-card">
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Disponibles</div>
+                        <div class="metric-val" style="color: #22c55e;">15</div>
+                    </div>
+                    <div class="metric-card">
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Tasa de venta</div>
+                        <div class="metric-val">37,5 %</div>
+                    </div>
+                </div>
+
+                <h4 class="mb-4">Actividad reciente</h4>
+                <table class="comp-table">
+                    <tbody>
+                        <tr>
+                            <td>Vivienda P3-D</td>
+                            <td>Hace 2 horas</td>
+                            <td><span class="status-badge status-res">Reservado</span></td>
+                        </tr>
+                        <tr>
+                            <td>Vivienda P1-A</td>
+                            <td>Ayer</td>
+                            <td><span class="status-badge status-ven">Vendido</span></td>
+                        </tr>
+                        <tr>
+                            <td>Vivienda P2-B</td>
+                            <td>Hace 3 días</td>
+                            <td><span class="status-badge status-disp">Disponible</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="container section-pad">
+        <div style="max-width: 800px; margin: 0 auto;" class="animate-on-scroll">
+            <h2 class="mb-8 text-center">Preguntas frecuentes</h2>
+            <div class="faq-item">
+                <details>
+                    <summary>¿Qué necesitamos para empezar?</summary>
+                    <p>Únicamente los planos de arquitectura (CAD o PDF) y la memoria de calidades de la promoción. Con eso, nuestro equipo de diseño 3D se encarga del resto.</p>
+                </details>
+            </div>
+            <div class="faq-item">
+                <details>
+                    <summary>¿Cuánto tarda el proceso?</summary>
+                    <p>El tiempo de desarrollo depende de la envergadura del proyecto, pero típicamente una promoción media está lista para su despliegue comercial en 3 a 5 semanas.</p>
+                </details>
+            </div>
+            <div class="faq-item">
+                <details>
+                    <summary>¿Se integra en nuestra web?</summary>
+                    <p>Sí, la experiencia se embebe directamente en tu dominio mediante un iframe ligero, manteniendo a tus usuarios en tu entorno de marca sin redirecciones.</p>
+                </details>
+            </div>
+            <div class="faq-item">
+                <details>
+                    <summary>¿Podemos actualizar precios y disponibilidad?</summary>
+                    <p>Totalmente. Prospectus incluye un panel de control desde donde podrás cambiar el estado (Disponible, Reservado, Vendido) y actualizar los precios en tiempo real.</p>
+                </details>
+            </div>
+            <div class="faq-item">
+                <details>
+                    <summary>¿Qué ocurre después de la entrega?</summary>
+                    <p>Mantenemos la plataforma operativa en nuestros servidores de alto rendimiento, asegurando una carga rápida para todos los usuarios durante toda la vida comercial de la promoción.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section id="nosotros" class="container section-pad">
+        <div class="editorial animate-on-scroll">
+            <h2 class="mb-8 text-center">Por qué existimos</h2>
+            <p>Comprar sobre plano nunca debería sentirse como un acto de fe. Sin embargo, durante décadas hemos pedido a las familias y a los inversores que tomen una de las decisiones financieras más importantes de sus vidas basándose en líneas impresas y un par de imágenes estáticas.</p>
+            <p><strong>Los renders y folletos tienen límites.</strong> Son ventanas cerradas. Muestran un ángulo, bajo una luz perfecta, pero ocultan la verdadera escala, la relación de los espacios y la sensación de habitar el lugar.</p>
+            <p>El comprador actual no solo necesita ver, necesita experimentar el proyecto. Prospectus nace de una premisa fundamental: <strong>poder mostrar la vivienda real antes de construirla</strong>. Transformamos la barrera de la abstracción arquitectónica en una puerta abierta, utilizando exactamente los mismos planos que ya existen.</p>
+
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: 4rem; gap: 2rem;">
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 0.5rem;">Claridad</h4>
+                    <p style="font-size: 0.95rem;">Eliminamos la fricción cognitiva entre un plano técnico y la realidad habitable.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 0.5rem;">Innovación útil</h4>
+                    <p style="font-size: 0.95rem;">La tecnología al servicio de la venta comercial, sin complejidades innecesarias.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 0.5rem;">Estética premium</h4>
+                    <p style="font-size: 0.95rem;">Tu promoción merece ser presentada con el rigor y la belleza de la propia arquitectura.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BANDA CTA -->
+    <section class="cta-band section-pad">
+        <div class="container animate-on-scroll">
+            <h2>Tu próxima promoción merece una experiencia que esté a la altura de los planos.</h2>
+            <a href="#contacto" class="btn">Pide una demo personalizada</a>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="container section-pad">
+        <h2 class="mb-8 animate-on-scroll">Empieza a vender mejor</h2>
+        <div class="contact-grid">
+            <div class="contact-form-wrapper animate-on-scroll">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Promotora / Empresa</label>
+                        <input type="text" id="company" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar solicitud</button>
+                </form>
+            </div>
+
+            <div class="contact-info animate-on-scroll">
+                <div class="contact-card">
+                    <h4 class="mb-4">Contacto directo</h4>
+                    <div class="mb-4">
+                        <span style="display:block; font-size:0.85rem; color:var(--text-muted);">Email</span>
+                        <a href="mailto:prospectus3d.es@gmail.com" style="font-size:1.1rem; font-weight:500;">prospectus3d.es@gmail.com</a>
+                    </div>
+                    <div class="mb-4">
+                        <span style="display:block; font-size:0.85rem; color:var(--text-muted);">WhatsApp</span>
+                        <a href="https://wa.me/34643190807" target="_blank" rel="noopener noreferrer" style="font-size:1.1rem; font-weight:500; color:var(--accent);">+34 643 190 807</a>
+                    </div>
+                    <div>
+                        <span style="display:block; font-size:0.85rem; color:var(--text-muted);">Ubicación</span>
+                        <span style="font-size:1.1rem; font-weight:500;">Tarragona, España</span>
+                    </div>
+                </div>
+
+                <div class="contact-card" style="background: var(--accent); color: #fff; border:none;">
+                    <h4 class="mb-2">¿Prefieres ver el producto?</h4>
+                    <p style="opacity: 0.9; margin-bottom: 1.5rem; font-size:0.95rem;">Explora nuestra demostración interactiva completa sin compromiso.</p>
+                    <a href="#demo" class="btn" style="background: #fff; color: var(--accent); width:100%;">Abrir demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-logo wordmark">Prospectus<span class="dot">.</span></div>
+        <p>© 2026 Prospectus 3D · prospectus3d.com</p>
+    </div>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+    // === 0. VÍDEOS: rutas locales en producción, assets en la preview de claude.ai ===
+    const ASSETS = {
+        vsl:      { video: 'd41db9f9f0dd1b6359bb3570beabe682' },
+        explorar: { video: '4f84d1f87e007dd94059851ea6144550' },
+        despues:  { video: '0de67f65dabef2de3e84d905ccde9125' },
+        masalla:  { video: '37f0b3231f3c3ba9e0c446c6561c63ed' },
+        creative: { video: '162380aabec799ecd1feff7a3924fe6b' }
+    };
+    (function wireVideos() {
+        const h = location.hostname;
+        const isProd = h === '' || h === 'localhost' || h === '127.0.0.1' || h.endsWith('prospectus3d.com');
+        if (isProd) return;
+        document.querySelectorAll('video[data-asset]').forEach(v => {
+            const a = ASSETS[v.dataset.asset];
+            if (!a || !a.video) return;
+            const src = v.querySelector('source');
+            if (src) src.src = '/_blob/' + a.video;
+            if (a.poster) v.poster = '/_blob/' + a.poster;
+            v.load();
+        });
+    })();
+
+    // === DEMO: iframe en vivo en producción; imagen de vista previa donde el iframe está bloqueado (p.ej. claude.ai) ===
+    (function demoEnv() {
+        const h = location.hostname;
+        const isProd = h === '' || h === 'localhost' || h === '127.0.0.1' || h.endsWith('prospectus3d.com');
+        const iframe = document.getElementById('demoIframe');
+        const overlay = document.getElementById('demoOverlay');
+        if (isProd) {
+            if (iframe && iframe.dataset.src) iframe.src = iframe.dataset.src;
+            if (overlay) overlay.hidden = true;
+        } else {
+            if (iframe) iframe.remove();
+            if (overlay) overlay.hidden = false;
+        }
+    })();
+
+    (function init() {
+        // === 1. NAVEGACIÓN MÓVIL ===
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('main-nav');
+        menuToggle.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!expanded));
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // === 2. GESTIÓN DEL VSL ===
+        const overlay = document.getElementById('vsl-overlay');
+        const video = document.getElementById('vsl-video');
+        function startVsl() {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                video.controls = true;
+                video.play().catch(e => console.log('Reproducción bloqueada por el navegador:', e));
+            }, 400);
+        }
+        if (overlay && video) {
+            overlay.addEventListener('click', startVsl);
+            overlay.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startVsl(); } });
+        }
+
+        // === 3. COMPARADOR INTERACTIVO ===
+        document.querySelectorAll('.comp-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const isPressed = btn.getAttribute('aria-pressed') === 'true';
+                btn.setAttribute('aria-pressed', String(!isPressed));
+                const targetClass = btn.getAttribute('data-target');
+                document.querySelectorAll('.' + targetClass).forEach(el => {
+                    el.style.display = !isPressed ? 'table-cell' : 'none';
+                });
+            });
+        });
+
+        // === 4. FORMULARIO CONTACTO ===
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const company = document.getElementById('company').value;
+                const email = document.getElementById('email').value;
+                const msg = document.getElementById('message').value;
+
+                const subject = encodeURIComponent(`Nuevo contacto web - ${company}`);
+                const body = encodeURIComponent(`Nombre: ${name}\nEmpresa: ${company}\nEmail: ${email}\n\nMensaje:\n${msg}`);
+
+                window.location.href = `mailto:prospectus3d.es@gmail.com?subject=${subject}&body=${body}`;
+            });
+        }
+
+        // === 5. ANIMACIONES AL HACER SCROLL ===
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { root: null, rootMargin: '0px', threshold: 0.1 });
+
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (!reduced.matches) {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        } else {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => el.classList.add('is-visible'));
+        }
+    })();
+</script>
+
+</body>
+</html>
