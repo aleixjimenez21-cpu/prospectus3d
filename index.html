@@ -723,7 +723,19 @@
 
 <!-- JAVASCRIPT -->
 <script>
-    // === 0. VÍDEOS: rutas locales en producción, assets en la preview de claude.ai ===
+    // === ENTORNO: host real (dominio propio, GitHub Pages, Netlify, Vercel, localhost) vs. la
+    //     preview de artifacts de claude.ai (donde los vídeos van por /_blob y el iframe externo
+    //     está bloqueado por seguridad). En cualquier host real la demo se embebe e interactúa. ===
+    const IS_REAL_HOST = (function () {
+        const h = location.hostname;
+        return h === '' || h === 'localhost' || h === '127.0.0.1'
+            || h.endsWith('prospectus3d.com')
+            || h.endsWith('.github.io')
+            || h.endsWith('.netlify.app')
+            || h.endsWith('.vercel.app');
+    })();
+
+    // === VÍDEOS: ficheros locales en host real; assets /_blob en la preview de claude.ai ===
     const ASSETS = {
         vsl:      { video: 'd41db9f9f0dd1b6359bb3570beabe682' },
         explorar: { video: '4f84d1f87e007dd94059851ea6144550' },
@@ -732,9 +744,7 @@
         creative: { video: '162380aabec799ecd1feff7a3924fe6b' }
     };
     (function wireVideos() {
-        const h = location.hostname;
-        const isProd = h === '' || h === 'localhost' || h === '127.0.0.1' || h.endsWith('prospectus3d.com');
-        if (isProd) return;
+        if (IS_REAL_HOST) return;
         document.querySelectorAll('video[data-asset]').forEach(v => {
             const a = ASSETS[v.dataset.asset];
             if (!a || !a.video) return;
@@ -745,13 +755,11 @@
         });
     })();
 
-    // === DEMO: iframe en vivo en producción; imagen de vista previa donde el iframe está bloqueado (p.ej. claude.ai) ===
+    // === DEMO: iframe interactivo en vivo en host real; imagen de vista previa en la preview de claude.ai ===
     (function demoEnv() {
-        const h = location.hostname;
-        const isProd = h === '' || h === 'localhost' || h === '127.0.0.1' || h.endsWith('prospectus3d.com');
         const iframe = document.getElementById('demoIframe');
         const overlay = document.getElementById('demoOverlay');
-        if (isProd) {
+        if (IS_REAL_HOST) {
             if (iframe && iframe.dataset.src) iframe.src = iframe.dataset.src;
             if (overlay) overlay.hidden = true;
         } else {
