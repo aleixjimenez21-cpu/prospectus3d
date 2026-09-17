@@ -1,0 +1,48 @@
+#audiovisual { background:#09090b; color:#f4f1f8; padding:100px 5% 120px; }
+#audiovisual .motion-container { max-width:1200px; margin:auto; }
+#audiovisual .motion-heading { margin-bottom:44px; }
+#audiovisual .motion-eyebrow { font-size:10px; letter-spacing:.18em; color:#b8a0d9; }
+#audiovisual h2 { font-size:clamp(36px,4vw,58px); line-height:1.08; letter-spacing:-.045em; font-weight:500; margin:23px 0; }
+#audiovisual h2 em { color:#b994ee; font-style:normal; }
+#audiovisual .motion-heading p { max-width:570px; font-size:15px; line-height:1.75; color:#a9a2b3; }
+#audiovisual .motion-stage { position:relative; aspect-ratio:16/9; overflow:hidden; border:1px solid #ffffff21; border-radius:14px; background:#080809; }
+#audiovisual video, #audiovisual #motion-cover, #audiovisual #motion-image { width:100%; height:100%; }
+#audiovisual video { object-fit:contain; }
+#audiovisual #motion-cover { position:absolute; inset:0; background:#080809; cursor:pointer; padding:0; transition:opacity .3s,visibility .3s; }
+#audiovisual #motion-image { display:block; object-fit:contain; transition:opacity .15s,transform .3s; }
+#audiovisual .motion-stage.playing #motion-cover { opacity:0; visibility:hidden; pointer-events:none; }
+#audiovisual .motion-play { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:52px; height:52px; border-radius:50%; display:grid; place-items:center; padding-left:3px; font-size:17px; color:#17121e; background:#fffffff0; border:1px solid #fff5; transition:background .2s; }
+#audiovisual #motion-cover:hover .motion-play { background:#d9c4f8; }
+#audiovisual #motion-cover:focus-visible { outline:2px solid #c39df1; outline-offset:-5px; }
+#audiovisual .motion-caption { display:flex; gap:30px; align-items:baseline; padding:26px 0 32px; transition:opacity .15s,transform .3s; }
+#audiovisual #motion-count { color:#b99adf; font-size:11px; letter-spacing:.12em; white-space:nowrap; }
+#audiovisual .motion-caption h3 { font-size:23px; letter-spacing:-.025em; font-weight:500; }
+#audiovisual .motion-caption p { margin-top:6px; color:#a9a2b3; font-size:14px; }
+#audiovisual.changing #motion-image { opacity:.15; transform:scale(.992); }
+#audiovisual.changing .motion-caption { opacity:.15; transform:translateY(3px); }
+#audiovisual .motion-selector { border-top:1px solid #ffffff20; }
+#audiovisual .motion-selector button { width:100%; display:flex; align-items:center; gap:28px; min-height:65px; padding:16px 4px; background:none; border-bottom:1px solid #ffffff18; color:#a7a0b2; font-size:16px; text-align:left; cursor:pointer; transition:color .2s,background .2s; }
+#audiovisual .motion-number { font-size:11px; font-variant-numeric:tabular-nums; color:#8e829f; }
+#audiovisual .motion-indicator { margin-left:auto; width:40px; height:1px; background:#b994ee; transform:scaleX(0); transform-origin:right; transition:transform .3s; flex-shrink:0; }
+#audiovisual .motion-selector button[aria-pressed="true"] { color:#f5edff; }
+#audiovisual .motion-selector button[aria-pressed="true"] .motion-number { color:#c098f2; }
+#audiovisual .motion-selector button[aria-pressed="true"] .motion-indicator { transform:scaleX(1); }
+#audiovisual .motion-selector button:hover { color:#fff; background:#ffffff03; }
+#audiovisual .motion-selector button:focus-visible { outline:2px solid #b994ee; outline-offset:-2px; }
+#audiovisual .motion-selector button:active { background:#b994ee12; }
+#audiovisual #motion-error { color:#d2bded; font-size:14px; margin-bottom:20px; }
+@media(max-width:1024px) { #audiovisual { padding:72px 4% 85px; } }
+@media(max-width:768px) { #audiovisual h2 { font-size:42px; } #audiovisual .motion-heading { margin-bottom:30px; } }
+@media(max-width:480px) {
+ #audiovisual { padding:54px 16px 64px; }
+ #audiovisual h2 { font-size:34px; line-height:1.12; margin:18px 0; }
+ #audiovisual .motion-heading p { font-size:14px; line-height:1.7; }
+ #audiovisual .motion-stage { border-radius:9px; }
+ #audiovisual .motion-play { width:44px; height:44px; font-size:14px; }
+ #audiovisual .motion-caption { display:block; padding:20px 0 25px; }
+ #audiovisual .motion-caption h3 { margin-top:9px; font-size:21px; }
+ #audiovisual .motion-selector button { min-height:58px; gap:16px; font-size:14px; }
+ #audiovisual .motion-indicator { width:18px; }
+}
+@media(max-width:350px) { #audiovisual h2 { font-size:30px; } #audiovisual .motion-selector button { gap:12px; font-size:13px; } }
+@media(prefers-reduced-motion:reduce) { #audiovisual *, #audiovisual *::before { transition:none!important; } }

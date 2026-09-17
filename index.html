@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Prospectus.</title>
+<link rel="stylesheet" href="questions.css">
+<link rel="stylesheet" href="closing.css">
+<link rel="stylesheet" href="process.css?v=2">
+<link rel="stylesheet" href="change.css">
+<link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="features.css">
 <meta name="description" content="Prospectus 3D convierte los planos de una promoción inmobiliaria en un showroom 3D interactivo para promotoras.">
 <style>
     /* ==========================================================================
@@ -286,6 +292,148 @@
        ========================================================================== */
     .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+    /* Hero Serra: styles isolated from the existing landing sections. */
+    #inicio {
+        position: relative; isolation: isolate; overflow: hidden;
+        max-width: none; min-height: 100svh; padding: 118px 20px 0;
+        display: block; color: #fff; background: #09090b;
+    }
+    #inicio::before {
+        content: ''; position: absolute; inset: 0 0 140px; z-index: -2;
+        background: url('assets/hero/serra-residencial.png') center center / cover no-repeat;
+        animation: hero-background 2.4s ease-out both;
+    }
+    #inicio::after {
+        content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+        background: linear-gradient(to bottom, rgba(8,12,23,.68), rgba(13,15,29,.53) 28%, rgba(10,10,19,.72) 55%, #09090b 88%),
+            linear-gradient(110deg, rgba(15,37,55,.32), rgba(70,37,106,.2) 55%, rgba(15,20,30,.14));
+    }
+    #inicio .hero-content { max-width: 1000px; margin: 0 auto 58px; }
+    #inicio .eyebrow {
+        display: inline-flex; align-items: center; margin: 0 0 26px; padding: 7px 15px;
+        border: 1px solid rgba(255,255,255,.23); border-radius: 100px;
+        background: rgba(255,255,255,.055); color: #eeeaf5;
+        font-size: 11px; font-weight: 500; letter-spacing: .025em; text-transform: none;
+        animation: hero-enter .8s .12s both;
+    }
+    #inicio h1 {
+        margin: 0; font-size: clamp(46px, 4.5vw, 70px); font-weight: 500;
+        line-height: 1.08; letter-spacing: -.055em; text-wrap: initial;
+        animation: hero-enter .9s .22s both;
+    }
+    #inicio h1 .hero-line { display: block; }
+    #inicio h1 em { font-weight: 450; }
+    #inicio h1 .hero-muted { color: #c0bbc9; }
+    #inicio .vsl-container {
+        max-width: 960px; border: 2px solid rgba(230,222,243,.33); border-radius: 20px;
+        box-shadow: 0 28px 80px rgba(0,0,0,.5); animation: hero-enter 1s .34s both;
+    }
+    #inicio .vsl-overlay { background: rgba(6,6,12,.08); padding: 0; }
+    #inicio .vsl-overlay:hover { background: transparent; }
+    #inicio .play-btn { width: 68px; height: 68px; box-shadow: 0 0 0 9px rgba(255,255,255,.12), 0 8px 30px #0005; }
+    #inicio .play-btn svg { width: 26px; height: 26px; }
+    #inicio .hero-transition { height: 80px; margin: 0 -20px; background: #09090b; }
+    header.hero-nav { background: transparent; border-color: transparent; backdrop-filter: none; color: #fff; }
+    header.hero-nav .nav-container { max-width: 1020px; padding: 0 30px; height: 76px; animation: hero-enter .65s both; }
+    header.hero-nav .wordmark { font-size: 25px; letter-spacing: -.05em; }
+    header.hero-nav .nav-links, header.hero-nav .btn-secondary, header.hero-nav .menu-toggle { display: none; }
+    header.hero-nav .btn-primary { padding: 10px 18px; font-size: 12px; border-radius: 8px; background: #7c3aed; }
+    @keyframes hero-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes hero-background { from { transform: scale(1.025); } to { transform: scale(1); } }
+    @media (max-width: 600px) {
+        #inicio { padding-top: 112px; }
+        #inicio::before { inset: 0 0 100px; background-position: center center; }
+        #inicio .hero-content { margin-bottom: 36px; }
+        #inicio .eyebrow { font-size: 10px; padding: 7px 12px; margin-bottom: 25px; }
+        #inicio h1 { font-size: clamp(36px, 9.6vw, 43px); line-height: 1.1; letter-spacing: -.05em; }
+        #inicio h1 .hero-line { display: inline; }
+        #inicio .vsl-container { border-radius: 12px; }
+        #inicio .play-btn { width: 52px; height: 52px; box-shadow: 0 0 0 6px #ffffff20, 0 8px 25px #0005; }
+        #inicio .play-btn svg { width: 22px; height: 22px; }
+        #inicio .hero-transition { height: 56px; }
+        header.hero-nav .nav-container { padding: 0 20px; height: 72px; }
+        header.hero-nav .wordmark { font-size: 22px; }
+        header.hero-nav .btn-primary { padding: 10px 13px; font-size: 11px; }
+    }
+    /* Captación: isolated styles, continuing the VSL's graphite background. */
+    #solicitar-demo { background: #09090b; color: #f5f3f8; padding: 36px 24px 120px; color-scheme: dark; }
+    #solicitar-demo .lead-layout { max-width: 1080px; margin: auto; display: grid; grid-template-columns: .9fr 1.1fr; gap: 88px; align-items: start; }
+    #solicitar-demo .lead-copy { padding-top: 8px; }
+    #solicitar-demo .lead-eyebrow { display: block; color: #b9a3df; font-size: 11px; font-weight: 600; letter-spacing: .16em; margin-bottom: 26px; }
+    #solicitar-demo h2 { font-size: clamp(34px, 3.3vw, 48px); line-height: 1.12; letter-spacing: -.045em; font-weight: 500; text-wrap: balance; }
+    #solicitar-demo h2 em { color: #bab4c6; font-weight: 400; }
+    #solicitar-demo .lead-description { max-width: 355px; margin-top: 26px; font-size: 15px; line-height: 1.8; color: #a5a1ac; }
+    #solicitar-demo .lead-signature { margin-top: 48px; padding-top: 22px; border-top: 1px solid #ffffff16; max-width: 355px; }
+    #solicitar-demo .lead-signature span { display: block; font-size: 20px; font-weight: 600; letter-spacing: -.04em; }
+    #solicitar-demo .lead-signature p { margin-top: 5px; font-size: 12px; color: #8d8896; }
+    #solicitar-demo .lead-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 23px 18px; }
+    #solicitar-demo .lead-field { min-width: 0; }
+    #solicitar-demo .lead-wide { grid-column: 1 / -1; }
+    #solicitar-demo label { display: block; margin-bottom: 9px; font-size: 12px; color: #d6d1de; }
+    #solicitar-demo label span { color: #8d8896; }
+    #solicitar-demo input, #solicitar-demo select, #solicitar-demo textarea {
+        display: block; width: 100%; min-height: 54px; padding: 14px 15px;
+        border: 1px solid #ffffff20; border-radius: 7px; background: #ffffff04;
+        color: #f5f3f8; font: inherit; font-size: 16px; transition: border-color .2s, background .2s, box-shadow .2s;
+    }
+    #solicitar-demo input::placeholder, #solicitar-demo textarea::placeholder { color: #77717f; opacity: 1; }
+    #solicitar-demo select { cursor: pointer; }
+    #solicitar-demo select option { background: #18161d; color: #f5f3f8; }
+    #solicitar-demo textarea { min-height: 112px; resize: vertical; }
+    #solicitar-demo input:focus, #solicitar-demo select:focus, #solicitar-demo textarea:focus { outline: none; border-color: #ac8adf; background: #ffffff07; box-shadow: 0 0 0 3px #ac8adf14; }
+    #solicitar-demo .lead-submit { width: 100%; min-height: 56px; margin-top: 26px; border-radius: 7px; background: #7c3aed; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s; }
+    #solicitar-demo .lead-submit:hover { background: #8b4cf0; }
+    #solicitar-demo .lead-note { color: #938d9e; font-size: 12px; line-height: 1.65; margin-top: 13px; }
+    @media (max-width: 900px) {
+        #solicitar-demo .lead-layout { gap: 40px; grid-template-columns: .9fr 1.1fr; }
+        #solicitar-demo .lead-fields { grid-template-columns: 1fr; gap: 20px; }
+    }
+    @media (max-width: 600px) {
+        #solicitar-demo { padding: 12px 20px 72px; }
+        #solicitar-demo .lead-layout { grid-template-columns: 1fr; gap: 34px; }
+        #solicitar-demo .lead-eyebrow { margin-bottom: 20px; }
+        #solicitar-demo h2 { font-size: 37px; max-width: 390px; }
+        #solicitar-demo .lead-description { margin-top: 20px; }
+        #solicitar-demo .lead-signature { margin-top: 25px; padding-top: 18px; }
+    }
+    /* Live showroom: architectural backdrop, original embedded application. */
+    #demo { position: relative; isolation: isolate; max-width: none; padding: 100px 5% 110px; background: #09090b; color: #f5f3f8; }
+    #demo::before { content: ''; position: absolute; inset: 0; z-index: -2; background: url('assets/demo/serra-background.png') center / cover no-repeat; }
+    #demo::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to bottom, #09090b 0%, rgba(10,15,26,.8) 22%, rgba(10,15,26,.72) 50%, #09090b 100%); }
+    #demo .demo-intro, #demo .demo-browser, #demo .demo-footer { max-width: 1120px; margin-left: auto; margin-right: auto; }
+    #demo .demo-intro { margin-bottom: 40px; }
+    #demo .demo-eyebrow { display: block; color: #bda3e9; font-size: 10px; letter-spacing: .18em; font-weight: 600; margin-bottom: 18px; }
+    #demo .demo-eyebrow::before, #demo .demo-live::before { content: ''; display: inline-block; width: 5px; height: 5px; background: #b58aef; border-radius: 50%; margin-right: 9px; vertical-align: middle; }
+    #demo h2 { font-size: clamp(34px, 3.4vw, 50px); line-height: 1.1; font-weight: 550; letter-spacing: -.045em; margin-bottom: 20px; }
+    #demo h2 span { color: #bb94f1; }
+    #demo .demo-intro p { max-width: 540px; color: #b5afbf; font-size: 15px; line-height: 1.75; }
+    #demo .demo-browser { border: 1px solid #ffffff24; border-radius: 15px; background: #121019; box-shadow: 0 30px 90px #0007; }
+    #demo .browser-bar { height: 37px; padding: 0 15px; gap: 6px; background: #1b1724; border-bottom: 1px solid #ffffff0d; }
+    #demo .browser-dot { width: 6px; height: 6px; background: #51495e; }
+    #demo .browser-url { margin: 0 auto 0 10px; color: #9c91aa; font-size: 10px; letter-spacing: .04em; }
+    #demo .demo-live { color: #bda3e9; font-size: 9px; letter-spacing: .13em; white-space: nowrap; }
+    #demo .demo-iframe-container { aspect-ratio: 16 / 10; background: #10121a; }
+    #demo .demo-overlay[hidden] { display: none; }
+    #demo .demo-footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 18px; font-size: 10px; letter-spacing: .08em; color: #9c91aa; }
+    #demo .demo-footer a { color: #c6a4f4; padding: 8px 0; }
+    #demo .demo-footer a:hover { color: #fff; }
+    #demo .demo-footer span { padding: 8px 0; }
+    #demo .demo-browser.animate-on-scroll { transform: translateY(18px) scale(.97); transition: opacity .8s ease, transform .8s ease; }
+    #demo .demo-browser.is-visible { transform: translateY(0) scale(1); }
+    @media (max-width: 600px) {
+        #demo { padding: 64px 20px 72px; }
+        #demo .demo-intro { margin-bottom: 28px; }
+        #demo h2 { font-size: 36px; }
+        #demo .demo-intro p { font-size: 14px; }
+        #demo .demo-browser { border-radius: 11px; }
+        #demo .demo-iframe-container { aspect-ratio: auto; height: 560px; height: clamp(480px, 72svh, 620px); }
+        #demo .browser-bar { padding: 0 10px; }
+        #demo .browser-dot { display: none; }
+        #demo .browser-url { margin-left: 0; font-size: 9px; }
+        #demo .demo-live { font-size: 8px; }
+        #demo .demo-footer { flex-direction: column; gap: 4px; font-size: 9px; }
+        #demo .demo-footer a { display: inline-flex; align-items: center; min-height: 44px; }
+    }
 </style>
 </head>
 <body>
@@ -293,20 +441,20 @@
 <a href="#main" class="skip-link">Saltar al contenido principal</a>
 
 <!-- NAVEGACIÓN -->
-<header>
+<header class="hero-nav">
     <div class="container nav-container">
         <a href="#inicio" class="wordmark" aria-label="Inicio Prospectus">Prospectus<span class="dot">.</span></a>
 
         <nav class="nav-links" id="main-nav">
             <a href="#inicio">Inicio</a>
-            <a href="#como-funciona">Cómo funciona</a>
-            <a href="#nosotros">Nosotros</a>
-            <a href="#contacto">Contacto</a>
+            <a href="#el-proceso">Cómo funciona</a>
+            <a href="#preguntas-frecuentes">FAQ</a>
+            <a href="#solicitar-demo">Contacto</a>
         </nav>
 
         <div class="nav-ctas">
             <a href="#demo" class="btn btn-secondary">Ver demo</a>
-            <a href="#contacto" class="btn btn-primary">Pide tu demo</a>
+            <a href="#solicitar-demo" class="btn btn-primary">Pide tu demo</a>
             <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
         </div>
     </div>
@@ -314,53 +462,70 @@
 
 <main id="main">
     <!-- INICIO Y VSL -->
-    <section id="inicio" class="hero container text-center section-pad">
-        <div class="hero-content animate-on-scroll">
-            <span class="eyebrow">Showrooms 3D para promotoras</span>
-            <h1>Vende tu promoción antes de construirla</h1>
-            <p>Convierte tus planos en una experiencia arquitectónica interactiva. Un único entorno para que tus compradores exploren, entiendan y decidan.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
-                <a href="#contacto" class="btn btn-primary">Solicitar demo</a>
-                <a href="#demo" class="btn btn-secondary">Explorar producto</a>
-            </div>
+    <section id="inicio" class="hero text-center" aria-labelledby="hero-title">
+        <div class="hero-content">
+            <span class="eyebrow">Showroom digital para obra nueva</span>
+            <h1 id="hero-title"><span class="hero-line">Tu promoción inmobiliaria,</span> <span class="hero-line">una <em>experiencia interactiva</em></span> <span class="hero-line hero-muted">antes de construirla.</span></h1>
         </div>
 
         <!-- VSL -->
-        <div class="vsl-container animate-on-scroll" aria-label="Vídeo: cómo funciona Prospectus">
+        <div class="vsl-container" aria-label="Vídeo: cómo funciona Prospectus">
             <div class="vsl-overlay" id="vsl-overlay" role="button" tabindex="0" aria-label="Reproducir vídeo: cómo funciona Prospectus">
-                <div class="vsl-tag">Product film</div>
                 <div class="play-btn">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
                 </div>
-                <div class="vsl-title">Cómo funciona Prospectus</div>
-                <div class="vsl-hint">Play · 2 min</div>
-                <div class="vsl-brand wordmark">Prospectus<span class="dot">.</span></div>
-                <div class="vsl-duration">02:17</div>
             </div>
-            <video id="vsl-video" class="vsl-video" preload="none" playsinline data-asset="vsl" poster="videos/vsl.jpg">
+            <video id="vsl-video" class="vsl-video" preload="none" playsinline data-asset="vsl" poster="assets/hero/prospectus-vsl.png">
                 <source src="videos/Prospectus_VSL_Product_Film_v2.mp4" type="video/mp4">
                 Tu navegador no soporta el elemento de vídeo.
             </video>
         </div>
-        <p class="vsl-caption">Descubre cómo Prospectus transforma la comercialización inmobiliaria.</p>
+        <div class="hero-transition" aria-hidden="true"></div>
+    </section>
+
+    <!-- CAPTACIÓN DESPUÉS DEL VSL -->
+    <section id="solicitar-demo" aria-labelledby="lead-title">
+        <div class="lead-layout">
+            <div class="lead-copy">
+                <span class="lead-eyebrow">SOLICITA UNA DEMO</span>
+                <h2 id="lead-title">Tu próxima promoción.<br><em>Una nueva forma de presentarla.</em></h2>
+                <p class="lead-description">Cuéntanos qué estás desarrollando. Veamos cómo convertir tu promoción en una experiencia que tus compradores puedan explorar antes de construirla.</p>
+                <div class="lead-signature"><span>Prospectus.</span><p>De los planos a una experiencia interactiva.</p></div>
+            </div>
+            <form id="leadForm" aria-label="Solicitar una demo de Prospectus" aria-describedby="lead-note">
+                <div class="lead-fields">
+                    <div class="lead-field lead-wide"><label for="lead-name">Nombre y apellidos</label><input id="lead-name" name="name" autocomplete="name" placeholder="Tu nombre completo" required maxlength="150"></div>
+                    <div class="lead-field lead-wide"><label for="lead-company">Empresa / Promotora</label><input id="lead-company" name="company" autocomplete="organization" placeholder="Nombre de la empresa" required maxlength="150"></div>
+                    <div class="lead-field"><label for="lead-email">Email profesional</label><input id="lead-email" name="email" type="email" autocomplete="email" placeholder="nombre@empresa.com" required maxlength="200"></div>
+                    <div class="lead-field"><label for="lead-phone">Teléfono</label><input id="lead-phone" name="phone" type="tel" autocomplete="tel" placeholder="+34 600 000 000" required maxlength="40"></div>
+                    <div class="lead-field"><label for="lead-homes">N.º aproximado de viviendas</label><input id="lead-homes" name="homes" type="number" inputmode="numeric" min="1" step="1" placeholder="Ej. 24" required></div>
+                    <div class="lead-field"><label for="lead-stage">Estado de la promoción</label><select id="lead-stage" name="stage" required><option value="" disabled selected>Selecciona una fase</option><option>En planificación</option><option>En preventa</option><option>En construcción</option><option>Terminada</option><option>Otro / por definir</option></select></div>
+                    <div class="lead-field lead-wide"><label for="lead-message">Información adicional <span>(opcional)</span></label><textarea id="lead-message" name="message" placeholder="Ubicación, plazos o cualquier detalle de tu promoción…" maxlength="2000"></textarea></div>
+                </div>
+                <button class="lead-submit" type="submit">Solicitar demo</button>
+                <p class="lead-note" id="lead-note">Se abrirá tu aplicación de correo con estos datos para que puedas enviar la solicitud a Prospectus.</p>
+            </form>
+        </div>
     </section>
 
     <!-- DEMO EN VIVO -->
-    <section id="demo" class="container section-pad">
-        <div class="text-center mb-8 animate-on-scroll">
-            <h2>Experimenta la diferencia</h2>
-            <p style="color: var(--text-muted); margin-top: 1rem;">Navega por una promoción real integrada directamente en la web.</p>
+    <section id="demo" aria-labelledby="demo-title">
+        <div class="demo-intro animate-on-scroll">
+            <span class="demo-eyebrow">DEMO EN VIVO</span>
+            <h2 id="demo-title">Recorre una promoción<br><span>por tu cuenta.</span></h2>
+            <p>Explora Serra Residencial como lo haría un comprador. Recorre el edificio, selecciona una planta, descubre las viviendas y utiliza las herramientas de Prospectus.</p>
         </div>
 
         <div class="demo-browser animate-on-scroll">
             <div class="browser-bar">
-                <div class="browser-dot" style="background:#ff5f56"></div>
-                <div class="browser-dot" style="background:#ffbd2e"></div>
-                <div class="browser-dot" style="background:#27c93f"></div>
-                <div class="browser-url">serraresidencial.com/promocion</div>
+                <div class="browser-dot" aria-hidden="true"></div>
+                <div class="browser-dot" aria-hidden="true"></div>
+                <div class="browser-dot" aria-hidden="true"></div>
+                <div class="browser-url">serraresidencial.netlify.app</div>
+                <span class="demo-live">INTERACTIVO</span>
             </div>
             <div class="demo-iframe-container" id="demoStage">
-                <iframe id="demoIframe" title="Demo interactiva de Prospectus 3D" loading="lazy" data-src="https://serraresidencial.netlify.app/"></iframe>
+                <iframe id="demoIframe" title="Demo interactiva de Prospectus 3D" loading="lazy" allow="autoplay; fullscreen" allowfullscreen data-src="https://serraresidencial.netlify.app/"></iframe>
                 <div class="demo-overlay" id="demoOverlay" hidden>
                     <div class="demo-overlay-card">
                         <span class="eyebrow">Showroom interactivo</span>
@@ -371,358 +536,255 @@
                 </div>
             </div>
         </div>
-        <p class="demo-fallback">¿No se carga la demo aquí? <a href="https://serraresidencial.netlify.app/" target="_blank" rel="noopener noreferrer">Ábrela en una pestaña nueva</a>.</p>
+        <div class="demo-footer"><span>SERRA RESIDENCIAL · SHOWROOM NAVEGABLE</span><a href="https://serraresidencial.netlify.app/" target="_blank" rel="noopener noreferrer">ABRIR DEMO COMPLETA ↗</a></div>
     </section>
 
     <!-- UN SOLO ENLACE, TODA LA PROMOCIÓN -->
-    <section id="beneficios" class="container section-pad animate-on-scroll">
-        <div class="text-center mb-8">
-            <h2>Toda la promoción en un enlace</h2>
-            <p style="color: var(--text-muted);">Centraliza la información comercial en una única experiencia inmersiva.</p>
-        </div>
-        <div class="grid features-grid">
-            <div class="card">
-                <h3>De planos a experiencia</h3>
-                <p style="color: var(--text-muted);">El comprador deja de imaginar. Recorre el edificio, entiende los volúmenes y siente el espacio antes de la primera piedra.</p>
+    <section id="beneficios" aria-labelledby="experience-title">
+        <div class="experience-layout">
+            <div class="experience-index">
+                <span class="experience-eyebrow">02 — LA EXPERIENCIA</span>
+                <h2 id="experience-title">Todo lo que necesita tu promoción,<br><em>en una sola experiencia.</em></h2>
+                <p class="experience-intro">Desde descubrir el edificio hasta comparar viviendas o resolver dudas. Todo el proceso de decisión en una única experiencia digital.</p>
+                <div class="experience-list" aria-label="Funcionalidades de Prospectus">
+                    <h3>01 — EXPLORA</h3>
+                    <button type="button" data-feature="0" aria-pressed="true"><span>01</span>Edificio 3D</button>
+                    <button type="button" data-feature="1" aria-pressed="false"><span>02</span>Selector de plantas</button>
+                    <button type="button" data-feature="2" aria-pressed="false"><span>03</span>Explora las viviendas</button>
+                    <button type="button" data-feature="3" aria-pressed="false"><span>04</span>Tour 360º</button>
+                    <h3>02 — DECIDE</h3>
+                    <button type="button" data-feature="4" aria-pressed="false"><span>05</span>Comparador de viviendas</button>
+                    <button type="button" data-feature="5" aria-pressed="false"><span>06</span>Calculadora hipotecaria</button>
+                    <button type="button" data-feature="6" aria-pressed="false"><span>07</span>Asistente IA</button>
+                    <h3>03 — GESTIONA</h3>
+                    <button type="button" data-feature="7" aria-pressed="false"><span>08</span>Panel de viviendas</button>
+                </div>
+                <div class="experience-mobile">
+                    <label for="experience-select">Explora las funcionalidades</label>
+                    <select id="experience-select">
+                        <optgroup label="01 — EXPLORA"><option value="0">01 · Edificio 3D</option><option value="1">02 · Selector de plantas</option><option value="2">03 · Explora las viviendas</option><option value="3">04 · Tour 360º</option></optgroup>
+                        <optgroup label="02 — DECIDE"><option value="4">05 · Comparador de viviendas</option><option value="5">06 · Calculadora hipotecaria</option><option value="6">07 · Asistente IA</option></optgroup>
+                        <optgroup label="03 — GESTIONA"><option value="7">08 · Panel de viviendas</option></optgroup>
+                    </select>
+                </div>
             </div>
-            <div class="card">
-                <h3>Integración directa</h3>
-                <p style="color: var(--text-muted);">Sin descargas ni aplicaciones externas. El showroom vive dentro de tu propia página web comercializadora.</p>
-            </div>
-            <div class="card">
-                <h3>Comparador de viviendas</h3>
-                <p style="color: var(--text-muted);">Facilita la toma de decisión. Permite al cliente poner lado a lado métricas, precios y características de sus opciones favoritas.</p>
+            <div class="experience-showcase">
+                <div class="experience-window">
+                    <div class="experience-bar"><span>SERRA RESIDENCIAL</span><span>PRODUCTO REAL</span></div>
+                    <div class="experience-media">
+                        <video id="experience-video" muted playsinline loop preload="none" poster="assets/features/building.webp" aria-label="Demostración del edificio de Serra Residencial"></video>
+                        <button type="button" id="experience-pause" aria-label="Pausar demostración">Pausar</button>
+                    </div>
+                    <div class="experience-detail" aria-live="polite" aria-atomic="true">
+                        <span id="experience-category">01 — EXPLORA</span>
+                        <h3 id="experience-name">Edificio 3D</h3>
+                        <p id="experience-description">Descubre la arquitectura y su entorno antes de entrar a explorar cada planta.</p>
+                    </div>
+                </div>
+                <a class="experience-link" href="#demo">Pruébalo en la demo real ↗</a>
             </div>
         </div>
     </section>
+    <script src="features.js" defer></script>
 
     <!-- SECCIÓN AUDIOVISUAL -->
-    <section id="audiovisual" class="container section-pad">
-        <h2 class="mb-8 animate-on-scroll">En movimiento</h2>
-        <div class="grid video-grid">
-            <div class="video-card animate-on-scroll">
-                <video preload="none" playsinline controls data-asset="explorar" poster="videos/explorar.jpg">
+    <section id="audiovisual" aria-labelledby="motion-heading">
+        <div class="motion-container">
+            <div class="motion-heading">
+                <span class="motion-eyebrow">03 — NUESTRA VISIÓN</span>
+                <h2 id="motion-heading">Una nueva forma de<br><em>presentar obra nueva.</em></h2>
+                <p>Tecnología, arquitectura y contenido trabajando juntos para transformar cómo se descubre una promoción.</p>
+            </div>
+            <div class="motion-stage">
+                <video id="motion-video" playsinline preload="metadata" aria-label="Explorar antes de existir">
                     <source src="videos/explorar.mp4" type="video/mp4">
                 </video>
-                <div class="video-info">
-                    <h4>Explorar antes de existir</h4>
-                    <p>De la planta al recorrido.</p>
-                </div>
+                <button id="motion-cover" type="button" aria-label="Reproducir Explorar antes de existir">
+                    <img id="motion-image" src="assets/motion/explorar.png" alt="Explorar antes de existir. Serra Residencial al atardecer." loading="lazy" decoding="async">
+                    <span class="motion-play" aria-hidden="true">▶</span>
+                </button>
             </div>
-            <div class="video-card animate-on-scroll">
-                <video preload="none" playsinline controls data-asset="despues" poster="videos/despues-del-clic.jpg">
-                    <source src="videos/despues-del-clic.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>Después del clic</h4>
-                    <p>Cuando la web responde como un comercial.</p>
-                </div>
+            <div class="motion-caption" aria-live="polite" aria-atomic="true">
+                <span id="motion-count">01 / 04</span>
+                <div><h3 id="motion-title">Explorar antes de existir</h3><p id="motion-description">De la planta al recorrido.</p></div>
             </div>
-            <div class="video-card animate-on-scroll">
-                <video preload="none" playsinline controls data-asset="masalla" poster="videos/mas-alla-del-3d.jpg">
-                    <source src="videos/mas-alla-del-3d.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>Más allá del 3D</h4>
-                    <p>Precio, disponibilidad y contexto.</p>
-                </div>
-            </div>
-            <div class="video-card animate-on-scroll">
-                <video preload="none" playsinline controls data-asset="creative" poster="videos/prospectus-30s.jpg">
-                    <source src="videos/prospectus-30s.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>Prospectus en 30 segundos</h4>
-                    <p>La experiencia completa, comprimida.</p>
-                </div>
+            <p id="motion-error" role="status" hidden>No se ha podido iniciar el vídeo. Vuelve a pulsar la portada para intentarlo.</p>
+            <div class="motion-selector" aria-label="Seleccionar vídeo">
+                <button type="button" data-motion="0" aria-pressed="true"><span class="motion-number">01</span><span>Explorar antes de existir</span><span class="motion-indicator" aria-hidden="true"></span></button>
+                <button type="button" data-motion="1" aria-pressed="false"><span class="motion-number">02</span><span>Después del clic</span><span class="motion-indicator" aria-hidden="true"></span></button>
+                <button type="button" data-motion="2" aria-pressed="false"><span class="motion-number">03</span><span>Más allá del 3D</span><span class="motion-indicator" aria-hidden="true"></span></button>
+                <button type="button" data-motion="3" aria-pressed="false"><span class="motion-number">04</span><span>Prospectus en 30 segundos</span><span class="motion-indicator" aria-hidden="true"></span></button>
             </div>
         </div>
     </section>
+    <script src="motion.js" defer></script>
 
     <!-- CÓMO FUNCIONA -->
-    <section id="como-funciona" class="container section-pad">
-        <div class="works-grid">
-            <div class="animate-on-scroll">
-                <h2 class="mb-4">Un proceso sencillo</h2>
-                <p style="color: var(--text-muted); margin-bottom: 2rem;">Transformamos la documentación técnica en tu mejor herramienta de ventas.</p>
-                <div class="grid" style="gap: 1.5rem;">
-                    <div>
-                        <strong style="color: var(--accent);">1. Recopilación</strong>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">Nos proporcionas los planos arquitectónicos y memoria de calidades.</p>
-                    </div>
-                    <div>
-                        <strong style="color: var(--accent);">2. Desarrollo 3D</strong>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">Convertimos la promoción en una experiencia digital completa.</p>
-                    </div>
-                    <div>
-                        <strong style="color: var(--accent);">3. Despliegue</strong>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">La integras en tu web con un simple fragmento de código.</p>
-                    </div>
+    <section id="el-cambio" aria-labelledby="change-title">
+        <div class="change-intro">
+            <span class="change-eyebrow">04 — EL CAMBIO</span>
+            <h2 id="change-title">La misma promoción.<br><em>Dos formas de vivirla.</em></h2>
+            <p>Renders, planos, disponibilidad y documentación dejan de ser piezas aisladas para convertirse en una experiencia que el comprador puede explorar.</p>
+        </div>
+        <div class="change-track">
+            <div class="change-sticky">
+                <div class="change-progress" aria-hidden="true"><span id="change-step">01 — RENDER</span><span class="change-rule"><i></i></span></div>
+                <div class="change-documents">
+                    <figure class="change-document"><img src="assets/change/render.png" alt="Render de Serra Residencial al atardecer" loading="lazy" width="1672" height="941"><figcaption><span>01 — RENDER</span>Una primera impresión.</figcaption></figure>
+                    <figure class="change-document"><img src="assets/change/plan.png" alt="Plano comercial de una vivienda de Serra Residencial" loading="lazy" width="1492" height="1054"><figcaption><span>02 — PLANO</span>Entender la vivienda.</figcaption></figure>
+                    <figure class="change-document"><img src="assets/change/availability.png" alt="Listado tradicional de disponibilidad y precios de Serra Residencial" loading="lazy" width="1492" height="1054"><figcaption><span>03 — DISPONIBILIDAD</span>Elegir entre opciones.</figcaption></figure>
+                    <figure class="change-document"><img src="assets/change/brochure.png" alt="Brochure comercial de Serra Residencial" loading="lazy" width="1536" height="1024"><figcaption><span>04 — INFORMACIÓN</span>Descubrir el proyecto.</figcaption></figure>
                 </div>
+                <div class="change-converge">
+                    <div class="change-miniatures" aria-hidden="true"><img src="assets/change/render.png" alt="" loading="lazy"><img src="assets/change/plan.png" alt="" loading="lazy"><img src="assets/change/availability.png" alt="" loading="lazy"><img src="assets/change/brochure.png" alt="" loading="lazy"></div>
+                    <p class="change-before">Cuatro formas de consultar una promoción.</p>
+                    <p class="change-after">Una sola forma de <em>explorarla.</em></p>
+                </div>
+                <div class="change-brand"><span>Prospectus.</span><p>Antes, el comprador recibía información.<br>Ahora, puede explorarla.</p></div>
             </div>
-            <div class="card animate-on-scroll">
-                <h3 class="mb-4">¿Qué incluye?</h3>
-                <ul class="feature-list">
-                    <li>Modelo 3D integral</li>
-                    <li>Navegación por edificio</li>
-                    <li>Navegación por plantas</li>
-                    <li>Fichas de viviendas</li>
-                    <li>Control de disponibilidad</li>
-                    <li>Comparador interactivo</li>
-                    <li>Integración web fluida</li>
-                    <li>Gestión comercial</li>
-                </ul>
+        </div>
+        <div class="change-product">
+            <span class="change-eyebrow">CON PROSPECTUS</span>
+            <h3>De consultar información<br>a explorar una promoción.</h3>
+            <div class="change-film"><video muted playsinline loop preload="none" poster="assets/change/explore.webp" aria-label="Recorrido real por una vivienda de Serra Residencial" data-src="assets/change/explore.mp4"></video><button type="button" class="change-play">Reproducir recorrido</button></div>
+            <p class="change-final">EXPLORA <span>·</span> COMPARA <span>·</span> DECIDE</p>
+        </div>
+    </section>
+    <script src="change.js" defer></script>
+
+    <section id="el-proceso" aria-labelledby="process-title">
+        <div class="process-wrap">
+            <div class="process-heading">
+                <p class="process-eyebrow">05 — EL PROCESO</p>
+                <h2 id="process-title">Un proceso<br><em>sencillo.</em></h2>
+                <p class="process-intro">Transformamos la documentación técnica en tu mejor herramienta de ventas.</p>
+            </div>
+            <ol class="process-steps">
+                <li class="process-step">
+                    <div class="process-copy"><span class="process-number" aria-hidden="true">01</span><h3>Recopilación</h3></div>
+                    <svg class="process-drawing" viewBox="0 0 320 180" fill="none" aria-hidden="true">
+                        <path class="muted-line" d="M90 24h148v134H90z M109 43h83m-83 9h63m-63 12h105m-105 9h105m-105 9h80"/>
+                        <path fill="#101013" d="M60 49h151v113H60z"/><path d="M60 49h151v113H60z M67 56h137v99H67z M67 108h54V56m0 70v29m0-61h83m-53 0v61m-83-30h29m-29 6h29m-29 6h29 M163 109h28v32h-28z"/>
+                        <path class="accent-line" d="M121 108v18m0-18a18 18 0 0 1 18 18h-18 M60 173h151m-151-4v8m151-8v8"/>
+                    </svg>
+                    <p>Nos proporcionas los planos arquitectónicos y memoria de calidades.</p>
+                </li>
+                <li class="process-step">
+                    <div class="process-copy"><span class="process-number" aria-hidden="true">02</span><h3>Desarrollo 3D</h3></div>
+                    <svg class="process-drawing" viewBox="0 0 320 180" fill="none" aria-hidden="true">
+                        <path class="muted-line" d="m47 143 108-44 119 44-108 32z M47 143v-9m227 9v-9"/>
+                        <path fill="#b994ee09" d="m77 67 87-36 83 30v83l-87 28-83-29z"/>
+                        <path d="m77 67 87-36 83 30-87 33-83-27z M77 67v76l83 29 87-28V61 M160 94v78 M77 93l83 29 87-32 M77 118l83 29 87-30 M104 76v76m28-67v77m57-79v79m29-90v80"/>
+                        <path class="accent-line" d="m77 67 83 27 87-33 M77 93l83 29 87-32"/>
+                    </svg>
+                    <p>Convertimos la promoción en una experiencia digital completa.</p>
+                </li>
+                <li class="process-step">
+                    <div class="process-copy"><span class="process-number" aria-hidden="true">03</span><h3>Despliegue</h3></div>
+                    <svg class="process-drawing" viewBox="0 0 320 180" fill="none" aria-hidden="true">
+                        <rect x="49" y="30" width="222" height="131" rx="4"/><path d="M49 53h222"/><path class="muted-line" d="M66 42h3m7 0h3m7 0h3 M68 73h67m-67 8h42 M204 74h46m-46 8h32"/>
+                        <rect class="accent-line" x="94" y="94" width="132" height="45" rx="2"/>
+                        <text x="160" y="122" text-anchor="middle" fill="#b994ee" stroke="none" font-family="monospace" font-size="17">&lt;div&gt;</text>
+                    </svg>
+                    <p>La integras en tu web con un simple fragmento de código.</p>
+                </li>
+            </ol>
+            <div class="process-included">
+                <p class="process-eyebrow">INCLUIDO EN CADA PROYECTO</p>
+                <h3>Todo lo necesario para presentar<br>y gestionar la promoción.</h3>
+                <ol class="process-list">
+                    <li><span>01</span>Modelo 3D integral</li>
+                    <li><span>02</span>Navegación por edificio</li>
+                    <li><span>03</span>Navegación por plantas</li>
+                    <li><span>04</span>Fichas de viviendas</li>
+                    <li><span>05</span>Control de disponibilidad</li>
+                    <li><span>06</span>Comparador interactivo</li>
+                    <li><span>07</span>Integración web fluida</li>
+                    <li><span>08</span>Gestión comercial</li>
+                </ol>
             </div>
         </div>
     </section>
+    <script src="process.js" defer></script>
 
-    <!-- COMPARADOR INTERACTIVO -->
-    <section id="comparador" class="container section-pad">
-        <div class="text-center mb-8 animate-on-scroll">
-            <h2>Comparador de viviendas</h2>
-            <p style="color: var(--text-muted);">Una herramienta real para la toma de decisiones.</p>
-        </div>
-
-        <div class="comparator-ui animate-on-scroll">
-            <div class="comparator-controls" aria-label="Seleccionar viviendas para comparar">
-                <button class="comp-btn" aria-pressed="true" data-target="col-p2a">Vivienda P2-A</button>
-                <button class="comp-btn" aria-pressed="true" data-target="col-p3d">Vivienda P3-D</button>
-                <button class="comp-btn" aria-pressed="false" data-target="col-p1c">Vivienda P1-C</button>
+    <section id="preguntas-frecuentes" aria-labelledby="questions-title">
+        <div class="questions-wrap">
+            <div class="questions-intro">
+                <p class="questions-eyebrow">06 — PREGUNTAS FRECUENTES</p>
+                <h2 id="questions-title">Antes de empezar,<br>quizá quieras <em>saber esto.</em></h2>
+                <p>Todo lo esencial antes de llevar Prospectus a tu próxima promoción.</p>
             </div>
-
-            <table class="comp-table">
-                <thead>
-                    <tr>
-                        <th>Característica</th>
-                        <th class="col-p2a">P2-A</th>
-                        <th class="col-p3d">P3-D</th>
-                        <th class="col-p1c" style="display:none;">P1-C</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Precio</td>
-                        <td class="col-p2a">470.000 €</td>
-                        <td class="col-p3d">525.000 €</td>
-                        <td class="col-p1c" style="display:none;">395.000 €</td>
-                    </tr>
-                    <tr>
-                        <td>Planta</td>
-                        <td class="col-p2a">Planta 2</td>
-                        <td class="col-p3d">Planta 3</td>
-                        <td class="col-p1c" style="display:none;">Planta 1</td>
-                    </tr>
-                    <tr>
-                        <td>Superficie</td>
-                        <td class="col-p2a">102 m²</td>
-                        <td class="col-p3d">105 m²</td>
-                        <td class="col-p1c" style="display:none;">85 m²</td>
-                    </tr>
-                    <tr>
-                        <td>Ratio (€/m²)</td>
-                        <td class="col-p2a">4.607 €/m²</td>
-                        <td class="col-p3d">5.000 €/m²</td>
-                        <td class="col-p1c" style="display:none;">4.647 €/m²</td>
-                    </tr>
-                    <tr>
-                        <td>Orientación</td>
-                        <td class="col-p2a">Mar</td>
-                        <td class="col-p3d">Mar</td>
-                        <td class="col-p1c" style="display:none;">Montaña</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- PANEL DE CLIENTE -->
-    <section id="panel" class="container section-pad">
-        <h2 class="mb-2 animate-on-scroll">Control total <span style="font-size: 1rem; color: var(--accent); vertical-align: middle; border: 1px solid var(--accent); padding: 2px 8px; border-radius: 12px; margin-left: 10px;">Ejemplo</span></h2>
-        <p style="color: var(--text-muted); margin-bottom: 3rem;" class="animate-on-scroll">Gestiona la disponibilidad en tiempo real.</p>
-
-        <div class="dashboard-mockup animate-on-scroll">
-            <div class="dash-sidebar">
-                <div class="wordmark mb-8">Prospectus<span class="dot">.</span> <span style="font-size:0.8rem; font-weight:normal; opacity:0.6;">Admin</span></div>
-                <div class="dash-nav">
-                    <div class="active">Visión general</div>
-                    <div>Disponibilidad</div>
-                    <div>Métricas</div>
-                    <div>Configuración</div>
+            <div class="questions-content">
+                <div class="questions-item">
+                    <h3><button type="button" id="question-01" aria-expanded="false" aria-controls="answer-01"><span class="questions-number" aria-hidden="true">01</span><span>¿Qué necesitáis para crear una promoción en Prospectus?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-01" role="region" aria-labelledby="question-01" inert><div><p>Partimos de la documentación disponible de la promoción, principalmente planos arquitectónicos, memoria de calidades y material comercial o visual. A partir de ahí construimos la experiencia digital del proyecto.</p></div></div>
                 </div>
-            </div>
-            <div class="dash-main">
-                <div class="metrics">
-                    <div class="metric-card">
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">Viviendas totales</div>
-                        <div class="metric-val">24</div>
-                    </div>
-                    <div class="metric-card">
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">Disponibles</div>
-                        <div class="metric-val" style="color: #22c55e;">15</div>
-                    </div>
-                    <div class="metric-card">
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">Tasa de venta</div>
-                        <div class="metric-val">37,5 %</div>
-                    </div>
+                <div class="questions-item">
+                    <h3><button type="button" id="question-02" aria-expanded="false" aria-controls="answer-02"><span class="questions-number" aria-hidden="true">02</span><span>¿Tengo que tener renders o un modelo 3D previamente?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-02" role="region" aria-labelledby="question-02" inert><div><p>No necesariamente. Revisamos el material disponible de cada promoción y determinamos qué necesitamos para construir la experiencia.</p></div></div>
                 </div>
-
-                <h4 class="mb-4">Actividad reciente</h4>
-                <table class="comp-table">
-                    <tbody>
-                        <tr>
-                            <td>Vivienda P3-D</td>
-                            <td>Hace 2 horas</td>
-                            <td><span class="status-badge status-res">Reservado</span></td>
-                        </tr>
-                        <tr>
-                            <td>Vivienda P1-A</td>
-                            <td>Ayer</td>
-                            <td><span class="status-badge status-ven">Vendido</span></td>
-                        </tr>
-                        <tr>
-                            <td>Vivienda P2-B</td>
-                            <td>Hace 3 días</td>
-                            <td><span class="status-badge status-disp">Disponible</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="questions-item">
+                    <h3><button type="button" id="question-03" aria-expanded="false" aria-controls="answer-03"><span class="questions-number" aria-hidden="true">03</span><span>¿Prospectus sustituye la web de mi promoción?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-03" role="region" aria-labelledby="question-03" inert><div><p>No tiene por qué. Prospectus puede integrarse dentro de la web existente de la promoción, manteniendo su identidad y convirtiéndose en la parte interactiva de la experiencia.</p></div></div>
+                </div>
+                <div class="questions-item">
+                    <h3><button type="button" id="question-04" aria-expanded="false" aria-controls="answer-04"><span class="questions-number" aria-hidden="true">04</span><span>¿Se adapta a la identidad visual de cada promoción?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-04" role="region" aria-labelledby="question-04" inert><div><p>Sí. La experiencia se adapta al proyecto y a su identidad visual para que Prospectus no se perciba como una plataforma externa, sino como parte de la propia promoción.</p></div></div>
+                </div>
+                <div class="questions-item">
+                    <h3><button type="button" id="question-05" aria-expanded="false" aria-controls="answer-05"><span class="questions-number" aria-hidden="true">05</span><span>¿Puedo actualizar precios y disponibilidad?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-05" role="region" aria-labelledby="question-05" inert><div><p>Sí. La disponibilidad y la información comercial de las viviendas pueden gestionarse para mantener la promoción actualizada.</p></div></div>
+                </div>
+                <div class="questions-item">
+                    <h3><button type="button" id="question-06" aria-expanded="false" aria-controls="answer-06"><span class="questions-number" aria-hidden="true">06</span><span>¿Funciona también en móvil y tablet?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-06" role="region" aria-labelledby="question-06" inert><div><p>Sí. La experiencia está planteada para adaptarse a ordenador, tablet y móvil.</p></div></div>
+                </div>
+                <div class="questions-contact"><h3>¿Tienes otra pregunta?</h3><p>Cuéntanos sobre tu próxima promoción.</p><a href="#solicitar-demo" class="btn btn-primary">HABLAR CON PROSPECTUS →</a></div>
             </div>
         </div>
     </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="container section-pad">
-        <div style="max-width: 800px; margin: 0 auto;" class="animate-on-scroll">
-            <h2 class="mb-8 text-center">Preguntas frecuentes</h2>
-            <div class="faq-item">
-                <details>
-                    <summary>¿Qué necesitamos para empezar?</summary>
-                    <p>Únicamente los planos de arquitectura (CAD o PDF) y la memoria de calidades de la promoción. Con eso, nuestro equipo de diseño 3D se encarga del resto.</p>
-                </details>
+    <script src="questions.js" defer></script>
+    <section id="hablemos" aria-labelledby="closing-title">
+        <div class="closing-inner">
+            <p class="closing-brand closing-reveal">PROSPECTUS<span>.</span></p>
+            <h2 id="closing-title" class="closing-reveal">Tu próxima promoción<br><span>puede empezar aquí.</span></h2>
+            <p class="closing-description closing-reveal">Descubre cómo Prospectus puede transformar la forma de presentar tu próximo proyecto.</p>
+            <div class="closing-actions closing-reveal">
+                <a class="closing-primary" href="#solicitar-demo">SOLICITAR DEMO <span aria-hidden="true">↗</span></a>
+                <a class="closing-secondary" href="https://wa.me/34633716169?text=Hola%2C%20me%20gustar%C3%ADa%20conocer%20mejor%20Prospectus." target="_blank" rel="noopener noreferrer">HABLAR POR WHATSAPP <span aria-hidden="true">↗</span></a>
             </div>
-            <div class="faq-item">
-                <details>
-                    <summary>¿Cuánto tarda el proceso?</summary>
-                    <p>El tiempo de desarrollo depende de la envergadura del proyecto, pero típicamente una promoción media está lista para su despliegue comercial en 3 a 5 semanas.</p>
-                </details>
-            </div>
-            <div class="faq-item">
-                <details>
-                    <summary>¿Se integra en nuestra web?</summary>
-                    <p>Sí, la experiencia se embebe directamente en tu dominio mediante un iframe ligero, manteniendo a tus usuarios en tu entorno de marca sin redirecciones.</p>
-                </details>
-            </div>
-            <div class="faq-item">
-                <details>
-                    <summary>¿Podemos actualizar precios y disponibilidad?</summary>
-                    <p>Totalmente. Prospectus incluye un panel de control desde donde podrás cambiar el estado (Disponible, Reservado, Vendido) y actualizar los precios en tiempo real.</p>
-                </details>
-            </div>
-            <div class="faq-item">
-                <details>
-                    <summary>¿Qué ocurre después de la entrega?</summary>
-                    <p>Mantenemos la plataforma operativa en nuestros servidores de alto rendimiento, asegurando una carga rápida para todos los usuarios durante toda la vida comercial de la promoción.</p>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- NOSOTROS -->
-    <section id="nosotros" class="container section-pad">
-        <div class="editorial animate-on-scroll">
-            <h2 class="mb-8 text-center">Por qué existimos</h2>
-            <p>Comprar sobre plano nunca debería sentirse como un acto de fe. Sin embargo, durante décadas hemos pedido a las familias y a los inversores que tomen una de las decisiones financieras más importantes de sus vidas basándose en líneas impresas y un par de imágenes estáticas.</p>
-            <p><strong>Los renders y folletos tienen límites.</strong> Son ventanas cerradas. Muestran un ángulo, bajo una luz perfecta, pero ocultan la verdadera escala, la relación de los espacios y la sensación de habitar el lugar.</p>
-            <p>El comprador actual no solo necesita ver, necesita experimentar el proyecto. Prospectus nace de una premisa fundamental: <strong>poder mostrar la vivienda real antes de construirla</strong>. Transformamos la barrera de la abstracción arquitectónica en una puerta abierta, utilizando exactamente los mismos planos que ya existen.</p>
-
-            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: 4rem; gap: 2rem;">
-                <div>
-                    <h4 style="color: var(--text-main); margin-bottom: 0.5rem;">Claridad</h4>
-                    <p style="font-size: 0.95rem;">Eliminamos la fricción cognitiva entre un plano técnico y la realidad habitable.</p>
-                </div>
-                <div>
-                    <h4 style="color: var(--text-main); margin-bottom: 0.5rem;">Innovación útil</h4>
-                    <p style="font-size: 0.95rem;">La tecnología al servicio de la venta comercial, sin complejidades innecesarias.</p>
-                </div>
-                <div>
-                    <h4 style="color: var(--text-main); margin-bottom: 0.5rem;">Estética premium</h4>
-                    <p style="font-size: 0.95rem;">Tu promoción merece ser presentada con el rigor y la belleza de la propia arquitectura.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- BANDA CTA -->
-    <section class="cta-band section-pad">
-        <div class="container animate-on-scroll">
-            <h2>Tu próxima promoción merece una experiencia que esté a la altura de los planos.</h2>
-            <a href="#contacto" class="btn">Pide una demo personalizada</a>
-        </div>
-    </section>
-
-    <!-- CONTACTO -->
-    <section id="contacto" class="container section-pad">
-        <h2 class="mb-8 animate-on-scroll">Empieza a vender mejor</h2>
-        <div class="contact-grid">
-            <div class="contact-form-wrapper animate-on-scroll">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" id="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Promotora / Empresa</label>
-                        <input type="text" id="company" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Mensaje</label>
-                        <textarea id="message" class="form-control" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar solicitud</button>
-                </form>
-            </div>
-
-            <div class="contact-info animate-on-scroll">
-                <div class="contact-card">
-                    <h4 class="mb-4">Contacto directo</h4>
-                    <div class="mb-4">
-                        <span style="display:block; font-size:0.85rem; color:var(--text-muted);">Email</span>
-                        <a href="mailto:prospectus3d.es@gmail.com" style="font-size:1.1rem; font-weight:500;">prospectus3d.es@gmail.com</a>
-                    </div>
-                    <div class="mb-4">
-                        <span style="display:block; font-size:0.85rem; color:var(--text-muted);">WhatsApp</span>
-                        <a href="https://wa.me/34643190807" target="_blank" rel="noopener noreferrer" style="font-size:1.1rem; font-weight:500; color:var(--accent);">+34 643 190 807</a>
-                    </div>
-                    <div>
-                        <span style="display:block; font-size:0.85rem; color:var(--text-muted);">Ubicación</span>
-                        <span style="font-size:1.1rem; font-weight:500;">Tarragona, España</span>
-                    </div>
-                </div>
-
-                <div class="contact-card" style="background: var(--accent); color: #fff; border:none;">
-                    <h4 class="mb-2">¿Prefieres ver el producto?</h4>
-                    <p style="opacity: 0.9; margin-bottom: 1.5rem; font-size:0.95rem;">Explora nuestra demostración interactiva completa sin compromiso.</p>
-                    <a href="#demo" class="btn" style="background: #fff; color: var(--accent); width:100%;">Abrir demo</a>
-                </div>
+            <div class="closing-contact">
+                <a href="mailto:prospectus3d.es@gmail.com">prospectus3d.es@gmail.com</a><span aria-hidden="true">·</span><a href="tel:+34633716169">+34 633 716 169</a>
             </div>
         </div>
     </section>
 </main>
-
-<!-- FOOTER -->
-<footer>
-    <div class="container">
-        <div class="footer-logo wordmark">Prospectus<span class="dot">.</span></div>
-        <p>© 2026 Prospectus 3D · prospectus3d.com</p>
+<footer id="closing-footer">
+    <div class="closing-footer-inner">
+        <div><a class="closing-wordmark" href="#inicio">Prospectus<span>.</span></a><p class="closing-copyright">© Prospectus</p></div>
+        <div class="closing-footer-contact"><a href="mailto:prospectus3d.es@gmail.com">prospectus3d.es@gmail.com</a><a href="tel:+34633716169">+34 633 716 169</a></div>
     </div>
 </footer>
+<a id="whatsapp-float" href="https://wa.me/34633716169?text=Hola%2C%20me%20gustar%C3%ADa%20conocer%20mejor%20Prospectus." target="_blank" rel="noopener noreferrer" aria-label="Hablar con Prospectus por WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.52 3.48A11.91 11.91 0 0 0 12.04 0C5.46 0 .1 5.35.1 11.94c0 2.1.55 4.16 1.6 5.98L0 24l6.24-1.64a11.95 11.95 0 0 0 5.8 1.48h.01C18.63 23.84 24 18.49 24 11.9c0-3.19-1.24-6.18-3.48-8.42ZM12.04 21.82a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.7.97.99-3.61-.24-.37a9.86 9.86 0 0 1-1.52-5.28c0-5.47 4.45-9.92 9.93-9.92a9.85 9.85 0 0 1 7.02 2.91 9.84 9.84 0 0 1 2.9 7.01c0 5.47-4.45 9.88-9.98 9.88Zm5.44-7.41c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.68-.51h-.57c-.2 0-.53.07-.8.37-.28.3-1.05 1.02-1.05 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.11 3.22 5.11 4.52.72.31 1.27.5 1.7.64.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
+    <span class="whatsapp-tooltip" aria-hidden="true">Hablar por WhatsApp</span>
+</a>
+<script src="closing.js" defer></script>
 
 <!-- JAVASCRIPT -->
 <script>
+    // Same mailto delivery as the original contact form; no external integration.
+    document.getElementById('leadForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const subject = encodeURIComponent(`Solicitud de demo - ${data.get('company')}`);
+        const body = encodeURIComponent(`Nombre: ${data.get('name')}\nEmpresa: ${data.get('company')}\nEmail: ${data.get('email')}\nTeléfono: ${data.get('phone')}\nN.º aproximado de viviendas: ${data.get('homes')}\nEstado de la promoción: ${data.get('stage')}\n\nInformación adicional:\n${data.get('message') || 'No indicada'}`);
+        window.location.href = `mailto:prospectus3d.es@gmail.com?subject=${subject}&body=${body}`;
+    });
+    // Transparent navigation only while the opening composition is visible.
+    new IntersectionObserver(([entry]) => {
+        document.querySelector('header').classList.toggle('hero-nav', entry.isIntersecting);
+    }, { rootMargin: '-76px 0px 0px 0px' }).observe(document.getElementById('inicio'));
     // === ENTORNO: host real (dominio propio, GitHub Pages, Netlify, Vercel, localhost) vs. la
     //     preview de artifacts de claude.ai (donde los vídeos van por /_blob y el iframe externo
     //     está bloqueado por seguridad). En cualquier host real la demo se embebe e interactúa. ===

@@ -1,0 +1,31 @@
+#hablemos { background:radial-gradient(ellipse at 50% 55%,#17121f 0%,#09090b 65%); color:#f4f1f8; padding:130px 24px 108px; text-align:center; }
+#hablemos .closing-inner { max-width:1200px; margin:auto; }
+#hablemos .closing-brand { font-size:12px; font-weight:650; letter-spacing:.24em; margin-bottom:42px; }
+#hablemos .closing-brand span,#closing-footer .closing-wordmark span { color:#b994ee; }
+#hablemos h2 { font-size:clamp(44px,5.8vw,88px); line-height:1.08; letter-spacing:-.055em; font-weight:500; margin:0; }
+#hablemos h2 span { color:#bbb1c8; }
+#hablemos .closing-description { max-width:510px; margin:32px auto 0; font-size:16px; line-height:1.8; color:#aaa2b4; }
+#hablemos .closing-actions { display:flex; justify-content:center; align-items:center; gap:16px; margin-top:42px; }
+#hablemos .closing-actions a { display:inline-flex; align-items:center; justify-content:center; gap:22px; min-height:56px; padding:17px 28px; border-radius:7px; font-size:11px; letter-spacing:.09em; font-weight:650; transition:background .2s,border-color .2s; }
+#hablemos .closing-primary { background:#7c3aed; color:#fff; border:1px solid #7c3aed; }
+#hablemos .closing-secondary { border:1px solid #ffffff24; color:#ddd6e6; background:transparent; }
+#hablemos .closing-contact { display:flex; align-items:center; justify-content:center; gap:15px; margin-top:30px; color:#a59cab; font-size:12px; }
+#hablemos a:focus-visible,#closing-footer a:focus-visible,#whatsapp-float:focus-visible { outline:2px solid #d0b2ff; outline-offset:6px; }
+#closing-footer { padding:0 5% 38px; background:#09090b; color:#a59cab; border:0; font-size:12px; }
+#closing-footer .closing-footer-inner { max-width:1200px; margin:auto; border-top:1px solid #ffffff18; padding-top:32px; display:flex; justify-content:space-between; gap:28px; }
+#closing-footer .closing-wordmark { font-size:23px; font-weight:700; letter-spacing:-.04em; color:#f4f1f8; }
+#closing-footer .closing-copyright { font-size:11px; margin-top:18px; }
+#closing-footer .closing-footer-contact { display:flex; flex-direction:column; align-items:flex-end; gap:9px; }
+#whatsapp-float { position:fixed; right:28px; bottom:calc(26px + env(safe-area-inset-bottom,0px)); width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:#168c4c; color:#fff; z-index:990; box-shadow:0 4px 20px #0003; transition:transform .2s,box-shadow .2s; }
+#whatsapp-float svg { width:28px; height:28px; }
+#whatsapp-float[hidden] { display:none; }
+#whatsapp-float .whatsapp-tooltip { position:absolute; right:calc(100% + 12px); white-space:nowrap; padding:8px 12px; border:1px solid #ffffff24; background:#141217; border-radius:6px; font-size:12px; opacity:0; pointer-events:none; }
+@media(hover:hover) { #whatsapp-float:hover { transform:scale(1.05); box-shadow:0 6px 24px #0004; } #whatsapp-float:hover .whatsapp-tooltip,#whatsapp-float:focus-visible .whatsapp-tooltip { opacity:1; } #hablemos .closing-primary:hover { background:#8b4cf0; } #hablemos .closing-secondary:hover { background:#ffffff08; border-color:#b994ee80; } #hablemos .closing-contact a:hover,#closing-footer a:hover { color:#fff; } }
+#hablemos.is-prepared .closing-reveal { opacity:0; transform:translateY(16px); transition:opacity .6s ease,transform .6s ease; }
+#hablemos.is-visible .closing-reveal { opacity:1; transform:none; }
+#hablemos .closing-reveal:nth-child(2) { transition-delay:.1s; }
+#hablemos .closing-reveal:nth-child(3) { transition-delay:.2s; }
+#hablemos .closing-reveal:nth-child(4) { transition-delay:.3s; }
+@media(max-width:768px) { #hablemos { padding:84px 24px 72px; } #hablemos h2 { font-size:clamp(38px,7.2vw,58px); } #hablemos .closing-brand { margin-bottom:32px; } #hablemos .closing-description { font-size:15px; max-width:430px; } #whatsapp-float { right:16px; bottom:calc(16px + env(safe-area-inset-bottom,0px)); width:52px; height:52px; } }
+@media(max-width:480px) { #hablemos { padding:72px 20px 60px; } #hablemos h2 { font-size:clamp(36px,9.4vw,41px); } #hablemos .closing-description { margin-top:26px; font-size:14px; } #hablemos .closing-actions { flex-direction:column; gap:12px; margin-top:32px; } #hablemos .closing-actions a { width:100%; min-height:54px; } #hablemos .closing-contact { flex-direction:column; gap:12px; margin-top:26px; } #hablemos .closing-contact>span { display:none; } #closing-footer { padding:0 20px 32px; } #closing-footer .closing-footer-inner { flex-direction:column; text-align:center; gap:22px; } #closing-footer .closing-footer-contact { align-items:center; } }
+@media(prefers-reduced-motion:reduce) { #hablemos .closing-reveal,#hablemos.is-prepared .closing-reveal { opacity:1; transform:none; transition:none; } #whatsapp-float { transition:none; } }

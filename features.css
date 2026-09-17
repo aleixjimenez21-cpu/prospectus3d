@@ -1,0 +1,37 @@
+#beneficios { background:#09090b; color:#f4f1f8; padding:100px 5% 120px; }
+#beneficios .experience-layout { max-width:1200px; margin:auto; display:grid; grid-template-columns: .8fr 1.2fr; gap:64px; align-items:start; }
+#beneficios .experience-eyebrow { color:#b8a0d9; font-size:10px; letter-spacing:.18em; }
+#beneficios h2 { font-size:clamp(32px,3vw,43px); line-height:1.12; letter-spacing:-.045em; margin:22px 0; font-weight:500; }
+#beneficios h2 em { color:#b994ee; font-style:normal; }
+#beneficios .experience-intro { font-size:14px; line-height:1.8; color:#a9a2b3; margin-bottom:35px; }
+#beneficios .experience-list h3 { font-size:10px; color:#8f859e; letter-spacing:.15em; font-weight:500; padding:23px 0 11px; border-bottom:1px solid #ffffff15; margin-bottom:7px; }
+#beneficios .experience-list button { display:flex; gap:20px; width:100%; min-height:44px; text-align:left; align-items:center; background:transparent; color:#b9b2c4; padding:10px 14px; border-left:2px solid transparent; border-radius:0 6px 6px 0; font-size:14px; cursor:pointer; transition:background .2s,color .2s; }
+#beneficios .experience-list button span { font-size:10px; color:#8d809f; font-variant-numeric:tabular-nums; }
+#beneficios .experience-list button[aria-pressed="true"] { color:#fff; background:#a16de914; border-left-color:#b78aea; }
+#beneficios .experience-list button[aria-pressed="true"] span { color:#caa6fb; }
+#beneficios .experience-showcase { position:sticky; top:112px; padding-top:8px; min-width:0; }
+#beneficios .experience-window { border:1px solid #ffffff21; border-radius:14px; overflow:hidden; background:#100e15; }
+#beneficios .experience-bar { display:flex; justify-content:space-between; gap:12px; font-size:9px; letter-spacing:.1em; color:#a69ab6; padding:13px 17px; }
+#beneficios .experience-media { position:relative; background:#080809; aspect-ratio:16/10; }
+#beneficios video { width:100%; height:100%; object-fit:contain; }
+#beneficios #experience-pause { position:absolute; bottom:12px; right:12px; min-height:36px; padding:8px 13px; border:1px solid #ffffff40; border-radius:6px; color:#fff; background:#09090bba; cursor:pointer; font-size:11px; }
+#beneficios .experience-detail { padding:26px 28px 30px; min-height:173px; }
+#beneficios #experience-category { font-size:10px; letter-spacing:.13em; color:#b398d4; }
+#beneficios .experience-detail h3 { font-size:25px; letter-spacing:-.035em; margin:12px 0 9px; }
+#beneficios .experience-detail p { font-size:14px; line-height:1.7; color:#b1aabb; }
+#beneficios .experience-link { display:inline-flex; align-items:center; min-height:44px; margin-top:14px; color:#baa6d5; font-size:12px; }
+#beneficios .experience-window.changing video, #beneficios .experience-window.changing .experience-detail { opacity:0; transform:translateY(5px) scale(.99); }
+#beneficios video, #beneficios .experience-detail { transition:opacity .17s ease,transform .3s ease; }
+#beneficios .experience-mobile { display:none; }
+@media(max-width:900px) {
+ #beneficios { padding:64px 20px 80px; }
+ #beneficios .experience-layout { grid-template-columns:1fr; gap:26px; max-width:720px; }
+ #beneficios .experience-list { display:none; }
+ #beneficios .experience-mobile { display:block; }
+ #beneficios .experience-mobile label { display:block; font-size:12px; color:#b8afc4; margin-bottom:10px; }
+ #beneficios select { width:100%; min-height:54px; padding:12px; border:1px solid #ffffff30; border-radius:7px; font:inherit; font-size:16px; color:#eee7f5; background:#17131e; color-scheme:dark; }
+ #beneficios .experience-showcase { position:static; padding:0; }
+ #beneficios .experience-detail { padding:22px; }
+ #beneficios .experience-intro { margin-bottom:26px; }
+}
+@media(prefers-reduced-motion:reduce) { #beneficios video, #beneficios .experience-detail { transition:none; } }
