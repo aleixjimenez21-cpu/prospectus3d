@@ -21,9 +21,9 @@ Los vídeos se sirven por ruta local (`videos/*.mp4`); no hace falta configuraci
 
 © 2026 Prospectus 3D · prospectus3d.com
 
-## Información legal (borrador pendiente)
+## Información legal
 
-Se han añadido `aviso-legal.html`, `privacidad.html` y `cookies.html`, con estilos en `legal.css` y enlaces desde el pie y el formulario. Antes de publicar esta versión, completar la identificación del titular en el aviso legal, privacidad y resumen del formulario; confirmar domicilio, NIF/CIF y datos registrales cuando correspondan. Validar también las prácticas reales de conservación, proveedores y transferencias del responsable. Después, retirar los avisos de borrador y revisar la indexación de esas páginas.
+Las páginas `aviso-legal.html`, `privacidad.html` y `cookies.html` utilizan `legal.css` y están enlazadas desde el pie y el formulario. Por petición del usuario se han retirado los campos de identificación sin datos y los avisos de borrador. Se mantienen el nombre comercial y los contactos existentes. Esto no acredita cumplimiento legal ni sustituye la identificación del titular cuando resulte exigible. Las páginas conservan `noindex`.
 
 El formulario mantiene el envío mediante el programa de correo del visitante; no hay un backend que reciba los datos. No se ha añadido una casilla de consentimiento genérica: la información de privacidad está visible junto al envío.
 

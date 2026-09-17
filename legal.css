@@ -25,7 +25,6 @@
 .legal-page h2 { font-size:23px; line-height:1.35; font-weight:500; margin:40px 0 16px; }
 .legal-page p, .legal-page li, .legal-page dd { color:#c2bdcb; }
 .legal-date { font-size:13px; }
-.legal-draft { border:1px solid #b994ee55; border-radius:8px; padding:18px 22px; margin-top:28px; background:#b994ee0a; font-size:14px; color:#d5c6ec; }
 .legal-page dl { padding:20px; border:1px solid #ffffff20; border-radius:8px; }
 .legal-page dt { font-weight:600; font-size:14px; margin-top:16px; }
 .legal-page dt:first-child { margin-top:0; }
