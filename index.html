@@ -522,15 +522,14 @@
                     <div class="demo-overlay-card">
                         <span class="eyebrow">Showroom interactivo</span>
                         <h3>Serra Residencial en 3D</h3>
-                        <p id="demo-privacy">Al activar la demo conectarás con Netlify, que recibirá tu IP y datos técnicos. La demo puede recordar que has completado el tutorial. <a href="cookies.html">Más información</a>.</p>
-                        <button type="button" class="btn btn-primary" id="demo-activate" aria-describedby="demo-privacy" hidden>Activar demo</button>
+                        <p>Vista previa del showroom. Ábrela a pantalla completa para navegarla.</p>
                         <noscript><p>Activa JavaScript o abre la demo en otra pestaña.</p></noscript>
                         <a class="btn btn-primary" href="https://serraresidencial.netlify.app/" target="_blank" rel="noopener noreferrer">Abrir demo →</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="demo-footer"><button type="button" id="demo-deactivate" hidden>Cerrar demo</button><span>SERRA RESIDENCIAL · SHOWROOM NAVEGABLE</span><a href="https://serraresidencial.netlify.app/" target="_blank" rel="noopener noreferrer">ABRIR DEMO COMPLETA ↗</a></div>
+        <div class="demo-footer"><span>SERRA RESIDENCIAL · SHOWROOM NAVEGABLE</span><a href="https://serraresidencial.netlify.app/" target="_blank" rel="noopener noreferrer">ABRIR DEMO COMPLETA ↗</a></div>
     </section>
 
     <!-- UN SOLO ENLACE, TODA LA PROMOCIÓN -->
@@ -776,7 +775,6 @@
     <span class="whatsapp-tooltip" aria-hidden="true">Hablar por WhatsApp</span>
 </a>
 <script src="closing.js" defer></script>
-<script src="demo-privacy.js" defer></script>
 
 <!-- JAVASCRIPT -->
 <script>
@@ -822,6 +820,19 @@
             if (a.poster) v.poster = '/_blob/' + a.poster;
             v.load();
         });
+    })();
+
+    // === DEMO: iframe interactivo en vivo en host real; imagen de vista previa en la preview de claude.ai ===
+    (function demoEnv() {
+        const iframe = document.getElementById('demoIframe');
+        const overlay = document.getElementById('demoOverlay');
+        if (IS_REAL_HOST) {
+            if (iframe && iframe.dataset.src) iframe.src = iframe.dataset.src;
+            if (overlay) overlay.hidden = true;
+        } else {
+            if (iframe) iframe.remove();
+            if (overlay) overlay.hidden = false;
+        }
     })();
 
     (function init() {
