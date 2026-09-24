@@ -1,4 +1,5 @@
 (() => {
+ const t=text=>window.ProspectusLanguage?.t(text)||text;
  const root=document.querySelector('#audiovisual');
  const video=root.querySelector('video'), source=video.querySelector('source');
  const cover=root.querySelector('#motion-cover'), image=root.querySelector('img');
@@ -12,6 +13,14 @@
  ];
  let active=0, timer, revision=0;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ function caption(){
+  const item=items[active];
+  image.alt=t(item[2])+'. '+t(item[4]);
+  cover.setAttribute('aria-label',t('Reproducir')+' '+t(item[2]));
+  video.setAttribute('aria-label',t(item[2]));
+  root.querySelector('#motion-title').textContent=t(item[2]);
+  root.querySelector('#motion-description').textContent=t(item[3]);
+ }
  function select(index) {
   if(index===active)return;
   active=index; revision++; clearTimeout(timer);
@@ -21,11 +30,9 @@
   root.classList.add('changing');
   timer=setTimeout(()=>{
    const item=items[index];
-   image.src='assets/motion/'+item[0]+'.png'; image.alt=item[2]+'. '+item[4];
-   cover.setAttribute('aria-label','Reproducir '+item[2]); video.setAttribute('aria-label',item[2]);
+   image.src='assets/motion/'+item[0]+'.png';
    root.querySelector('#motion-count').textContent='0'+(index+1)+' / 04';
-   root.querySelector('#motion-title').textContent=item[2];
-   root.querySelector('#motion-description').textContent=item[3];
+   caption();
    root.classList.remove('changing');
   },reduced.matches?0:150);
  }
@@ -52,4 +59,6 @@
   items.slice(1).forEach(item=>{const img=new Image();img.src='assets/motion/'+item[0]+'.png';});
   observer.disconnect();
  },{rootMargin:'300px'}).observe(root);
+ window.addEventListener('prospectus:languagechange',caption);
+ caption();
 })();

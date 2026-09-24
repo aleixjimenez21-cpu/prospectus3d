@@ -1,4 +1,5 @@
 (() => {
+ const t = text => window.ProspectusLanguage?.t(text) || text;
  const section = document.querySelector('#beneficios');
  const video = section.querySelector('video');
  const pane = section.querySelector('.experience-window');
@@ -18,12 +19,22 @@
  ];
  let active=0, timer, visible=false, paused=reduced.matches;
  const path=(i,ext)=>`assets/features/${items[i][0]}.${ext}`;
+ function labels(){
+  pause.textContent=t(paused?'Reproducir':'Pausar');
+  pause.setAttribute('aria-label',t(paused?'Reproducir demostración':'Pausar demostración'));
+ }
+ function caption(){
+  const item=items[active];
+  video.setAttribute('aria-label',`${t('Demostración:')} ${t(item[2])}`);
+  section.querySelector('#experience-category').textContent=`${String(active+1).padStart(2,'0')} — ${t(item[1])}`;
+  section.querySelector('#experience-name').textContent=t(item[2]);
+  section.querySelector('#experience-description').textContent=t(item[3]);
+ }
  function playback(){
-  pause.textContent=paused?'Reproducir':'Pausar';
-  pause.setAttribute('aria-label',paused?'Reproducir demostración':'Pausar demostración');
+  labels();
   if(visible&&!paused&&!document.hidden) {
    if(!video.getAttribute('src')) { video.src=path(active,'mp4'); video.load(); }
-   video.play().catch(()=>{pause.textContent='Reproducir';paused=true;});
+   video.play().catch(()=>{paused=true;labels();});
   } else video.pause();
  }
  function change(index){
@@ -32,11 +43,8 @@
   buttons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));
   select.value=String(index); pane.classList.add('changing'); video.pause();
   timer=setTimeout(()=>{
-   const item=items[index]; video.removeAttribute('src'); video.poster=path(index,'webp'); video.load();
-   video.setAttribute('aria-label',`Demostración: ${item[2]}`);
-   section.querySelector('#experience-category').textContent=`${String(index+1).padStart(2,'0')} — ${item[1]}`;
-   section.querySelector('#experience-name').textContent=item[2];
-   section.querySelector('#experience-description').textContent=item[3];
+   video.removeAttribute('src'); video.poster=path(index,'webp'); video.load();
+   caption();
    pane.classList.remove('changing'); playback();
    // Preload only the next lightweight poster, never eight videos.
    const next=new Image(); next.src=path((index+1)%items.length,'webp');
@@ -52,5 +60,6 @@
  new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;playback();},{threshold:.1}).observe(section.querySelector('.experience-media'));
  reduced.addEventListener('change',()=>{paused=reduced.matches;playback();});
  document.addEventListener('visibilitychange',playback);
- playback();
+ window.addEventListener('prospectus:languagechange',()=>{caption();labels();});
+ caption(); playback();
 })();

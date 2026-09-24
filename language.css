@@ -1,0 +1,26 @@
+/* Native controls keep keyboard and mobile language selection familiar. */
+.language-control { display:inline-flex; flex:none; align-items:center; }
+.language-label { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.language-select { min-height:44px; width:115px; border:1px solid #ffffff38; border-radius:8px; padding:8px 10px; background:#18161d; color:#f5f3f8; font:inherit; font-size:12px; cursor:pointer; color-scheme:dark; }
+.language-select option { background:#18161d; color:#f5f3f8; }
+.language-select:focus-visible { outline:2px solid #c6a4f4; outline-offset:3px; }
+.language-select[hidden] { display:none; }
+.legal-header { flex-wrap:wrap; gap:12px 24px; }
+.legal-header .language-control { margin-left:auto; }
+@media(max-width:600px) {
+    header .nav-container, header.hero-nav .nav-container { padding:0 16px; gap:8px; }
+    header .wordmark, header.hero-nav .wordmark { font-size:20px; }
+    header .nav-ctas { gap:7px; }
+    header .language-select { width:74px; padding:8px 4px; font-size:11px; }
+    header .nav-ctas .btn-primary, header.hero-nav .btn-primary { min-height:44px; padding:9px; font-size:10px; white-space:nowrap; }
+    header .menu-toggle { font-size:20px; min-height:44px; }
+    .legal-header { padding:22px 20px; }
+    .legal-header > a:last-child { flex-basis:100%; font-size:12px; }
+}
+@media(max-width:360px) {
+    header .nav-container, header.hero-nav .nav-container { padding:0 12px; gap:6px; }
+    header .nav-ctas { gap:5px; }
+    header .language-select { width:66px; font-size:10px; }
+    header .wordmark, header.hero-nav .wordmark { font-size:18px; }
+    header .nav-ctas .btn-primary, header.hero-nav .btn-primary { padding-inline:7px; }
+}

@@ -436,6 +436,9 @@
         #demo .demo-footer a { display: inline-flex; align-items: center; min-height: 44px; }
     }
 </style>
+<link rel="stylesheet" href="language.css">
+<script src="translations.js" defer></script>
+<script src="language.js" defer></script>
 </head>
 <body>
 
@@ -454,6 +457,7 @@
         </nav>
 
         <div class="nav-ctas">
+            <label class="language-control"><span class="language-label">Idioma</span><select class="language-select" data-language-picker hidden><option value="es" lang="es">Español</option><option value="it" lang="it">Italiano</option><option value="en" lang="en">English</option></select></label>
             <a href="#demo" class="btn btn-secondary">Ver demo</a>
             <a href="#solicitar-demo" class="btn btn-primary">Pide tu demo</a>
             <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
@@ -782,8 +786,9 @@
     document.getElementById('leadForm').addEventListener('submit', (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const subject = encodeURIComponent(`Solicitud de demo - ${data.get('company')}`);
-        const body = encodeURIComponent(`Nombre: ${data.get('name')}\nEmpresa: ${data.get('company')}\nEmail: ${data.get('email')}\nTeléfono: ${data.get('phone')}\nN.º aproximado de viviendas: ${data.get('homes')}\nEstado de la promoción: ${data.get('stage')}\n\nInformación adicional:\n${data.get('message') || 'No indicada'}`);
+        const t = window.ProspectusLanguage?.t || (text => text);
+        const subject = encodeURIComponent(`${t('Solicitud de demo')} - ${data.get('company')}`);
+        const body = encodeURIComponent(`${t('Nombre')}: ${data.get('name')}\n${t('Empresa')}: ${data.get('company')}\n${t('Email')}: ${data.get('email')}\n${t('Teléfono')}: ${data.get('phone')}\n${t('N.º aproximado de viviendas')}: ${data.get('homes')}\n${t('Estado de la promoción')}: ${t(data.get('stage'))}\n\n${t('Información adicional')}:\n${data.get('message') || t('No indicada')}`);
         window.location.href = `mailto:prospectus3d.es@gmail.com?subject=${subject}&body=${body}`;
     });
     // Transparent navigation only while the opening composition is visible.
