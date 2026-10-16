@@ -99,3 +99,45 @@ Deno.test('normalises email and permits international names, phone separators an
   const { lead } = validate({ ...sample(), email: '  Contact@Example.COM ', name: 'João García', message: 'Primera línea\nSegunda línea' });
   assert(lead.email === 'contact@example.com' && lead.message.includes('\n'));
 });
+
+Deno.test('SQL-looking free text is sent only as JSON data to fixed RPCs and plaintext email', async () => {
+  const attacks = ["' OR '1'='1' --", "'; DROP TABLE contact_requests; --", "x'); SELECT pg_sleep(0.05); --", "$$; SELECT current_user; --"];
+  const allowed = new Set([
+    'https://challenges.cloudflare.com/turnstile/v0/siteverify', 'https://api.resend.com/emails',
+    ...['accept_contact_request', 'claim_contact_notifications', 'finish_contact_notification'].map(n => `${config.url}/rest/v1/rpc/${n}`),
+  ]);
+  for (const field of ['name', 'company', 'message']) {
+    for (const attack of attacks) {
+      const s = stub();
+      const payload = { ...sample(), [field]: attack, sql: attack, table: attack, query: attack };
+      assert((await contactHandler(() => config, s.send)(req(payload))).status === 201);
+      const write = s.calls.find(c => c.url.endsWith('accept_contact_request'))!;
+      assert(write.body.p_request[field] === attack);
+      assert(!('sql' in write.body.p_request) && !('table' in write.body.p_request) && !('query' in write.body.p_request));
+      assert(s.calls.every(c => allowed.has(c.url)));
+      const mail = s.calls.find(c => c.url === 'https://api.resend.com/emails')!;
+      assert(mail.body.text.includes(attack) && !mail.body.html);
+    }
+  }
+  const s = stub();
+  const normal = { ...sample(), name: "Ana O'Connor", company: "L'Arquitectura", email: "'or'1'='1@example.com" };
+  assert((await contactHandler(() => config, s.send)(req(normal))).status === 201);
+  assert(s.saved().name === normal.name && s.saved().company === normal.company && s.saved().email === normal.email);
+});
+
+Deno.test('SQL expressions and object values cannot replace structured fields or the CAPTCHA', async () => {
+  const attack = "' OR '1'='1' --";
+  for (const field of ['request_id', 'email', 'phone', 'homes', 'stage', 'language', 'website']) {
+    const s = stub();
+    assert((await contactHandler(() => config, s.send)(req({ ...sample(), [field]: attack }))).status === 400, field);
+    assert(s.calls.length === 0);
+  }
+  for (const field of Object.keys(sample())) {
+    const s = stub();
+    assert((await contactHandler(() => config, s.send)(req({ ...sample(), [field]: { sql: 'SELECT 1' } }))).status === 400, field);
+    assert(s.calls.length === 0);
+  }
+  const s = stub({ captcha: { success: false } });
+  assert((await contactHandler(() => config, s.send)(req({ ...sample(), token: attack }))).status === 400);
+  assert(s.calls.length === 1 && s.calls[0].url.endsWith('siteverify'));
+});

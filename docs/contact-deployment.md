@@ -7,14 +7,14 @@
 - Proyecto gratuito creado en la organización elegida por el propietario: **Prospectus 3D**, `qiqampmzdikwvaaernik`, región `eu-west-1`.
 - Migraciones aplicadas; ambas funciones desplegadas y sus cinco secretos configurados. Una petición incompleta devuelve HTTP 400. Formulario publicado en la portada mediante la PR #1, commit de despliegue `1ba23c7`. GitHub Pages confirmó `built`; HTML, configuración, formulario, privacidad y traducciones coinciden con la versión probada. `contact-check.html` se retiró y devuelve HTTP 404.
 - Verificado en Supabase: persistencia y prohibición de lectura/escritura/RPC para visitantes. El primer registro sintético de almacenamiento se eliminó tras la prueba integral, sin enviarlo por email. Se conserva como referencia la solicitud real claramente identificada como prueba técnica.
-- 12 pruebas del servidor, 1 prueba integrada sobre PostgreSQL/PGlite con persistencia en disco y 4 pruebas de navegador pasadas. CAPTCHA, correo y respuestas del backend están simulados en las pruebas de navegador; esto NO acredita recepción de correo real.
+- 14 pruebas del servidor, 3 pruebas integradas sobre PostgreSQL/PGlite (incluidas persistencia en disco e inyección SQL) y 4 pruebas de navegador pasadas. CAPTCHA, correo y respuestas del backend están simulados en las pruebas de navegador; esto NO acredita recepción de correo real.
 - Resend: dominio `prospectus3d.com` verificado, región Irlanda, envío con TLS obligatorio, clave limitada a envío y a ese dominio guardada en Supabase. Remitente `solicitudes@prospectus3d.com`. Los tres registros DNS exigidos por Resend se comprobaron contra los servidores autoritativos de GoDaddy; no se cambiaron los nameservers ni los registros de la web.
 - Sitekey de Turnstile recibida del propietario e incorporada a la configuración pública; Secret Key guardada en Supabase. Desafío real validado desde `prospectus3d.com`.
 - Reintentos: `pg_cron` y `pg_net` habilitados, credencial en Vault, trabajo `prospectus-contact-notifications` cada minuto; ejecución HTTP 200 `{"ok":true}` comprobada.
 - Prueba integral real: solicitud `e4ae1a3f-9cde-431c-9995-eb2759497397`, persistida y enviada en un intento. Resend `01a144e0-fccf-7a11-b19d-db6980a0d46d` confirma `Delivered` a `prospectus3d.es@gmail.com` el 16/10/2026 a las 15:22 (Europe/Madrid), con aceptación SMTP 250 de Gmail. El propietario confirmó que llegó a Recibidos.
 - Controles reales: token inválido HTTP 400, origen ajeno HTTP 403, worker sin credencial HTTP 401; sin nuevas filas ni correos. Repetición del UUID en la operación de base de datos devuelve `duplicate: true`, conservando una única solicitud y un único envío.
 - Prueba posterior al despliegue desde la portada: el propietario completó la comprobación humana de Turnstile. Solicitud `9c2dd2fd-46b4-4f69-862e-1ac981cc9ce2`, persistida a las 15:29 y enviada en un intento; Resend `01a144e6-f1fa-724e-b7a5-d1fe73fa1c86` confirma `Delivered`. El formulario mostró «Solicitud recibida» y vació los campos.
-- Pendiente favicon: falta el logo original. No se ha creado un sustituto.
+- Favicon: el propietario proporcionó el logo original sobre fondo blanco, sin márgenes negros. Se reutiliza íntegro como `favicon.jpg`, con `rel="icon"` y `Organization.logo`. No se ha rediseñado.
 
 ## Flujo
 
@@ -59,7 +59,11 @@ La eliminación de una solicitud por motivos de privacidad debe incluir, cuando 
 
 ## Favicon e indexación
 
-Solicitar el logo original. Reutilizarlo para un PNG/ICO cuadrado sin rediseñarlo, con URL estable y tamaño suficiente (por ejemplo, 192 × 192). Añadir `rel="icon"` a la página principal y `logo` a los datos de organización una vez exista el recurso real. Comprobar HTTP 200, MIME correcto y acceso de Googlebot/Googlebot-Image. Solicitar rastreo en Search Console si hay acceso. Google decide el snippet y cuándo actualizar el favicon; no hay garantía de plazo o de que lo muestre. [Requisitos de Google](https://developers.google.com/search/docs/appearance/favicon-in-search).
+Se utiliza el JPEG original proporcionado por el propietario, cuadrado de 1254 × 1254 píxeles y fondo blanco, sin márgenes negros. El archivo se copia sin rediseñar ni recomprimir a `/favicon.jpg`. La portada y las páginas legales declaran `rel="icon"`; los datos de organización incluyen la misma URL como `logo`. JPEG es un formato admitido por Google. `robots.txt` permite rastrear la portada y la imagen. No se ha solicitado rastreo desde Search Console. Google decide cuándo actualizar el favicon y el snippet; no hay garantía de plazo o de que lo muestre. [Requisitos de Google](https://developers.google.com/search/docs/appearance/favicon-in-search).
+
+## Revisión de inyección SQL
+
+Ver [la revisión y las pruebas reproducibles](sql-injection-audit.md). Los valores se pasan como parámetros JSON a funciones de SQL fijo; no se concatenan con consultas. La verificación incluye permisos reales de producción y pruebas en PostgreSQL aislado con el mismo código de funciones desplegado.
 
 ## Referencias técnicas
 
