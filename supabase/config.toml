@@ -1,0 +1,8 @@
+project_id = "prospectus3d"
+
+[functions.contact]
+verify_jwt = false
+
+[functions.contact-notifications]
+# This endpoint checks a separate bearer secret before accessing the queue.
+verify_jwt = false

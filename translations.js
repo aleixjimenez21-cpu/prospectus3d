@@ -700,10 +700,6 @@ window.PROSPECTUS_TRANSLATIONS = {
     "en": "Data protection.",
     "it": "Protezione dei dati."
   },
-  "Contacto: Prospectus 3D. Usaremos los datos para atender tu solicitud de demo o propuesta, sobre la base de medidas precontractuales o del interés legítimo cuando actúes por una empresa. El envío se realiza mediante tu correo y Gmail; no te suscribe a publicidad. Puedes ejercer tus derechos en prospectus3d.es@gmail.com.": {
-    "en": "Contact: Prospectus 3D. We use your data to respond to your demo or proposal request, based on pre-contractual measures or legitimate interests when you represent a company. Messages are sent through your email service and Gmail; this does not subscribe you to advertising. You can exercise your rights at prospectus3d.es@gmail.com.",
-    "it": "Contatto: Prospectus 3D. Utilizziamo i dati per rispondere alla tua richiesta di demo o proposta, sulla base di misure precontrattuali o del legittimo interesse quando rappresenti un’azienda. L’invio avviene tramite il tuo servizio email e Gmail; non comporta l’iscrizione a comunicazioni pubblicitarie. Puoi esercitare i tuoi diritti scrivendo a prospectus3d.es@gmail.com."
-  },
   "Consulta la política de privacidad y los proveedores": {
     "en": "Read the privacy policy and provider information",
     "it": "Consulta l’informativa sulla privacy e i fornitori"
@@ -711,10 +707,6 @@ window.PROSPECTUS_TRANSLATIONS = {
   "Solicitar demo": {
     "en": "Request a demo",
     "it": "Richiedi una demo"
-  },
-  "Se abrirá tu aplicación de correo con estos datos para que puedas enviar la solicitud a Prospectus.": {
-    "en": "Your email application will open with these details so you can send your request to Prospectus.",
-    "it": "Si aprirà la tua applicazione email con questi dati, così potrai inviare la richiesta a Prospectus."
   },
   "Información legal": {
     "en": "Legal information",
@@ -844,10 +836,6 @@ window.PROSPECTUS_TRANSLATIONS = {
     "en": "The form asks for your name, company, work email, phone number, approximate number of homes, project stage and an optional message. Required fields are needed to prepare the request. Avoid including sensitive data or unnecessary information about other people.",
     "it": "Il modulo richiede nome, azienda, email professionale, telefono, numero indicativo di abitazioni, fase del progetto e un messaggio facoltativo. I campi obbligatori sono necessari per preparare la richiesta. Evita di includere dati sensibili o dati non necessari di altre persone."
   },
-  "Al pulsar «Solicitar demo», la web prepara un correo en tu aplicación de correo. No envía automáticamente el formulario a un servidor de Prospectus: debes revisar y enviar el mensaje. Tu proveedor de correo tratará los datos al gestionar ese envío.": {
-    "en": "When you select “Request a demo”, the website prepares an email in your email application. It does not automatically submit the form to a Prospectus server: you must review and send the message. Your email provider will process the data when sending it.",
-    "it": "Premendo «Richiedi una demo», il sito prepara un messaggio nella tua applicazione email. Il modulo non viene inviato automaticamente a un server di Prospectus: devi controllare e inviare il messaggio. Il tuo fornitore di posta elettronica tratterà i dati per gestirne l’invio."
-  },
   "3. Finalidades y bases jurídicas": {
     "en": "3. Purposes and legal bases",
     "it": "3. Finalità e basi giuridiche"
@@ -871,10 +859,6 @@ window.PROSPECTUS_TRANSLATIONS = {
   "5. Proveedores y servicios externos": {
     "en": "5. Providers and external services",
     "it": "5. Fornitori e servizi esterni"
-  },
-  "El alojamiento previsto es GitHub Pages. El correo de contacto utiliza Gmail. Estos proveedores pueden tratar información necesaria para alojar la web o gestionar los mensajes. Los datos también podrán comunicarse a autoridades cuando exista una obligación legal.": {
-    "en": "The intended hosting service is GitHub Pages. The contact email uses Gmail. These providers may process information needed to host the website or manage messages. Data may also be disclosed to authorities where legally required.",
-    "it": "Il servizio di hosting previsto è GitHub Pages. L’email di contatto utilizza Gmail. Questi fornitori possono trattare le informazioni necessarie a ospitare il sito o gestire i messaggi. I dati potranno inoltre essere comunicati alle autorità in presenza di un obbligo di legge."
   },
   "La demo de Serra Residencial se aloja en Netlify y se carga automáticamente dentro de esta página, sin solicitar una activación previa. El navegador puede aplazar su carga hasta que te acerques a la sección de la demo. Al cargarla, tu navegador comunica a ese servicio tu dirección IP y datos técnicos de conexión. Los enlaces para abrirla en otra pestaña acceden directamente al sitio externo.": {
     "en": "The Serra Residencial demo is hosted on Netlify and loads automatically within this page without requiring prior activation. Your browser may delay loading until you approach the demo section. When it loads, your browser shares your IP address and technical connection data with that service. Links that open it in another tab take you directly to the external site.",
@@ -1127,5 +1111,73 @@ window.PROSPECTUS_TRANSLATIONS = {
   "Última actualización: 24 de septiembre de 2026": {
     "en": "Last updated: 24 September 2026",
     "it": "Ultimo aggiornamento: 24 settembre 2026"
+  },
+  "Contacto: Prospectus 3D. Usaremos los datos para atender tu solicitud de demo o propuesta, sobre la base de medidas precontractuales o del interés legítimo cuando actúes por una empresa. La solicitud se guarda en Supabase y se notifica por correo mediante Resend a nuestro buzón de Gmail. Cloudflare Turnstile protege el formulario frente al spam. No te suscribe a publicidad. Puedes ejercer tus derechos en prospectus3d.es@gmail.com.": {
+    "en": "Contact: Prospectus 3D. We use your data to respond to your demo or proposal request, based on pre-contractual measures or legitimate interests when you represent a company. Your request is stored in Supabase and an email notification is sent through Resend to our Gmail inbox. Cloudflare Turnstile protects the form against spam. This does not subscribe you to advertising. You can exercise your rights at prospectus3d.es@gmail.com.",
+    "it": "Contatto: Prospectus 3D. Utilizziamo i dati per rispondere alla tua richiesta di demo o proposta, sulla base di misure precontrattuali o del legittimo interesse quando rappresenti un’azienda. La richiesta viene salvata in Supabase e notificata tramite Resend alla nostra casella Gmail. Cloudflare Turnstile protegge il modulo dallo spam. Non comporta l’iscrizione a comunicazioni pubblicitarie. Puoi esercitare i tuoi diritti scrivendo a prospectus3d.es@gmail.com."
+  },
+  "Enviaremos tu solicitud directamente a Prospectus.": {
+    "en": "We will send your request directly to Prospectus.",
+    "it": "Invieremo la tua richiesta direttamente a Prospectus."
+  },
+  "Al pulsar «Solicitar demo», los datos se envían de forma cifrada a Supabase y se guardan para atender tu solicitud. Resend envía un aviso a prospectus3d.es@gmail.com. Si el aviso falla, la solicitud permanece guardada y el sistema reintenta el envío. Cloudflare Turnstile verifica la interacción para reducir el spam. También se utilizan límites de envío y un identificador derivado del correo para controlar abusos. La web no guarda los datos del formulario en el almacenamiento del navegador.": {
+    "en": "When you select “Request a demo”, your data is sent over an encrypted connection to Supabase and stored to handle your request. Resend sends a notification to prospectus3d.es@gmail.com. If the notification fails, the request remains stored and the system retries. Cloudflare Turnstile checks the interaction to reduce spam. Submission limits and an identifier derived from your email are also used to prevent abuse. The website does not save form data in browser storage.",
+    "it": "Quando selezioni «Richiedi una demo», i dati vengono inviati con una connessione cifrata a Supabase e salvati per gestire la richiesta. Resend invia una notifica a prospectus3d.es@gmail.com. Se la notifica fallisce, la richiesta resta salvata e il sistema riprova. Cloudflare Turnstile verifica l’interazione per ridurre lo spam. Si utilizzano inoltre limiti di invio e un identificativo derivato dall’email per prevenire abusi. Il sito non salva i dati del modulo nella memoria del browser."
+  },
+  "La web se aloja en GitHub Pages. Supabase almacena las solicitudes y ejecuta el procesamiento del formulario. Resend gestiona las notificaciones al buzón de Gmail de Prospectus. Cloudflare Turnstile proporciona la verificación antispam al interactuar con el formulario y puede tratar datos técnicos del navegador y de conexión. Estos proveedores tratan la información necesaria para prestar sus servicios. Los datos también podrán comunicarse a autoridades cuando exista una obligación legal.": {
+    "en": "The website is hosted on GitHub Pages. Supabase stores requests and processes form submissions. Resend handles notifications to the Prospectus Gmail inbox. Cloudflare Turnstile provides spam verification when you interact with the form and may process technical browser and connection data. These providers process information needed to deliver their services. Data may also be disclosed to authorities where legally required.",
+    "it": "Il sito è ospitato su GitHub Pages. Supabase conserva le richieste ed elabora gli invii del modulo. Resend gestisce le notifiche alla casella Gmail di Prospectus. Cloudflare Turnstile fornisce la verifica antispam quando interagisci con il modulo e può trattare dati tecnici del browser e della connessione. Questi fornitori trattano le informazioni necessarie per erogare i propri servizi. I dati potranno inoltre essere comunicati alle autorità in presenza di un obbligo di legge."
+  },
+  "Última actualización: 16 de octubre de 2026": {
+    "en": "Last updated: 16 October 2026",
+    "it": "Ultimo aggiornamento: 16 ottobre 2026"
+  },
+  "También puedes escribirnos por correo": {
+    "en": "You can also email us",
+    "it": "Puoi anche scriverci via email"
+  },
+  "Activa JavaScript para utilizar el formulario o escríbenos a prospectus3d.es@gmail.com.": {
+    "en": "Enable JavaScript to use the form or email prospectus3d.es@gmail.com.",
+    "it": "Attiva JavaScript per usare il modulo o scrivi a prospectus3d.es@gmail.com."
+  },
+  "Enviando…": {
+    "en": "Sending…",
+    "it": "Invio in corso…"
+  },
+  "Estamos enviando tu solicitud…": {
+    "en": "We are sending your request…",
+    "it": "Stiamo inviando la tua richiesta…"
+  },
+  "Solicitud recibida. Gracias, nos pondremos en contacto contigo.": {
+    "en": "Request received. Thank you, we will contact you.",
+    "it": "Richiesta ricevuta. Grazie, ti contatteremo."
+  },
+  "El formulario no está disponible ahora. Escríbenos a prospectus3d.es@gmail.com.": {
+    "en": "The form is currently unavailable. Email prospectus3d.es@gmail.com.",
+    "it": "Il modulo non è disponibile al momento. Scrivi a prospectus3d.es@gmail.com."
+  },
+  "No se ha podido completar la verificación. Reintenta o escríbenos por correo.": {
+    "en": "Verification could not be completed. Try again or email us.",
+    "it": "Non è stato possibile completare la verifica. Riprova o scrivici via email."
+  },
+  "Completa la verificación de seguridad antes de enviar.": {
+    "en": "Complete the security check before sending.",
+    "it": "Completa la verifica di sicurezza prima di inviare."
+  },
+  "Has enviado varias solicitudes. Espera una hora o escríbenos por correo.": {
+    "en": "You have sent several requests. Wait an hour or email us.",
+    "it": "Hai inviato diverse richieste. Attendi un’ora o scrivici via email."
+  },
+  "La verificación ha caducado. Complétala de nuevo y reintenta.": {
+    "en": "Verification expired. Complete it again and retry.",
+    "it": "La verifica è scaduta. Completala di nuovo e riprova."
+  },
+  "Revisa los datos del formulario y vuelve a intentarlo.": {
+    "en": "Check your form details and try again.",
+    "it": "Controlla i dati del modulo e riprova."
+  },
+  "No hemos podido confirmar el envío. Conservamos los datos en el formulario para que puedas reintentar.": {
+    "en": "We could not confirm your submission. Your details remain in the form so you can retry.",
+    "it": "Non abbiamo potuto confermare l’invio. I dati restano nel modulo per consentirti di riprovare."
   }
 };
