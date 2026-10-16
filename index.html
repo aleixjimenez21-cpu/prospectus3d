@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="questions.css">
 <link rel="stylesheet" href="closing.css">
 <link rel="stylesheet" href="legal.css">
+<link rel="stylesheet" href="contact.css">
 <link rel="stylesheet" href="process.css?v=2">
 <link rel="stylesheet" href="change.css">
 <link rel="stylesheet" href="motion.css">
@@ -755,19 +756,24 @@
                 <p class="lead-description">Cuéntanos qué estás desarrollando. Veamos cómo convertir tu promoción en una experiencia que tus compradores puedan explorar antes de construirla.</p>
                 <div class="lead-signature"><span>Prospectus.</span><p>De los planos a una experiencia interactiva.</p></div>
             </div>
-            <form id="leadForm" aria-label="Solicitar una demo de Prospectus" aria-describedby="lead-note lead-privacy">
+            <form id="leadForm" method="post" aria-label="Solicitar una demo de Prospectus" aria-describedby="lead-note lead-privacy">
                 <div class="lead-fields">
-                    <div class="lead-field lead-wide"><label for="lead-name">Nombre y apellidos</label><input id="lead-name" name="name" autocomplete="name" placeholder="Tu nombre completo" required maxlength="150"></div>
-                    <div class="lead-field lead-wide"><label for="lead-company">Empresa / Promotora</label><input id="lead-company" name="company" autocomplete="organization" placeholder="Nombre de la empresa" required maxlength="150"></div>
+                    <div class="lead-field lead-wide"><label for="lead-name">Nombre y apellidos</label><input id="lead-name" name="name" minlength="2" autocomplete="name" placeholder="Tu nombre completo" required maxlength="150"></div>
+                    <div class="lead-field lead-wide"><label for="lead-company">Empresa / Promotora</label><input id="lead-company" name="company" minlength="2" autocomplete="organization" placeholder="Nombre de la empresa" required maxlength="150"></div>
                     <div class="lead-field"><label for="lead-email">Email profesional</label><input id="lead-email" name="email" type="email" autocomplete="email" placeholder="nombre@empresa.com" required maxlength="200"></div>
-                    <div class="lead-field"><label for="lead-phone">Teléfono</label><input id="lead-phone" name="phone" type="tel" autocomplete="tel" placeholder="+34 600 000 000" required maxlength="40"></div>
-                    <div class="lead-field"><label for="lead-homes">N.º aproximado de viviendas</label><input id="lead-homes" name="homes" type="number" inputmode="numeric" min="1" step="1" placeholder="Ej. 24" required></div>
+                    <div class="lead-field"><label for="lead-phone">Teléfono</label><input id="lead-phone" name="phone" minlength="7" type="tel" autocomplete="tel" placeholder="+34 600 000 000" required maxlength="40"></div>
+                    <div class="lead-field"><label for="lead-homes">N.º aproximado de viviendas</label><input id="lead-homes" name="homes" type="number" inputmode="numeric" min="1" max="100000" step="1" placeholder="Ej. 24" required></div>
                     <div class="lead-field"><label for="lead-stage">Estado de la promoción</label><select id="lead-stage" name="stage" required><option value="" disabled selected>Selecciona una fase</option><option>En planificación</option><option>En preventa</option><option>En construcción</option><option>Terminada</option><option>Otro / por definir</option></select></div>
                     <div class="lead-field lead-wide"><label for="lead-message">Información adicional <span>(opcional)</span></label><textarea id="lead-message" name="message" placeholder="Ubicación, plazos o cualquier detalle de tu promoción…" maxlength="2000"></textarea></div>
                 </div>
-                <p id="lead-privacy" class="lead-privacy"><strong>Protección de datos.</strong> Contacto: Prospectus 3D. Usaremos los datos para atender tu solicitud de demo o propuesta, sobre la base de medidas precontractuales o del interés legítimo cuando actúes por una empresa. El envío se realiza mediante tu correo y Gmail; no te suscribe a publicidad. Puedes ejercer tus derechos en prospectus3d.es@gmail.com. <a href="privacidad.html">Consulta la política de privacidad y los proveedores</a>.</p>
+                <p id="lead-privacy" class="lead-privacy"><strong>Protección de datos.</strong> Contacto: Prospectus 3D. Usaremos los datos para atender tu solicitud de demo o propuesta, sobre la base de medidas precontractuales o del interés legítimo cuando actúes por una empresa. La solicitud se guarda en Supabase y se notifica por correo mediante Resend a nuestro buzón de Gmail. Cloudflare Turnstile protege el formulario frente al spam. No te suscribe a publicidad. Puedes ejercer tus derechos en prospectus3d.es@gmail.com. <a href="privacidad.html">Consulta la política de privacidad y los proveedores</a>.</p>
+                <div class="contact-trap" aria-hidden="true"><label for="lead-website">Website</label><input id="lead-website" name="website" tabindex="-1" autocomplete="off"></div>
+                <div id="lead-verification"></div>
                 <button class="lead-submit" type="submit">Solicitar demo</button>
-                <p class="lead-note" id="lead-note">Se abrirá tu aplicación de correo con estos datos para que puedas enviar la solicitud a Prospectus.</p>
+                <p class="lead-note" id="lead-note">Enviaremos tu solicitud directamente a Prospectus.</p>
+                <p id="lead-status" role="status" aria-live="polite" aria-atomic="true"></p>
+                <p class="contact-fallback"><a href="mailto:prospectus3d.es@gmail.com">También puedes escribirnos por correo</a>.</p>
+                <noscript><p>Activa JavaScript para utilizar el formulario o escríbenos a prospectus3d.es@gmail.com.</p><style>#leadForm .lead-submit{display:none}</style></noscript>
             </form>
         </div>
     </section>
@@ -784,18 +790,11 @@
     <span class="whatsapp-tooltip" aria-hidden="true">Hablar por WhatsApp</span>
 </a>
 <script src="closing.js" defer></script>
+<script src="contact-config.js" defer></script>
+<script src="contact.js" defer></script>
 
 <!-- JAVASCRIPT -->
 <script>
-    // Same mailto delivery as the original contact form; no external integration.
-    document.getElementById('leadForm').addEventListener('submit', (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const t = window.ProspectusLanguage?.t || (text => text);
-        const subject = encodeURIComponent(`${t('Solicitud de demo')} - ${data.get('company')}`);
-        const body = encodeURIComponent(`${t('Nombre')}: ${data.get('name')}\n${t('Empresa')}: ${data.get('company')}\n${t('Email')}: ${data.get('email')}\n${t('Teléfono')}: ${data.get('phone')}\n${t('N.º aproximado de viviendas')}: ${data.get('homes')}\n${t('Estado de la promoción')}: ${t(data.get('stage'))}\n\n${t('Información adicional')}:\n${data.get('message') || t('No indicada')}`);
-        window.location.href = `mailto:prospectus3d.es@gmail.com?subject=${subject}&body=${body}`;
-    });
     // Transparent navigation only while the opening composition is visible.
     new IntersectionObserver(([entry]) => {
         document.querySelector('header').classList.toggle('hero-nav', entry.isIntersecting);
@@ -888,23 +887,6 @@
                 });
             });
         });
-
-        // === 4. FORMULARIO CONTACTO ===
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = document.getElementById('name').value;
-                const company = document.getElementById('company').value;
-                const email = document.getElementById('email').value;
-                const msg = document.getElementById('message').value;
-
-                const subject = encodeURIComponent(`Nuevo contacto web - ${company}`);
-                const body = encodeURIComponent(`Nombre: ${name}\nEmpresa: ${company}\nEmail: ${email}\n\nMensaje:\n${msg}`);
-
-                window.location.href = `mailto:prospectus3d.es@gmail.com?subject=${subject}&body=${body}`;
-            });
-        }
 
         // === 5. ANIMACIONES AL HACER SCROLL ===
         const observer = new IntersectionObserver((entries, obs) => {

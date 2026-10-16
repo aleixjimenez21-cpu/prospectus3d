@@ -25,7 +25,7 @@ Los vídeos se sirven por ruta local (`videos/*.mp4`); no hace falta configuraci
 
 Las páginas `aviso-legal.html`, `privacidad.html` y `cookies.html` utilizan `legal.css` y están enlazadas desde el pie y el formulario. Por petición del usuario se han retirado los campos de identificación sin datos y los avisos de borrador. Se mantienen el nombre comercial y los contactos existentes. Esto no acredita cumplimiento legal ni sustituye la identificación del titular cuando resulte exigible. Las páginas conservan `noindex`.
 
-El formulario mantiene el envío mediante el programa de correo del visitante; no hay un backend que reciba los datos. No se ha añadido una casilla de consentimiento genérica: la información de privacidad está visible junto al envío.
+Esta rama prepara el envío directo a Supabase con notificaciones por Resend y verificación Turnstile. La activación está pendiente de las credenciales y de una prueba real de entrega. Consulta `docs/contact-deployment.md` antes de publicarla. No se ha añadido una casilla de consentimiento genérica: la información de privacidad está visible junto al envío.
 
 La demo externa se carga automáticamente dentro de un iframe con `loading="lazy"` y `referrerpolicy="no-referrer"`. Se conserva la alternativa para abrirla en otra pestaña si JavaScript está desactivado o el entorno no permite incrustarla. Las políticas explican la conexión automática con Netlify y la preferencia funcional `serra_tutorial_completed` (localStorage), identificada en el código de la demo. Si cambia la demo, revisar de nuevo esta información.
 
@@ -42,3 +42,7 @@ El selector de la cabecera permite elegir español, italiano o inglés sin recar
 También se traducen las páginas legales y los mensajes preparados de correo y WhatsApp. Los vídeos, textos integrados en imágenes y la aplicación externa de Serra conservan su idioma original. Con JavaScript desactivado se muestra la versión española.
 
 Validación: cambio entre los tres idiomas a 1440, 768, 390 y 320 px; textos estáticos y atributos; persistencia y navegación entre páginas; almacenamiento bloqueado; idioma inválido; datos del formulario; selector de funciones y vídeos; FAQ y carga automática de la demo. El generador de correo se comprobó en los tres idiomas sin enviar mensajes.
+
+## Formulario con almacenamiento persistente
+
+El código de integración, las pruebas y el estado real del despliegue se documentan en [docs/contact-deployment.md](docs/contact-deployment.md). No publicar el formulario nuevo con `contact-config.js` incompleto. Las pruebas locales no sustituyen la comprobación de entrega en Gmail.
