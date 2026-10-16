@@ -5,10 +5,15 @@
 - Web y repositorio identificados: `https://prospectus3d.com/`, `aleixjimenez21-cpu/prospectus3d`, GitHub Pages desde `main` en `/`.
 - SEO publicado en `0aac402`: solo la descripción SEO cambia a «para promotoras e inmobiliarias», con sus traducciones. Se añaden canonical, datos de organización/sitio, robots.txt y sitemap.xml. No se ha solicitado rastreo desde Search Console.
 - Proyecto gratuito creado en la organización elegida por el propietario: **Prospectus 3D**, `qiqampmzdikwvaaernik`, región `eu-west-1`.
-- Migración aplicada; ambas funciones desplegadas. Las funciones rechazan peticiones hasta completar los secretos. La nueva interfaz del formulario aún NO está publicada.
+- Migraciones aplicadas; ambas funciones desplegadas y sus cinco secretos configurados. Una petición incompleta devuelve HTTP 400. La nueva interfaz aún NO está activada en la portada; existe temporalmente `contact-check.html` con `noindex` para probarla en el dominio real.
 - Verificado en Supabase: persistencia de un registro sintético y prohibición de lectura/escritura/RPC para visitantes. El registro sintético se mantiene marcado `needs_attention / synthetic_storage_test` y no se enviará por email; eliminar únicamente ese registro después de la prueba final.
 - 12 pruebas del servidor, 1 prueba integrada sobre PostgreSQL/PGlite con persistencia en disco y 4 pruebas de navegador pasadas. CAPTCHA, correo y respuestas del backend están simulados en las pruebas de navegador; esto NO acredita recepción de correo real.
-- Pendiente: acceso/configuración de Resend, verificación DNS en GoDaddy, widget Cloudflare Turnstile, secretos, cron, prueba integral y publicación del formulario.
+- Resend: dominio `prospectus3d.com` verificado, región Irlanda, envío con TLS obligatorio, clave limitada a envío y a ese dominio guardada en Supabase. Remitente `solicitudes@prospectus3d.com`. Los tres registros DNS exigidos por Resend se comprobaron contra los servidores autoritativos de GoDaddy; no se cambiaron los nameservers ni los registros de la web.
+- Sitekey de Turnstile recibida del propietario e incorporada a la configuración pública; Secret Key guardada en Supabase. Desafío real validado desde `prospectus3d.com`.
+- Reintentos: `pg_cron` y `pg_net` habilitados, credencial en Vault, trabajo `prospectus-contact-notifications` cada minuto; ejecución HTTP 200 `{"ok":true}` comprobada.
+- Prueba integral real: solicitud `e4ae1a3f-9cde-431c-9995-eb2759497397`, persistida y enviada en un intento. Resend `01a144e0-fccf-7a11-b19d-db6980a0d46d` confirma `Delivered` a `prospectus3d.es@gmail.com` el 16/10/2026 a las 15:22 (Europe/Madrid). No se ha inspeccionado la bandeja de Gmail; la entrega la confirma el proveedor.
+- Controles reales: token inválido HTTP 400, origen ajeno HTTP 403, worker sin credencial HTTP 401; sin nuevas filas ni correos. Repetición del UUID en la operación de base de datos devuelve `duplicate: true`, conservando una única solicitud y un único envío.
+- Pendiente: retirar la página de prueba y publicar el formulario en la portada; confirmar con el propietario en qué carpeta de Gmail aparece el aviso.
 - Pendiente favicon: falta el logo original. No se ha creado un sustituto.
 
 ## Flujo
@@ -23,7 +28,7 @@ El UUID de la petición y la huella HMAC de sus datos evitan duplicados al reint
 
 Si falla el correo, la solicitud permanece guardada. `contact-notifications` reclama trabajos con bloqueo temporal, reintenta con espera creciente y usa una clave estable de idempotencia de Resend. Se detiene tras 8 intentos o 23 horas para no reintentar fuera de la ventana de idempotencia del proveedor. Las filas `needs_attention` requieren revisión manual. `sent` significa que Resend aceptó el envío, no que Gmail lo entregó en la bandeja de entrada.
 
-## Configuración pendiente
+## Configuración reproducible
 
 1. **Resend:** crear/usar la cuenta de Prospectus, elegir el plan gratuito, añadir el dominio o un subdominio de envío y publicar en GoDaddy exactamente los registros que muestre Resend. No cambiar los nameservers ni sobrescribir MX/SPF existentes. Esperar a que Resend indique dominio verificado. Crear una clave limitada al envío y al dominio correspondiente. Un remitente posible es `solicitudes@prospectus3d.com`; se debe confirmar en la configuración real. No usar Gmail como remitente de Resend.
 2. **Cloudflare Turnstile:** widget para `prospectus3d.com` y `www.prospectus3d.com`, modo Managed. Guardar la clave pública en `contact-config.js` y la secreta en Supabase. No hace falta trasladar el DNS a Cloudflare.

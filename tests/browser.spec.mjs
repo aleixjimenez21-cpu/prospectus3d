@@ -4,7 +4,7 @@ async function prepare(page, { configured = true, outcome = 'success', language 
     const sent = [];
     await page.route('**/videos/**', route => route.abort());
     await page.route('https://serraresidencial.netlify.app/**', route => route.fulfill({ contentType: 'text/html', body: '<p>External demo omitted in tests</p>' }));
-    if (configured) await page.route('**/contact-config.js', route => route.fulfill({ contentType: 'text/javascript', body: `window.PROSPECTUS_CONTACT_CONFIG={endpoint:'${endpoint}',turnstileSiteKey:'TEST_ONLY'}` }));
+    await page.route('**/contact-config.js', route => route.fulfill({ contentType: 'text/javascript', body: `window.PROSPECTUS_CONTACT_CONFIG=${JSON.stringify(configured ? { endpoint, turnstileSiteKey: 'TEST_ONLY' } : { endpoint: '', turnstileSiteKey: '' })}` }));
     await page.route('https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit', route => route.fulfill({ contentType: 'text/javascript', body: `window.turnstile={render:(container,options)=>{window.testChallenge=options;options.callback('TEST_ONLY');container.textContent='Verificación simulada';return 'test-widget'},reset:()=>window.testChallenge.callback('TEST_ONLY')};` }));
     await page.route(endpoint, async route => {
         if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'content-type', 'Access-Control-Allow-Methods': 'POST' } });
