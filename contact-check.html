@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prospectus.</title>
+<link rel="stylesheet" href="questions.css">
+<link rel="stylesheet" href="closing.css">
+<link rel="stylesheet" href="legal.css">
+<link rel="stylesheet" href="contact.css">
+<link rel="stylesheet" href="process.css?v=2">
+<link rel="stylesheet" href="change.css">
+<link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="features.css">
+<meta name="description" content="Prospectus 3D convierte los planos de una promoción inmobiliaria en un showroom 3D interactivo para promotoras e inmobiliarias.">
+<link rel="canonical" href="https://prospectus3d.com/">
+<meta name="robots" content="noindex, nofollow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://prospectus3d.com/#website","url":"https://prospectus3d.com/","name":"Prospectus 3D"},{"@type":"Organization","@id":"https://prospectus3d.com/#organization","url":"https://prospectus3d.com/","name":"Prospectus 3D","email":"prospectus3d.es@gmail.com"}]}
+</script>
+<style>
+    /* ==========================================================================
+       SISTEMA DE VARIABLES — ESTILO ORIGINAL (Tecnológico / Violeta)
+       ========================================================================== */
+    :root {
+        --bg-base: #09090b;
+        --bg-surface: #18181b;
+        --bg-surface-hover: #27272a;
+        --text-main: #ffffff;
+        --text-muted: #a1a1aa;
+        --accent: #8b5cf6;
+        --accent-hover: #7c3aed;
+        --border-color: #27272a;
+
+        --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        --font-head: var(--font-sans);
+        --radius: 12px;
+        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --bg-base: #ffffff;
+            --bg-surface: #f4f4f5;
+            --bg-surface-hover: #e4e4e7;
+            --text-main: #09090b;
+            --text-muted: #52525b;
+            --border-color: #e4e4e7;
+        }
+    }
+
+    /* ==========================================================================
+       RESET Y BASE
+       ========================================================================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+        font-family: var(--font-sans);
+        background-color: var(--bg-base);
+        color: var(--text-main);
+        line-height: 1.6;
+        overflow-x: hidden;
+        transition: background-color var(--transition), color var(--transition);
+    }
+    h1, h2, h3, h4, .font-head { font-family: var(--font-head); font-weight: 500; text-wrap: balance; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button, input, textarea { font-family: inherit; border: none; outline: none; }
+    img, video { max-width: 100%; display: block; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    .skip-link { position: absolute; top: -40px; left: 0; background: var(--accent); color: #fff; padding: 8px; z-index: 9999; }
+    .skip-link:focus { top: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+        * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    }
+
+    /* ==========================================================================
+       UTILIDADES Y LAYOUT
+       ========================================================================== */
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+    .section-pad { padding: 120px 0; }
+    .text-center { text-align: center; }
+    .mb-2 { margin-bottom: 0.5rem; } .mb-4 { margin-bottom: 1.5rem; } .mb-8 { margin-bottom: 3rem; }
+    .mt-4 { margin-top: 1.5rem; } .mt-8 { margin-top: 3rem; }
+    .grid { display: grid; gap: 2rem; }
+
+    .btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        padding: 14px 28px; border-radius: var(--radius); font-weight: 500;
+        cursor: pointer; transition: var(--transition); font-size: 1rem;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-secondary { background: var(--bg-surface); border: 1px solid var(--border-color); color: var(--text-main); }
+    .btn-secondary:hover { background: var(--border-color); }
+
+    .wordmark { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.02em; }
+    .wordmark .dot { color: var(--accent); }
+
+    /* ==========================================================================
+       NAVEGACIÓN
+       ========================================================================== */
+    header {
+        position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+        background: color-mix(in srgb, var(--bg-base) 85%, transparent);
+        backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color);
+    }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { font-size: 0.95rem; font-weight: 500; opacity: 0.8; transition: var(--transition); }
+    .nav-links a:hover { opacity: 1; color: var(--accent); }
+    .nav-ctas { display: flex; gap: 1rem; align-items: center; }
+    .menu-toggle { display: none; background: transparent; color: var(--text-main); font-size: 1.5rem; cursor: pointer; }
+
+    @media (max-width: 992px) {
+        .nav-links, .nav-ctas .btn-secondary { display: none; }
+        .menu-toggle { display: block; }
+        .nav-links.active {
+            display: flex; flex-direction: column; position: absolute; top: 80px; left: 0;
+            width: 100%; background: var(--bg-base); padding: 2rem; border-bottom: 1px solid var(--border-color);
+        }
+    }
+
+    /* ==========================================================================
+       HERO / INICIO
+       ========================================================================== */
+    .hero { min-height: 100vh; padding-top: 120px; display: flex; flex-direction: column; justify-content: center; }
+    .hero-content { max-width: 800px; margin: 0 auto 4rem auto; }
+    .eyebrow { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 600; display: block; margin-bottom: 1rem; }
+    .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+    .hero p { font-size: clamp(1.1rem, 2vw, 1.25rem); color: var(--text-muted); margin-bottom: 2.5rem; }
+
+    /* ==========================================================================
+       VSL / PORTADA
+       ========================================================================== */
+    .vsl-container {
+        position: relative; width: 100%; aspect-ratio: 16/9; max-width: 1200px; margin: 0 auto;
+        border-radius: var(--radius); overflow: hidden; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .vsl-video { width: 100%; height: 100%; object-fit: cover; }
+
+    .vsl-overlay {
+        position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center;
+        background: linear-gradient(135deg, rgba(10,10,10,0.72) 0%, rgba(30,30,30,0.5) 100%);
+        z-index: 10; cursor: pointer; transition: opacity 0.4s ease; text-align: center; padding: 6%;
+    }
+    .vsl-overlay:hover .play-btn { transform: scale(1.08); }
+    .vsl-tag { position: absolute; top: 2rem; left: 2rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(4px); padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+    .vsl-duration { position: absolute; bottom: 2rem; right: 2rem; font-size: 0.9rem; color: rgba(255,255,255,0.85); font-weight: 500; }
+    .vsl-brand { position: absolute; bottom: 2rem; left: 2rem; font-size: 1.5rem; color: #fff; }
+
+    .play-btn {
+        width: 84px; height: 84px; border-radius: 50%; background: #fff;
+        display: flex; justify-content: center; align-items: center;
+        box-shadow: 0 12px 36px rgba(0,0,0,0.28); transition: var(--transition);
+    }
+    .play-btn svg { width: 30px; height: 30px; fill: #111; margin-left: 5px; }
+    .vsl-title { color: #fff; font-family: var(--font-head); font-weight: 600; font-size: clamp(1.4rem, 2.6vw, 2.2rem); letter-spacing: -0.02em; margin-top: 1.35rem; }
+    .vsl-hint { display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 0.7rem; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.9); font-weight: 600; }
+    .vsl-hint::before { content: ''; border-left: 8px solid currentColor; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+    .vsl-caption { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 1.5rem; }
+
+    /* ==========================================================================
+       DEMO EN VIVO
+       ========================================================================== */
+    .demo-browser {
+        background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius);
+        overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 1200px; margin: 0 auto;
+    }
+    .browser-bar {
+        padding: 12px 16px; background: var(--bg-surface-hover); border-bottom: 1px solid var(--border-color);
+        display: flex; align-items: center; gap: 8px;
+    }
+    .browser-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--border-color); }
+    .browser-url { margin-left: auto; margin-right: auto; font-size: 0.8rem; color: var(--text-muted); opacity: 0.7; }
+    .demo-iframe-container { position: relative; aspect-ratio: 16/9; width: 100%; background: #0b0b0d center/cover no-repeat; background-image: url("videos/demo-preview.jpg"); }
+    .demo-iframe-container iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .demo-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding: 2rem; background: linear-gradient(to top, rgba(0,0,0,0.78), rgba(0,0,0,0.15) 55%, transparent); }
+    .demo-overlay-card { text-align: center; max-width: 460px; background: color-mix(in srgb, var(--bg-base) 82%, transparent); backdrop-filter: blur(8px); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem 1.75rem; }
+    .demo-overlay-card h3 { font-size: 1.3rem; margin: 0.4rem 0 0.5rem; }
+    .demo-overlay-card p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.1rem; }
+    .demo-fallback { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 1.25rem; }
+    .demo-fallback a { color: var(--accent); text-decoration: underline; }
+
+    /* ==========================================================================
+       UN SOLO ENLACE
+       ========================================================================== */
+    .features-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .card { background: var(--bg-surface); padding: 3rem 2rem; border-radius: var(--radius); border: 1px solid var(--border-color); transition: var(--transition); }
+    .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+
+    /* ==========================================================================
+       SECCIÓN AUDIOVISUAL (HORIZONTAL)
+       ========================================================================== */
+    .video-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .video-card { border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; background: var(--bg-surface); }
+    .video-card video { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: #000; }
+    .video-info { padding: 1.25rem 1.5rem 1.5rem; }
+    .video-info h4 { font-size: 1.15rem; margin-bottom: 0.25rem; }
+    .video-info p { color: var(--text-muted); font-size: 0.9rem; }
+    @media (max-width: 768px) { .video-grid { grid-template-columns: 1fr; } }
+
+    /* ==========================================================================
+       CÓMO FUNCIONA
+       ========================================================================== */
+    .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .feature-list li { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+    .feature-list li::before { content: "✓"; color: var(--accent); font-weight: bold; }
+    @media (max-width: 768px) { .works-grid { grid-template-columns: 1fr; } }
+
+    /* ==========================================================================
+       COMPARADOR INTERACTIVO
+       ========================================================================== */
+    .comparator-ui { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; overflow-x: auto; }
+    .comparator-controls { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .comp-btn { padding: 8px 16px; border: 1px solid var(--border-color); background: var(--bg-base); border-radius: 20px; cursor: pointer; color: var(--text-muted); transition: var(--transition); }
+    .comp-btn[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .comp-table { width: 100%; border-collapse: collapse; min-width: 600px; font-variant-numeric: tabular-nums; }
+    .comp-table th, .comp-table td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+    .comp-table th { font-weight: 500; color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; }
+    .comp-table td { font-weight: 500; }
+    .col-p2a, .col-p3d, .col-p1c { transition: opacity 0.3s; }
+
+    /* ==========================================================================
+       PANEL DE CLIENTE (DASHBOARD)
+       ========================================================================== */
+    .dashboard-mockup {
+        background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius);
+        padding: 2rem; display: grid; grid-template-columns: 250px 1fr; gap: 2rem;
+    }
+    .dash-sidebar { border-right: 1px solid var(--border-color); padding-right: 2rem; }
+    .dash-nav { display: flex; flex-direction: column; gap: 1rem; }
+    .dash-nav div { padding: 8px 12px; border-radius: 6px; font-size: 0.9rem; color: var(--text-muted); }
+    .dash-nav div.active { background: var(--accent); color: #fff; }
+    .dash-main .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .metric-card { padding: 1.5rem; background: var(--bg-base); border: 1px solid var(--border-color); border-radius: 8px; }
+    .metric-val { font-size: 1.8rem; font-family: var(--font-head); font-weight: 600; }
+    .status-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .status-disp { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+    .status-res { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+    .status-ven { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+    .dash-main .comp-table { min-width: 0; }
+    @media (max-width: 768px) { .dashboard-mockup { grid-template-columns: 1fr; } .dash-sidebar { border-right: none; border-bottom: 1px solid var(--border-color); padding-right: 0; padding-bottom: 1rem; } .dash-main .metrics { grid-template-columns: 1fr; } }
+
+    /* ==========================================================================
+       FAQ
+       ========================================================================== */
+    .faq-item { border-bottom: 1px solid var(--border-color); }
+    .faq-item details { padding: 1.5rem 0; cursor: pointer; }
+    .faq-item summary { font-size: 1.2rem; font-weight: 500; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: "+"; font-size: 1.5rem; color: var(--accent); }
+    .faq-item details[open] summary::after { content: "−"; }
+    .faq-item p { margin-top: 1rem; color: var(--text-muted); }
+
+    /* ==========================================================================
+       NOSOTROS
+       ========================================================================== */
+    .editorial { max-width: 800px; margin: 0 auto; font-size: 1.2rem; line-height: 1.8; color: var(--text-muted); }
+    .editorial p { margin-bottom: 1.5rem; }
+    .editorial strong { color: var(--text-main); }
+
+    /* ==========================================================================
+       BANDA CTA
+       ========================================================================== */
+    .cta-band { background: var(--accent); color: #fff; }
+    .cta-band .container { text-align: center; }
+    .cta-band h2 { max-width: 900px; margin: 0 auto 2rem; font-size: clamp(1.8rem, 3.5vw, 3rem); }
+    .cta-band .btn { background: #fff; color: var(--accent); }
+    .cta-band .btn:hover { transform: translateY(-2px); }
+
+    /* ==========================================================================
+       CONTACTO
+       ========================================================================== */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
+    .form-control { width: 100%; padding: 12px 16px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); font-size: 1rem; transition: var(--transition); }
+    .form-control:focus { border-color: var(--accent); }
+    textarea.form-control { resize: vertical; min-height: 120px; }
+    .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+    .contact-card { padding: 2rem; background: var(--bg-surface); border-radius: var(--radius); border: 1px solid var(--border-color); }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer { padding: 4rem 5%; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+    .footer-logo { margin-bottom: 1rem; }
+
+    /* ==========================================================================
+       ANIMACIONES
+       ========================================================================== */
+    .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+    /* Hero Serra: styles isolated from the existing landing sections. */
+    #inicio {
+        position: relative; isolation: isolate; overflow: hidden;
+        max-width: none; min-height: 100svh; padding: 118px 20px 0;
+        display: block; color: #fff; background: #09090b;
+    }
+    #inicio::before {
+        content: ''; position: absolute; inset: 0 0 140px; z-index: -2;
+        background: url('assets/hero/serra-residencial.png') center center / cover no-repeat;
+        animation: hero-background 2.4s ease-out both;
+    }
+    #inicio::after {
+        content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+        background: linear-gradient(to bottom, rgba(8,12,23,.68), rgba(13,15,29,.53) 28%, rgba(10,10,19,.72) 55%, #09090b 88%),
+            linear-gradient(110deg, rgba(15,37,55,.32), rgba(70,37,106,.2) 55%, rgba(15,20,30,.14));
+    }
+    #inicio .hero-content { max-width: 1000px; margin: 0 auto 58px; }
+    #inicio .eyebrow {
+        display: inline-flex; align-items: center; margin: 0 0 26px; padding: 7px 15px;
+        border: 1px solid rgba(255,255,255,.23); border-radius: 100px;
+        background: rgba(255,255,255,.055); color: #eeeaf5;
+        font-size: 11px; font-weight: 500; letter-spacing: .025em; text-transform: none;
+        animation: hero-enter .8s .12s both;
+    }
+    #inicio h1 {
+        margin: 0; font-size: clamp(46px, 4.5vw, 70px); font-weight: 500;
+        line-height: 1.08; letter-spacing: -.055em; text-wrap: initial;
+        animation: hero-enter .9s .22s both;
+    }
+    #inicio h1 .hero-line { display: block; }
+    #inicio h1 em { font-weight: 450; }
+    #inicio h1 .hero-muted { color: #c0bbc9; }
+    #inicio .vsl-container {
+        max-width: 960px; border: 2px solid rgba(230,222,243,.33); border-radius: 20px;
+        box-shadow: 0 28px 80px rgba(0,0,0,.5); animation: hero-enter 1s .34s both;
+    }
+    #inicio .vsl-overlay { background: rgba(6,6,12,.08); padding: 0; }
+    #inicio .vsl-overlay:hover { background: transparent; }
+    #inicio .play-btn { width: 68px; height: 68px; box-shadow: 0 0 0 9px rgba(255,255,255,.12), 0 8px 30px #0005; }
+    #inicio .play-btn svg { width: 26px; height: 26px; }
+    #inicio .hero-transition { height: 80px; margin: 0 -20px; background: #09090b; }
+    header.hero-nav { background: transparent; border-color: transparent; backdrop-filter: none; color: #fff; }
+    header.hero-nav .nav-container { max-width: 1020px; padding: 0 30px; height: 76px; animation: hero-enter .65s both; }
+    header.hero-nav .wordmark { font-size: 25px; letter-spacing: -.05em; }
+    header.hero-nav .nav-links, header.hero-nav .btn-secondary, header.hero-nav .menu-toggle { display: none; }
+    header.hero-nav .btn-primary { padding: 10px 18px; font-size: 12px; border-radius: 8px; background: #7c3aed; }
+    @keyframes hero-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes hero-background { from { transform: scale(1.025); } to { transform: scale(1); } }
+    @media (max-width: 600px) {
+        #inicio { padding-top: 112px; }
+        #inicio::before { inset: 0 0 100px; background-position: center center; }
+        #inicio .hero-content { margin-bottom: 36px; }
+        #inicio .eyebrow { font-size: 10px; padding: 7px 12px; margin-bottom: 25px; }
+        #inicio h1 { font-size: clamp(36px, 9.6vw, 43px); line-height: 1.1; letter-spacing: -.05em; }
+        #inicio h1 .hero-line { display: inline; }
+        #inicio .vsl-container { border-radius: 12px; }
+        #inicio .play-btn { width: 52px; height: 52px; box-shadow: 0 0 0 6px #ffffff20, 0 8px 25px #0005; }
+        #inicio .play-btn svg { width: 22px; height: 22px; }
+        #inicio .hero-transition { height: 56px; }
+        header.hero-nav .nav-container { padding: 0 20px; height: 72px; }
+        header.hero-nav .wordmark { font-size: 22px; }
+        header.hero-nav .btn-primary { padding: 10px 13px; font-size: 11px; }
+    }
+    /* Formulario de demo al final de la página. */
+    #solicitar-demo { scroll-margin-top: 96px; background: #09090b; color: #f5f3f8; padding: 36px 24px 120px; color-scheme: dark; }
+    #solicitar-demo .lead-layout { max-width: 1080px; margin: auto; display: grid; grid-template-columns: .9fr 1.1fr; gap: 88px; align-items: start; }
+    #solicitar-demo .lead-copy { padding-top: 8px; }
+    #solicitar-demo .lead-eyebrow { display: block; color: #b9a3df; font-size: 11px; font-weight: 600; letter-spacing: .16em; margin-bottom: 26px; }
+    #solicitar-demo h2 { font-size: clamp(34px, 3.3vw, 48px); line-height: 1.12; letter-spacing: -.045em; font-weight: 500; text-wrap: balance; }
+    #solicitar-demo h2 em { color: #bab4c6; font-weight: 400; }
+    #solicitar-demo .lead-description { max-width: 355px; margin-top: 26px; font-size: 15px; line-height: 1.8; color: #a5a1ac; }
+    #solicitar-demo .lead-signature { margin-top: 48px; padding-top: 22px; border-top: 1px solid #ffffff16; max-width: 355px; }
+    #solicitar-demo .lead-signature span { display: block; font-size: 20px; font-weight: 600; letter-spacing: -.04em; }
+    #solicitar-demo .lead-signature p { margin-top: 5px; font-size: 12px; color: #8d8896; }
+    #solicitar-demo .lead-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 23px 18px; }
+    #solicitar-demo .lead-field { min-width: 0; }
+    #solicitar-demo .lead-wide { grid-column: 1 / -1; }
+    #solicitar-demo label { display: block; margin-bottom: 9px; font-size: 12px; color: #d6d1de; }
+    #solicitar-demo label span { color: #8d8896; }
+    #solicitar-demo input, #solicitar-demo select, #solicitar-demo textarea {
+        display: block; width: 100%; min-height: 54px; padding: 14px 15px;
+        border: 1px solid #ffffff20; border-radius: 7px; background: #ffffff04;
+        color: #f5f3f8; font: inherit; font-size: 16px; transition: border-color .2s, background .2s, box-shadow .2s;
+    }
+    #solicitar-demo input::placeholder, #solicitar-demo textarea::placeholder { color: #77717f; opacity: 1; }
+    #solicitar-demo select { cursor: pointer; }
+    #solicitar-demo select option { background: #18161d; color: #f5f3f8; }
+    #solicitar-demo textarea { min-height: 112px; resize: vertical; }
+    #solicitar-demo input:focus, #solicitar-demo select:focus, #solicitar-demo textarea:focus { outline: none; border-color: #ac8adf; background: #ffffff07; box-shadow: 0 0 0 3px #ac8adf14; }
+    #solicitar-demo .lead-submit { width: 100%; min-height: 56px; margin-top: 26px; border-radius: 7px; background: #7c3aed; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s; }
+    #solicitar-demo .lead-submit:hover { background: #8b4cf0; }
+    #solicitar-demo .lead-note { color: #938d9e; font-size: 12px; line-height: 1.65; margin-top: 13px; }
+    @media (max-width: 900px) {
+        #solicitar-demo .lead-layout { gap: 40px; grid-template-columns: .9fr 1.1fr; }
+        #solicitar-demo .lead-fields { grid-template-columns: 1fr; gap: 20px; }
+    }
+    @media (max-width: 600px) {
+        #solicitar-demo { padding: 12px 20px 72px; }
+        #solicitar-demo .lead-layout { grid-template-columns: 1fr; gap: 34px; }
+        #solicitar-demo .lead-eyebrow { margin-bottom: 20px; }
+        #solicitar-demo h2 { font-size: 37px; max-width: 390px; }
+        #solicitar-demo .lead-description { margin-top: 20px; }
+        #solicitar-demo .lead-signature { margin-top: 25px; padding-top: 18px; }
+    }
+    /* Live showroom: architectural backdrop, original embedded application. */
+    #demo { position: relative; isolation: isolate; max-width: none; padding: 100px 5% 110px; background: #09090b; color: #f5f3f8; }
+    #demo::before { content: ''; position: absolute; inset: 0; z-index: -2; background: url('assets/demo/serra-background.png') center / cover no-repeat; }
+    #demo::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to bottom, #09090b 0%, rgba(10,15,26,.8) 22%, rgba(10,15,26,.72) 50%, #09090b 100%); }
+    #demo .demo-intro, #demo .demo-browser, #demo .demo-footer { max-width: 1120px; margin-left: auto; margin-right: auto; }
+    #demo .demo-intro { margin-bottom: 40px; }
+    #demo .demo-eyebrow { display: block; color: #bda3e9; font-size: 10px; letter-spacing: .18em; font-weight: 600; margin-bottom: 18px; }
+    #demo .demo-eyebrow::before, #demo .demo-live::before { content: ''; display: inline-block; width: 5px; height: 5px; background: #b58aef; border-radius: 50%; margin-right: 9px; vertical-align: middle; }
+    #demo h2 { font-size: clamp(34px, 3.4vw, 50px); line-height: 1.1; font-weight: 550; letter-spacing: -.045em; margin-bottom: 20px; }
+    #demo h2 span { color: #bb94f1; }
+    #demo .demo-intro p { max-width: 540px; color: #b5afbf; font-size: 15px; line-height: 1.75; }
+    #demo .demo-browser { border: 1px solid #ffffff24; border-radius: 15px; background: #121019; box-shadow: 0 30px 90px #0007; }
+    #demo .browser-bar { height: 37px; padding: 0 15px; gap: 6px; background: #1b1724; border-bottom: 1px solid #ffffff0d; }
+    #demo .browser-dot { width: 6px; height: 6px; background: #51495e; }
+    #demo .browser-url { margin: 0 auto 0 10px; color: #9c91aa; font-size: 10px; letter-spacing: .04em; }
+    #demo .demo-live { color: #bda3e9; font-size: 9px; letter-spacing: .13em; white-space: nowrap; }
+    #demo .demo-iframe-container { aspect-ratio: 16 / 10; background: #10121a; }
+    #demo .demo-overlay[hidden] { display: none; }
+    #demo .demo-footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 18px; font-size: 10px; letter-spacing: .08em; color: #9c91aa; }
+    #demo .demo-footer a { color: #c6a4f4; padding: 8px 0; }
+    #demo .demo-footer a:hover { color: #fff; }
+    #demo .demo-footer span { padding: 8px 0; }
+    #demo .demo-browser.animate-on-scroll { transform: translateY(18px) scale(.97); transition: opacity .8s ease, transform .8s ease; }
+    #demo .demo-browser.is-visible { transform: translateY(0) scale(1); }
+    @media (max-width: 600px) {
+        #demo { padding: 64px 20px 72px; }
+        #demo .demo-intro { margin-bottom: 28px; }
+        #demo h2 { font-size: 36px; }
+        #demo .demo-intro p { font-size: 14px; }
+        #demo .demo-browser { border-radius: 11px; }
+        #demo .demo-iframe-container { aspect-ratio: auto; height: 560px; height: clamp(480px, 72svh, 620px); }
+        #demo .browser-bar { padding: 0 10px; }
+        #demo .browser-dot { display: none; }
+        #demo .browser-url { margin-left: 0; font-size: 9px; }
+        #demo .demo-live { font-size: 8px; }
+        #demo .demo-footer { flex-direction: column; gap: 4px; font-size: 9px; }
+        #demo .demo-footer a { display: inline-flex; align-items: center; min-height: 44px; }
+    }
+</style>
+<link rel="stylesheet" href="language.css">
+<script src="translations.js" defer></script>
+<script src="language.js" defer></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+<!-- NAVEGACIÓN -->
+<header class="hero-nav">
+    <div class="container nav-container">
+        <a href="#inicio" class="wordmark" aria-label="Inicio Prospectus">Prospectus<span class="dot">.</span></a>
+
+        <nav class="nav-links" id="main-nav">
+            <a href="#inicio">Inicio</a>
+            <a href="#el-proceso">Cómo funciona</a>
+            <a href="#preguntas-frecuentes">FAQ</a>
+            <a href="#solicitar-demo">Contacto</a>
+        </nav>
+
+        <div class="nav-ctas">
+            <label class="language-control"><span class="language-label">Idioma</span><select class="language-select" data-language-picker hidden><option value="es" lang="es">Español</option><option value="it" lang="it">Italiano</option><option value="en" lang="en">English</option></select></label>
+            <a href="#demo" class="btn btn-secondary">Ver demo</a>
+            <a href="#solicitar-demo" class="btn btn-primary">Pide tu demo</a>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+        </div>
+    </div>
+</header>
+
+<main id="main">
+    <!-- INICIO Y VSL -->
+    <section id="inicio" class="hero text-center" aria-labelledby="hero-title">
+        <div class="hero-content">
+            <span class="eyebrow">Showroom digital para obra nueva</span>
+            <h1 id="hero-title"><span class="hero-line">Tu promoción inmobiliaria,</span> <span class="hero-line">una <em>experiencia interactiva</em></span> <span class="hero-line hero-muted">antes de construirla.</span></h1>
+        </div>
+
+        <!-- VSL -->
+        <div class="vsl-container" aria-label="Vídeo: cómo funciona Prospectus">
+            <div class="vsl-overlay" id="vsl-overlay" role="button" tabindex="0" aria-label="Reproducir vídeo: cómo funciona Prospectus">
+                <div class="play-btn">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+            </div>
+            <video id="vsl-video" class="vsl-video" preload="none" playsinline data-asset="vsl" poster="assets/hero/prospectus-vsl.png">
+                <source src="videos/Prospectus_VSL_Product_Film_v2.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de vídeo.
+            </video>
+        </div>
+        <div class="hero-transition" aria-hidden="true"></div>
+    </section>
+
+    <!-- CAPTACIÓN DESPUÉS DEL VSL -->
+    <section id="hablemos" aria-labelledby="closing-title">
+        <div class="closing-inner">
+            <p class="closing-brand closing-reveal">PROSPECTUS<span>.</span></p>
+            <h2 id="closing-title" class="closing-reveal">Tu próxima promoción<br><span>puede empezar aquí.</span></h2>
+            <p class="closing-description closing-reveal">Descubre cómo Prospectus puede transformar la forma de presentar tu próximo proyecto.</p>
+            <div class="closing-actions closing-reveal">
+                <a class="closing-primary" href="#solicitar-demo">SOLICITAR DEMO <span aria-hidden="true">↗</span></a>
+                <a class="closing-secondary" href="https://wa.me/34643190807?text=Hola%2C%20me%20gustar%C3%ADa%20conocer%20mejor%20Prospectus." target="_blank" rel="noopener noreferrer">HABLAR POR WHATSAPP <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="closing-contact">
+                <a href="mailto:prospectus3d.es@gmail.com">prospectus3d.es@gmail.com</a><span aria-hidden="true">·</span><a href="tel:+34633716169">+34 633 716 169</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEMO EN VIVO -->
+    <section id="demo" aria-labelledby="demo-title">
+        <div class="demo-intro animate-on-scroll">
+            <span class="demo-eyebrow">DEMO EN VIVO</span>
+            <h2 id="demo-title">Recorre una promoción<br><span>por tu cuenta.</span></h2>
+            <p>Explora Serra Residencial como lo haría un comprador. Recorre el edificio, selecciona una planta, descubre las viviendas y utiliza las herramientas de Prospectus.</p>
+        </div>
+
+        <div class="demo-browser animate-on-scroll">
+            <div class="browser-bar">
+                <div class="browser-dot" aria-hidden="true"></div>
+                <div class="browser-dot" aria-hidden="true"></div>
+                <div class="browser-dot" aria-hidden="true"></div>
+                <div class="browser-url">serraresidencial.netlify.app</div>
+                <span class="demo-live">INTERACTIVO</span>
+            </div>
+            <div class="demo-iframe-container" id="demoStage">
+                <iframe id="demoIframe" title="Demo interactiva de Prospectus 3D" loading="lazy" allow="autoplay; fullscreen" allowfullscreen referrerpolicy="no-referrer" data-src="https://serraresidencial.netlify.app/"></iframe>
+                <div class="demo-overlay" id="demoOverlay">
+                    <div class="demo-overlay-card">
+                        <span class="eyebrow">Showroom interactivo</span>
+                        <h3>Serra Residencial en 3D</h3>
+                        <p>Vista previa del showroom. Ábrela a pantalla completa para navegarla.</p>
+                        <noscript><p>Activa JavaScript o abre la demo en otra pestaña.</p></noscript>
+                        <a class="btn btn-primary" href="https://serraresidencial.netlify.app/" target="_blank" rel="noopener noreferrer">Abrir demo →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="demo-footer"><span>SERRA RESIDENCIAL · SHOWROOM NAVEGABLE</span><a href="https://serraresidencial.netlify.app/" target="_blank" rel="noopener noreferrer">ABRIR DEMO COMPLETA ↗</a></div>
+    </section>
+
+    <!-- UN SOLO ENLACE, TODA LA PROMOCIÓN -->
+    <section id="beneficios" aria-labelledby="experience-title">
+        <div class="experience-layout">
+            <div class="experience-index">
+                <span class="experience-eyebrow">02 — LA EXPERIENCIA</span>
+                <h2 id="experience-title">Todo lo que necesita tu promoción,<br><em>en una sola experiencia.</em></h2>
+                <p class="experience-intro">Desde descubrir el edificio hasta comparar viviendas o resolver dudas. Todo el proceso de decisión en una única experiencia digital.</p>
+                <div class="experience-list" aria-label="Funcionalidades de Prospectus">
+                    <h3>01 — EXPLORA</h3>
+                    <button type="button" data-feature="0" aria-pressed="true"><span>01</span>Edificio 3D</button>
+                    <button type="button" data-feature="1" aria-pressed="false"><span>02</span>Selector de plantas</button>
+                    <button type="button" data-feature="2" aria-pressed="false"><span>03</span>Explora las viviendas</button>
+                    <button type="button" data-feature="3" aria-pressed="false"><span>04</span>Tour 360º</button>
+                    <h3>02 — DECIDE</h3>
+                    <button type="button" data-feature="4" aria-pressed="false"><span>05</span>Comparador de viviendas</button>
+                    <button type="button" data-feature="5" aria-pressed="false"><span>06</span>Calculadora hipotecaria</button>
+                    <button type="button" data-feature="6" aria-pressed="false"><span>07</span>Asistente IA</button>
+                    <h3>03 — GESTIONA</h3>
+                    <button type="button" data-feature="7" aria-pressed="false"><span>08</span>Panel de viviendas</button>
+                </div>
+                <div class="experience-mobile">
+                    <label for="experience-select">Explora las funcionalidades</label>
+                    <select id="experience-select">
+                        <optgroup label="01 — EXPLORA"><option value="0">01 · Edificio 3D</option><option value="1">02 · Selector de plantas</option><option value="2">03 · Explora las viviendas</option><option value="3">04 · Tour 360º</option></optgroup>
+                        <optgroup label="02 — DECIDE"><option value="4">05 · Comparador de viviendas</option><option value="5">06 · Calculadora hipotecaria</option><option value="6">07 · Asistente IA</option></optgroup>
+                        <optgroup label="03 — GESTIONA"><option value="7">08 · Panel de viviendas</option></optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="experience-showcase">
+                <div class="experience-window">
+                    <div class="experience-bar"><span>SERRA RESIDENCIAL</span><span>PRODUCTO REAL</span></div>
+                    <div class="experience-media">
+                        <video id="experience-video" muted playsinline loop preload="none" poster="assets/features/building.webp" aria-label="Demostración del edificio de Serra Residencial"></video>
+                        <button type="button" id="experience-pause" aria-label="Pausar demostración">Pausar</button>
+                    </div>
+                    <div class="experience-detail" aria-live="polite" aria-atomic="true">
+                        <span id="experience-category">01 — EXPLORA</span>
+                        <h3 id="experience-name">Edificio 3D</h3>
+                        <p id="experience-description">Descubre la arquitectura y su entorno antes de entrar a explorar cada planta.</p>
+                    </div>
+                </div>
+                <a class="experience-link" href="#demo">Pruébalo en la demo real ↗</a>
+            </div>
+        </div>
+    </section>
+    <script src="features.js" defer></script>
+
+    <!-- SECCIÓN AUDIOVISUAL -->
+    <section id="audiovisual" aria-labelledby="motion-heading">
+        <div class="motion-container">
+            <div class="motion-heading">
+                <span class="motion-eyebrow">03 — NUESTRA VISIÓN</span>
+                <h2 id="motion-heading">Una nueva forma de<br><em>presentar obra nueva.</em></h2>
+                <p>Tecnología, arquitectura y contenido trabajando juntos para transformar cómo se descubre una promoción.</p>
+            </div>
+            <div class="motion-stage">
+                <video id="motion-video" playsinline preload="metadata" aria-label="Explorar antes de existir">
+                    <source src="videos/explorar.mp4" type="video/mp4">
+                </video>
+                <button id="motion-cover" type="button" aria-label="Reproducir Explorar antes de existir">
+                    <img id="motion-image" src="assets/motion/explorar.png" alt="Explorar antes de existir. Serra Residencial al atardecer." loading="lazy" decoding="async">
+                    <span class="motion-play" aria-hidden="true">▶</span>
+                </button>
+            </div>
+            <div class="motion-caption" aria-live="polite" aria-atomic="true">
+                <span id="motion-count">01 / 04</span>
+                <div><h3 id="motion-title">Explorar antes de existir</h3><p id="motion-description">De la planta al recorrido.</p></div>
+            </div>
+            <p id="motion-error" role="status" hidden>No se ha podido iniciar el vídeo. Vuelve a pulsar la portada para intentarlo.</p>
+            <div class="motion-selector" aria-label="Seleccionar vídeo">
+                <button type="button" data-motion="0" aria-pressed="true"><span class="motion-number">01</span><span>Explorar antes de existir</span><span class="motion-indicator" aria-hidden="true"></span></button>
+                <button type="button" data-motion="1" aria-pressed="false"><span class="motion-number">02</span><span>Después del clic</span><span class="motion-indicator" aria-hidden="true"></span></button>
+                <button type="button" data-motion="2" aria-pressed="false"><span class="motion-number">03</span><span>Más allá del 3D</span><span class="motion-indicator" aria-hidden="true"></span></button>
+                <button type="button" data-motion="3" aria-pressed="false"><span class="motion-number">04</span><span>Prospectus en 30 segundos</span><span class="motion-indicator" aria-hidden="true"></span></button>
+            </div>
+        </div>
+    </section>
+    <script src="motion.js" defer></script>
+
+    <!-- CÓMO FUNCIONA -->
+    <section id="el-cambio" aria-labelledby="change-title">
+        <div class="change-intro">
+            <span class="change-eyebrow">04 — EL CAMBIO</span>
+            <h2 id="change-title">La misma promoción.<br><em>Dos formas de vivirla.</em></h2>
+            <p>Renders, planos, disponibilidad y documentación dejan de ser piezas aisladas para convertirse en una experiencia que el comprador puede explorar.</p>
+        </div>
+        <div class="change-track">
+            <div class="change-sticky">
+                <div class="change-progress" aria-hidden="true"><span id="change-step">01 — RENDER</span><span class="change-rule"><i></i></span></div>
+                <div class="change-documents">
+                    <figure class="change-document"><img src="assets/change/render.png" alt="Render de Serra Residencial al atardecer" loading="lazy" width="1672" height="941"><figcaption><span>01 — RENDER</span>Una primera impresión.</figcaption></figure>
+                    <figure class="change-document"><img src="assets/change/plan.png" alt="Plano comercial de una vivienda de Serra Residencial" loading="lazy" width="1492" height="1054"><figcaption><span>02 — PLANO</span>Entender la vivienda.</figcaption></figure>
+                    <figure class="change-document"><img src="assets/change/availability.png" alt="Listado tradicional de disponibilidad y precios de Serra Residencial" loading="lazy" width="1492" height="1054"><figcaption><span>03 — DISPONIBILIDAD</span>Elegir entre opciones.</figcaption></figure>
+                    <figure class="change-document"><img src="assets/change/brochure.png" alt="Brochure comercial de Serra Residencial" loading="lazy" width="1536" height="1024"><figcaption><span>04 — INFORMACIÓN</span>Descubrir el proyecto.</figcaption></figure>
+                </div>
+                <div class="change-converge">
+                    <div class="change-miniatures" aria-hidden="true"><img src="assets/change/render.png" alt="" loading="lazy"><img src="assets/change/plan.png" alt="" loading="lazy"><img src="assets/change/availability.png" alt="" loading="lazy"><img src="assets/change/brochure.png" alt="" loading="lazy"></div>
+                    <p class="change-before">Cuatro formas de consultar una promoción.</p>
+                    <p class="change-after">Una sola forma de <em>explorarla.</em></p>
+                </div>
+                <div class="change-brand"><span>Prospectus.</span><p>Antes, el comprador recibía información.<br>Ahora, puede explorarla.</p></div>
+            </div>
+        </div>
+        <div class="change-product">
+            <span class="change-eyebrow">CON PROSPECTUS</span>
+            <h3>De consultar información<br>a explorar una promoción.</h3>
+            <div class="change-film"><video muted playsinline loop preload="none" poster="assets/change/explore.webp" aria-label="Recorrido real por una vivienda de Serra Residencial" data-src="assets/change/explore.mp4"></video><button type="button" class="change-play">Reproducir recorrido</button></div>
+            <p class="change-final">EXPLORA <span>·</span> COMPARA <span>·</span> DECIDE</p>
+        </div>
+    </section>
+    <script src="change.js" defer></script>
+
+    <section id="el-proceso" aria-labelledby="process-title">
+        <div class="process-wrap">
+            <div class="process-heading">
+                <p class="process-eyebrow">05 — EL PROCESO</p>
+                <h2 id="process-title">Un proceso<br><em>sencillo.</em></h2>
+                <p class="process-intro">Transformamos la documentación técnica en tu mejor herramienta de ventas.</p>
+            </div>
+            <ol class="process-steps">
+                <li class="process-step">
+                    <div class="process-copy"><span class="process-number" aria-hidden="true">01</span><h3>Recopilación</h3></div>
+                    <svg class="process-drawing" viewBox="0 0 320 180" fill="none" aria-hidden="true">
+                        <path class="muted-line" d="M90 24h148v134H90z M109 43h83m-83 9h63m-63 12h105m-105 9h105m-105 9h80"/>
+                        <path fill="#101013" d="M60 49h151v113H60z"/><path d="M60 49h151v113H60z M67 56h137v99H67z M67 108h54V56m0 70v29m0-61h83m-53 0v61m-83-30h29m-29 6h29m-29 6h29 M163 109h28v32h-28z"/>
+                        <path class="accent-line" d="M121 108v18m0-18a18 18 0 0 1 18 18h-18 M60 173h151m-151-4v8m151-8v8"/>
+                    </svg>
+                    <p>Nos proporcionas los planos arquitectónicos y memoria de calidades.</p>
+                </li>
+                <li class="process-step">
+                    <div class="process-copy"><span class="process-number" aria-hidden="true">02</span><h3>Desarrollo 3D</h3></div>
+                    <svg class="process-drawing" viewBox="0 0 320 180" fill="none" aria-hidden="true">
+                        <path class="muted-line" d="m47 143 108-44 119 44-108 32z M47 143v-9m227 9v-9"/>
+                        <path fill="#b994ee09" d="m77 67 87-36 83 30v83l-87 28-83-29z"/>
+                        <path d="m77 67 87-36 83 30-87 33-83-27z M77 67v76l83 29 87-28V61 M160 94v78 M77 93l83 29 87-32 M77 118l83 29 87-30 M104 76v76m28-67v77m57-79v79m29-90v80"/>
+                        <path class="accent-line" d="m77 67 83 27 87-33 M77 93l83 29 87-32"/>
+                    </svg>
+                    <p>Convertimos la promoción en una experiencia digital completa.</p>
+                </li>
+                <li class="process-step">
+                    <div class="process-copy"><span class="process-number" aria-hidden="true">03</span><h3>Despliegue</h3></div>
+                    <svg class="process-drawing" viewBox="0 0 320 180" fill="none" aria-hidden="true">
+                        <rect x="49" y="30" width="222" height="131" rx="4"/><path d="M49 53h222"/><path class="muted-line" d="M66 42h3m7 0h3m7 0h3 M68 73h67m-67 8h42 M204 74h46m-46 8h32"/>
+                        <rect class="accent-line" x="94" y="94" width="132" height="45" rx="2"/>
+                        <text x="160" y="122" text-anchor="middle" fill="#b994ee" stroke="none" font-family="monospace" font-size="17">&lt;div&gt;</text>
+                    </svg>
+                    <p>La integras en tu web con un simple fragmento de código.</p>
+                </li>
+            </ol>
+            <div class="process-included">
+                <p class="process-eyebrow">INCLUIDO EN CADA PROYECTO</p>
+                <h3>Todo lo necesario para presentar<br>y gestionar la promoción.</h3>
+                <ol class="process-list">
+                    <li><span>01</span>Modelo 3D integral</li>
+                    <li><span>02</span>Navegación por edificio</li>
+                    <li><span>03</span>Navegación por plantas</li>
+                    <li><span>04</span>Fichas de viviendas</li>
+                    <li><span>05</span>Control de disponibilidad</li>
+                    <li><span>06</span>Comparador interactivo</li>
+                    <li><span>07</span>Integración web fluida</li>
+                    <li><span>08</span>Gestión comercial</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <script src="process.js" defer></script>
+
+    <section id="preguntas-frecuentes" aria-labelledby="questions-title">
+        <div class="questions-wrap">
+            <div class="questions-intro">
+                <p class="questions-eyebrow">06 — PREGUNTAS FRECUENTES</p>
+                <h2 id="questions-title">Antes de empezar,<br>quizá quieras <em>saber esto.</em></h2>
+                <p>Todo lo esencial antes de llevar Prospectus a tu próxima promoción.</p>
+            </div>
+            <div class="questions-content">
+                <div class="questions-item">
+                    <h3><button type="button" id="question-01" aria-expanded="false" aria-controls="answer-01"><span class="questions-number" aria-hidden="true">01</span><span>¿Qué necesitáis para crear una promoción en Prospectus?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-01" role="region" aria-labelledby="question-01" inert><div><p>Partimos de la documentación disponible de la promoción, principalmente planos arquitectónicos, memoria de calidades y material comercial o visual. A partir de ahí construimos la experiencia digital del proyecto.</p></div></div>
+                </div>
+                <div class="questions-item">
+                    <h3><button type="button" id="question-02" aria-expanded="false" aria-controls="answer-02"><span class="questions-number" aria-hidden="true">02</span><span>¿Tengo que tener renders o un modelo 3D previamente?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-02" role="region" aria-labelledby="question-02" inert><div><p>No necesariamente. Revisamos el material disponible de cada promoción y determinamos qué necesitamos para construir la experiencia.</p></div></div>
+                </div>
+                <div class="questions-item">
+                    <h3><button type="button" id="question-03" aria-expanded="false" aria-controls="answer-03"><span class="questions-number" aria-hidden="true">03</span><span>¿Prospectus sustituye la web de mi promoción?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-03" role="region" aria-labelledby="question-03" inert><div><p>No tiene por qué. Prospectus puede integrarse dentro de la web existente de la promoción, manteniendo su identidad y convirtiéndose en la parte interactiva de la experiencia.</p></div></div>
+                </div>
+                <div class="questions-item">
+                    <h3><button type="button" id="question-04" aria-expanded="false" aria-controls="answer-04"><span class="questions-number" aria-hidden="true">04</span><span>¿Se adapta a la identidad visual de cada promoción?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-04" role="region" aria-labelledby="question-04" inert><div><p>Sí. La experiencia se adapta al proyecto y a su identidad visual para que Prospectus no se perciba como una plataforma externa, sino como parte de la propia promoción.</p></div></div>
+                </div>
+                <div class="questions-item">
+                    <h3><button type="button" id="question-05" aria-expanded="false" aria-controls="answer-05"><span class="questions-number" aria-hidden="true">05</span><span>¿Puedo actualizar precios y disponibilidad?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-05" role="region" aria-labelledby="question-05" inert><div><p>Sí. La disponibilidad y la información comercial de las viviendas pueden gestionarse para mantener la promoción actualizada.</p></div></div>
+                </div>
+                <div class="questions-item">
+                    <h3><button type="button" id="question-06" aria-expanded="false" aria-controls="answer-06"><span class="questions-number" aria-hidden="true">06</span><span>¿Funciona también en móvil y tablet?</span><span class="questions-symbol" aria-hidden="true"></span></button></h3>
+                    <div class="questions-answer" id="answer-06" role="region" aria-labelledby="question-06" inert><div><p>Sí. La experiencia está planteada para adaptarse a ordenador, tablet y móvil.</p></div></div>
+                </div>
+                <div class="questions-contact"><h3>¿Tienes otra pregunta?</h3><p>Cuéntanos sobre tu próxima promoción.</p><a href="#solicitar-demo" class="btn btn-primary">HABLAR CON PROSPECTUS →</a></div>
+            </div>
+        </div>
+    </section>
+    <script src="questions.js" defer></script>
+    <!-- FORMULARIO DE SOLICITUD DE DEMO -->
+    <section id="solicitar-demo" aria-labelledby="lead-title">
+        <div class="lead-layout">
+            <div class="lead-copy">
+                <span class="lead-eyebrow">SOLICITA UNA DEMO</span>
+                <h2 id="lead-title">Tu próxima promoción.<br><em>Una nueva forma de presentarla.</em></h2>
+                <p class="lead-description">Cuéntanos qué estás desarrollando. Veamos cómo convertir tu promoción en una experiencia que tus compradores puedan explorar antes de construirla.</p>
+                <div class="lead-signature"><span>Prospectus.</span><p>De los planos a una experiencia interactiva.</p></div>
+            </div>
+            <form id="leadForm" method="post" aria-label="Solicitar una demo de Prospectus" aria-describedby="lead-note lead-privacy">
+                <div class="lead-fields">
+                    <div class="lead-field lead-wide"><label for="lead-name">Nombre y apellidos</label><input id="lead-name" name="name" minlength="2" autocomplete="name" placeholder="Tu nombre completo" required maxlength="150"></div>
+                    <div class="lead-field lead-wide"><label for="lead-company">Empresa / Promotora</label><input id="lead-company" name="company" minlength="2" autocomplete="organization" placeholder="Nombre de la empresa" required maxlength="150"></div>
+                    <div class="lead-field"><label for="lead-email">Email profesional</label><input id="lead-email" name="email" type="email" autocomplete="email" placeholder="nombre@empresa.com" required maxlength="200"></div>
+                    <div class="lead-field"><label for="lead-phone">Teléfono</label><input id="lead-phone" name="phone" minlength="7" type="tel" autocomplete="tel" placeholder="+34 600 000 000" required maxlength="40"></div>
+                    <div class="lead-field"><label for="lead-homes">N.º aproximado de viviendas</label><input id="lead-homes" name="homes" type="number" inputmode="numeric" min="1" max="100000" step="1" placeholder="Ej. 24" required></div>
+                    <div class="lead-field"><label for="lead-stage">Estado de la promoción</label><select id="lead-stage" name="stage" required><option value="" disabled selected>Selecciona una fase</option><option>En planificación</option><option>En preventa</option><option>En construcción</option><option>Terminada</option><option>Otro / por definir</option></select></div>
+                    <div class="lead-field lead-wide"><label for="lead-message">Información adicional <span>(opcional)</span></label><textarea id="lead-message" name="message" placeholder="Ubicación, plazos o cualquier detalle de tu promoción…" maxlength="2000"></textarea></div>
+                </div>
+                <p id="lead-privacy" class="lead-privacy"><strong>Protección de datos.</strong> Contacto: Prospectus 3D. Usaremos los datos para atender tu solicitud de demo o propuesta, sobre la base de medidas precontractuales o del interés legítimo cuando actúes por una empresa. La solicitud se guarda en Supabase y se notifica por correo mediante Resend a nuestro buzón de Gmail. Cloudflare Turnstile protege el formulario frente al spam. No te suscribe a publicidad. Puedes ejercer tus derechos en prospectus3d.es@gmail.com. <a href="privacidad.html">Consulta la política de privacidad y los proveedores</a>.</p>
+                <div class="contact-trap" aria-hidden="true"><label for="lead-website">Website</label><input id="lead-website" name="website" tabindex="-1" autocomplete="off"></div>
+                <div id="lead-verification"></div>
+                <button class="lead-submit" type="submit">Solicitar demo</button>
+                <p class="lead-note" id="lead-note">Enviaremos tu solicitud directamente a Prospectus.</p>
+                <p id="lead-status" role="status" aria-live="polite" aria-atomic="true"></p>
+                <p class="contact-fallback"><a href="mailto:prospectus3d.es@gmail.com">También puedes escribirnos por correo</a>.</p>
+                <noscript><p>Activa JavaScript para utilizar el formulario o escríbenos a prospectus3d.es@gmail.com.</p><style>#leadForm .lead-submit{display:none}</style></noscript>
+            </form>
+        </div>
+    </section>
+</main>
+<footer id="closing-footer">
+    <div class="closing-footer-inner">
+        <div><a class="closing-wordmark" href="#inicio">Prospectus<span>.</span></a><p class="closing-copyright">© Prospectus</p></div>
+        <div class="closing-footer-contact"><a href="mailto:prospectus3d.es@gmail.com">prospectus3d.es@gmail.com</a><a href="tel:+34633716169">+34 633 716 169</a></div>
+    </div>
+    <nav class="legal-links" aria-label="Información legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Política de privacidad</a><a href="cookies.html">Política de cookies</a></nav>
+</footer>
+<a id="whatsapp-float" href="https://wa.me/34643190807?text=Hola%2C%20me%20gustar%C3%ADa%20conocer%20mejor%20Prospectus." target="_blank" rel="noopener noreferrer" aria-label="Hablar con Prospectus por WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.52 3.48A11.91 11.91 0 0 0 12.04 0C5.46 0 .1 5.35.1 11.94c0 2.1.55 4.16 1.6 5.98L0 24l6.24-1.64a11.95 11.95 0 0 0 5.8 1.48h.01C18.63 23.84 24 18.49 24 11.9c0-3.19-1.24-6.18-3.48-8.42ZM12.04 21.82a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.7.97.99-3.61-.24-.37a9.86 9.86 0 0 1-1.52-5.28c0-5.47 4.45-9.92 9.93-9.92a9.85 9.85 0 0 1 7.02 2.91 9.84 9.84 0 0 1 2.9 7.01c0 5.47-4.45 9.88-9.98 9.88Zm5.44-7.41c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.68-.51h-.57c-.2 0-.53.07-.8.37-.28.3-1.05 1.02-1.05 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.11 3.22 5.11 4.52.72.31 1.27.5 1.7.64.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
+    <span class="whatsapp-tooltip" aria-hidden="true">Hablar por WhatsApp</span>
+</a>
+<script src="closing.js" defer></script>
+<script src="contact-config.js" defer></script>
+<script src="contact.js" defer></script>
+
+<!-- JAVASCRIPT -->
+<script>
+    // Transparent navigation only while the opening composition is visible.
+    new IntersectionObserver(([entry]) => {
+        document.querySelector('header').classList.toggle('hero-nav', entry.isIntersecting);
+    }, { rootMargin: '-76px 0px 0px 0px' }).observe(document.getElementById('inicio'));
+    // === ENTORNO: host real (dominio propio, GitHub Pages, Netlify, Vercel, localhost) vs. la
+    //     preview de artifacts de claude.ai (donde los vídeos van por /_blob y el iframe externo
+    //     está bloqueado por seguridad). En cualquier host real la demo se embebe e interactúa. ===
+    const IS_REAL_HOST = (function () {
+        const h = location.hostname;
+        return h === '' || h === 'localhost' || h === '127.0.0.1'
+            || h.endsWith('prospectus3d.com')
+            || h.endsWith('.github.io')
+            || h.endsWith('.netlify.app')
+            || h.endsWith('.vercel.app');
+    })();
+
+    // === VÍDEOS: ficheros locales en host real; assets /_blob en la preview de claude.ai ===
+    const ASSETS = {
+        vsl:      { video: 'd41db9f9f0dd1b6359bb3570beabe682' },
+        explorar: { video: '4f84d1f87e007dd94059851ea6144550' },
+        despues:  { video: '0de67f65dabef2de3e84d905ccde9125' },
+        masalla:  { video: '37f0b3231f3c3ba9e0c446c6561c63ed' },
+        creative: { video: '162380aabec799ecd1feff7a3924fe6b' }
+    };
+    (function wireVideos() {
+        if (IS_REAL_HOST) return;
+        document.querySelectorAll('video[data-asset]').forEach(v => {
+            const a = ASSETS[v.dataset.asset];
+            if (!a || !a.video) return;
+            const src = v.querySelector('source');
+            if (src) src.src = '/_blob/' + a.video;
+            if (a.poster) v.poster = '/_blob/' + a.poster;
+            v.load();
+        });
+    })();
+
+    // === DEMO: iframe interactivo en vivo en host real; imagen de vista previa en la preview de claude.ai ===
+    (function demoEnv() {
+        const iframe = document.getElementById('demoIframe');
+        const overlay = document.getElementById('demoOverlay');
+        if (IS_REAL_HOST) {
+            if (iframe && iframe.dataset.src) iframe.src = iframe.dataset.src;
+            if (overlay) overlay.hidden = true;
+        } else {
+            if (iframe) iframe.remove();
+            if (overlay) overlay.hidden = false;
+        }
+    })();
+
+    (function init() {
+        // === 1. NAVEGACIÓN MÓVIL ===
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('main-nav');
+        menuToggle.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!expanded));
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // === 2. GESTIÓN DEL VSL ===
+        const overlay = document.getElementById('vsl-overlay');
+        const video = document.getElementById('vsl-video');
+        function startVsl() {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                video.controls = true;
+                video.play().catch(e => console.log('Reproducción bloqueada por el navegador:', e));
+            }, 400);
+        }
+        if (overlay && video) {
+            overlay.addEventListener('click', startVsl);
+            overlay.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startVsl(); } });
+        }
+
+        // === 3. COMPARADOR INTERACTIVO ===
+        document.querySelectorAll('.comp-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const isPressed = btn.getAttribute('aria-pressed') === 'true';
+                btn.setAttribute('aria-pressed', String(!isPressed));
+                const targetClass = btn.getAttribute('data-target');
+                document.querySelectorAll('.' + targetClass).forEach(el => {
+                    el.style.display = !isPressed ? 'table-cell' : 'none';
+                });
+            });
+        });
+
+        // === 5. ANIMACIONES AL HACER SCROLL ===
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { root: null, rootMargin: '0px', threshold: 0.1 });
+
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (!reduced.matches) {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        } else {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => el.classList.add('is-visible'));
+        }
+    })();
+</script>
+
+</body>
+</html>
