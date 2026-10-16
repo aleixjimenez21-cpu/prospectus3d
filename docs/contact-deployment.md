@@ -6,14 +6,14 @@
 - SEO publicado en `0aac402`: solo la descripción SEO cambia a «para promotoras e inmobiliarias», con sus traducciones. Se añaden canonical, datos de organización/sitio, robots.txt y sitemap.xml. No se ha solicitado rastreo desde Search Console.
 - Proyecto gratuito creado en la organización elegida por el propietario: **Prospectus 3D**, `qiqampmzdikwvaaernik`, región `eu-west-1`.
 - Migraciones aplicadas; ambas funciones desplegadas y sus cinco secretos configurados. Una petición incompleta devuelve HTTP 400. La nueva interfaz aún NO está activada en la portada; existe temporalmente `contact-check.html` con `noindex` para probarla en el dominio real.
-- Verificado en Supabase: persistencia de un registro sintético y prohibición de lectura/escritura/RPC para visitantes. El registro sintético se mantiene marcado `needs_attention / synthetic_storage_test` y no se enviará por email; eliminar únicamente ese registro después de la prueba final.
+- Verificado en Supabase: persistencia y prohibición de lectura/escritura/RPC para visitantes. El primer registro sintético de almacenamiento se eliminó tras la prueba integral, sin enviarlo por email. Se conserva como referencia la solicitud real claramente identificada como prueba técnica.
 - 12 pruebas del servidor, 1 prueba integrada sobre PostgreSQL/PGlite con persistencia en disco y 4 pruebas de navegador pasadas. CAPTCHA, correo y respuestas del backend están simulados en las pruebas de navegador; esto NO acredita recepción de correo real.
 - Resend: dominio `prospectus3d.com` verificado, región Irlanda, envío con TLS obligatorio, clave limitada a envío y a ese dominio guardada en Supabase. Remitente `solicitudes@prospectus3d.com`. Los tres registros DNS exigidos por Resend se comprobaron contra los servidores autoritativos de GoDaddy; no se cambiaron los nameservers ni los registros de la web.
 - Sitekey de Turnstile recibida del propietario e incorporada a la configuración pública; Secret Key guardada en Supabase. Desafío real validado desde `prospectus3d.com`.
 - Reintentos: `pg_cron` y `pg_net` habilitados, credencial en Vault, trabajo `prospectus-contact-notifications` cada minuto; ejecución HTTP 200 `{"ok":true}` comprobada.
 - Prueba integral real: solicitud `e4ae1a3f-9cde-431c-9995-eb2759497397`, persistida y enviada en un intento. Resend `01a144e0-fccf-7a11-b19d-db6980a0d46d` confirma `Delivered` a `prospectus3d.es@gmail.com` el 16/10/2026 a las 15:22 (Europe/Madrid). No se ha inspeccionado la bandeja de Gmail; la entrega la confirma el proveedor.
 - Controles reales: token inválido HTTP 400, origen ajeno HTTP 403, worker sin credencial HTTP 401; sin nuevas filas ni correos. Repetición del UUID en la operación de base de datos devuelve `duplicate: true`, conservando una única solicitud y un único envío.
-- Pendiente: retirar la página de prueba y publicar el formulario en la portada; confirmar con el propietario en qué carpeta de Gmail aparece el aviso.
+- Esta rama retira la página temporal de prueba y activa el formulario en la portada al publicarse. Falta la comprobación posterior al despliegue y confirmar con el propietario en qué carpeta de Gmail aparece el aviso.
 - Pendiente favicon: falta el logo original. No se ha creado un sustituto.
 
 ## Flujo
