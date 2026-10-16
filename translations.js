@@ -1,8 +1,8 @@
 // Spanish source strings and reviewed English/Italian translations.
 window.PROSPECTUS_TRANSLATIONS = {
-  "Prospectus 3D convierte los planos de una promoción inmobiliaria en un showroom 3D interactivo para promotoras.": {
-    "en": "Prospectus 3D turns property development plans into interactive 3D showrooms for developers.",
-    "it": "Prospectus 3D trasforma le planimetrie dei progetti immobiliari in showroom 3D interattivi per i promotori."
+  "Prospectus 3D convierte los planos de una promoción inmobiliaria en un showroom 3D interactivo para promotoras e inmobiliarias.": {
+    "en": "Prospectus 3D turns property development plans into interactive 3D showrooms for developers and real estate agencies.",
+    "it": "Prospectus 3D trasforma le planimetrie dei progetti immobiliari in showroom 3D interattivi per promotori e agenzie immobiliari."
   },
   "Saltar al contenido principal": {
     "en": "Skip to main content",
