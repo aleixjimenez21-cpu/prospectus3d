@@ -1,0 +1,7 @@
+.contact-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+#leadForm .lead-submit:disabled { opacity: .65; cursor: wait; }
+#lead-status { margin-top: 1rem; font-size: .9rem; line-height: 1.5; }
+#lead-status[data-state="error"] { color: #fda4af; }
+#lead-status[data-state="success"] { color: #86efac; }
+#lead-verification { margin: 1rem 0; min-height: 0; }
+#leadForm .contact-fallback { margin-top: .7rem; font-size: .85rem; }
