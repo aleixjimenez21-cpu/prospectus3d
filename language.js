@@ -6,7 +6,10 @@
     const queryLanguage = new URL(location.href).searchParams.get('lang');
     let savedLanguage;
     try { savedLanguage = localStorage.getItem(storageKey); } catch (_) { /* Storage can be disabled. */ }
-    let language = supported.includes(queryLanguage) ? queryLanguage : supported.includes(savedLanguage) ? savedLanguage : 'es';
+    // /en/ and /it/ are pre-translated static pages: their language is fixed by the URL.
+    const pageLanguage = supported.includes(document.documentElement.dataset.pageLanguage) ? document.documentElement.dataset.pageLanguage : null;
+    let language = pageLanguage || (supported.includes(queryLanguage) ? queryLanguage : supported.includes(savedLanguage) ? savedLanguage : 'es');
+    const homePath = code => code === 'es' ? '/' : `/${code}/`;
     const textNodes = [];
     const attributes = [];
     const translate = text => language === 'es' ? text : dictionary[text]?.[language] || text;
@@ -32,7 +35,7 @@
     const localLinks = [...document.querySelectorAll('a[href]')].filter(link => {
         const href = link.getAttribute('href');
         return href && !href.startsWith('#') && !/^(?:[a-z]+:|\/\/)/i.test(href);
-    });
+    }).map(link => [link, link.getAttribute('href')]);
     const whatsapp = [...document.querySelectorAll('a[href^="https://wa.me/"]')];
     const pickers = [...document.querySelectorAll('[data-language-picker]')];
 
@@ -46,9 +49,12 @@
         }
         for (const [element, name, value] of attributes) element.setAttribute(name, translate(value));
         // Query parameters preserve the selection even when localStorage is unavailable.
-        localLinks.forEach(link => {
-            const url = new URL(link.href);
+        localLinks.forEach(([link, original]) => {
+            const url = new URL(original, location.href);
+            // Links to the home page point to the indexable URL of each language.
+            if (/^\/(?:(?:en|it)\/)?(?:index\.html)?$/.test(url.pathname)) url.pathname = homePath(language);
             url.searchParams.set('lang', language);
+            if (language !== 'es' && url.pathname === homePath(language)) url.searchParams.delete('lang');
             link.href = url.href;
         });
         whatsapp.forEach(link => {
@@ -61,6 +67,11 @@
     }
     pickers.forEach(picker => picker.addEventListener('change', () => {
         if (!supported.includes(picker.value)) return;
+        if (pageLanguage && picker.value !== pageLanguage) {
+            try { localStorage.setItem(storageKey, picker.value); } catch (_) { /* The URL carries the choice. */ }
+            location.href = homePath(picker.value) + (picker.value === 'es' ? '?lang=es' : '') + location.hash;
+            return;
+        }
         language = picker.value;
         try { localStorage.setItem(storageKey, language); } catch (_) { /* URL fallback remains available. */ }
         const url = new URL(location.href);

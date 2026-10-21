@@ -30,7 +30,7 @@
   root.classList.add('changing');
   timer=setTimeout(()=>{
    const item=items[index];
-   image.src='assets/motion/'+item[0]+'.webp';
+   image.src='/assets/motion/'+item[0]+'.webp';
    root.querySelector('#motion-count').textContent='0'+(index+1)+' / 04';
    caption();
    root.classList.remove('changing');
@@ -38,7 +38,7 @@
  }
  async function play() {
   const token=++revision; error.hidden=true; video.pause();
-  const src='videos/'+items[active][1]+'.mp4';
+  const src='/videos/'+items[active][1]+'.mp4';
   if(source.getAttribute('src')!==src){ source.src=src; video.load(); }
   video.currentTime=0; video.controls=true;
   try { await video.play(); if(token!==revision)return; stage.classList.add('playing'); cover.tabIndex=-1; video.focus({preventScroll:true}); }
@@ -56,7 +56,7 @@
  // Original PNGs are preloaded lazily near the section; videos remain on demand.
  new IntersectionObserver((entries,observer)=>{
   if(!entries.some(e=>e.isIntersecting))return;
-  items.slice(1).forEach(item=>{const img=new Image();img.src='assets/motion/'+item[0]+'.webp';});
+  items.slice(1).forEach(item=>{const img=new Image();img.src='/assets/motion/'+item[0]+'.webp';});
   observer.disconnect();
  },{rootMargin:'300px'}).observe(root);
  window.addEventListener('prospectus:languagechange',caption);

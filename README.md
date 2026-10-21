@@ -49,4 +49,6 @@ El código de integración, las pruebas y el estado real del despliegue se docum
 
 ## SEO
 
-Título, descripción, Open Graph (`assets/og-image.jpg`), JSON-LD (`WebSite`, `Organization`/`ProfessionalService`, `Service`, `WebPage`, `FAQPage`), `sitemap.xml` con imágenes y `404.html`. Las imágenes se sirven en WebP. Si cambias las preguntas frecuentes, actualiza también el bloque `FAQPage` del `<head>` de `index.html`. Estado y pasos pendientes (Search Console, Perfil de Empresa en Google, analítica, backlinks): [docs/seo.md](docs/seo.md).
+Título, descripción, Open Graph (`assets/og-image.jpg`), JSON-LD (`WebSite`, `Organization`/`ProfessionalService`, `Service`, `WebPage`, `FAQPage`), `sitemap.xml` con imágenes y `404.html`. Las imágenes se sirven en WebP. Si cambias las preguntas frecuentes, actualiza también el bloque `FAQPage` del `<head>` de `index.html`.
+
+**Versiones /en/ e /it/:** son copias traducidas de `index.html` generadas por `scripts/build-languages.mjs`. Después de editar `index.html` o `translations.js`, ejecuta `npm install` (una vez) y `npm run build:languages`. El test `tests/languages.test.mjs` falla si se te olvida. Estado y pasos pendientes (Search Console, Perfil de Empresa en Google, analítica, backlinks): [docs/seo.md](docs/seo.md).
