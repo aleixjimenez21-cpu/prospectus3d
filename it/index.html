@@ -137,6 +137,16 @@
     .nav-ctas { display: flex; gap: 1rem; align-items: center; }
     .menu-toggle { display: none; background: transparent; color: var(--text-main); font-size: 1.5rem; cursor: pointer; }
 
+    .nav-services { position: relative; }
+    .nav-services-toggle { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; background: none; color: inherit; font-size: 0.95rem; font-weight: 500; opacity: 0.8; cursor: pointer; transition: var(--transition); }
+    .nav-services-toggle span { font-size: .7em; transition: transform .2s; }
+    .nav-services-toggle:hover, .nav-services.open .nav-services-toggle { opacity: 1; }
+    .nav-services.open .nav-services-toggle span { transform: rotate(180deg); }
+    .nav-services-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); min-width: 270px; padding: 8px; flex-direction: column; background: #141318; border: 1px solid #ffffff1f; border-radius: 12px; box-shadow: 0 18px 40px #0008; }
+    .nav-services:hover .nav-services-menu, .nav-services.open .nav-services-menu { display: flex; }
+    .nav-links .nav-services-menu a { padding: 10px 12px; border-radius: 8px; color: #f5f3f8; opacity: 1; font-size: 0.92rem; white-space: nowrap; }
+    .nav-links .nav-services-menu a:hover { background: #ffffff12; color: #fff; }
+
     @media (max-width: 992px) {
         .nav-links, .nav-ctas .btn-secondary { display: none; }
         .menu-toggle { display: block; }
@@ -144,6 +154,11 @@
             display: flex; flex-direction: column; position: absolute; top: 80px; left: 0;
             width: 100%; background: var(--bg-base); padding: 2rem; border-bottom: 1px solid var(--border-color);
         }
+        .nav-links.active { align-items: flex-start; gap: 1.1rem; max-height: calc(100svh - 80px); overflow-y: auto; }
+        .nav-links.active .nav-services-toggle { min-height: 0; pointer-events: none; opacity: 1; }
+        .nav-links.active .nav-services-toggle span { display: none; }
+        .nav-links.active .nav-services-menu { display: flex; position: static; transform: none; min-width: 0; padding: 4px 0 0 14px; background: none; border: 0; box-shadow: none; }
+        .nav-links.active .nav-services-menu a { padding: 8px 0; color: inherit; opacity: 0.8; }
     }
 
     /* ==========================================================================
@@ -368,7 +383,12 @@
     header.hero-nav { background: transparent; border-color: transparent; backdrop-filter: none; color: #fff; }
     header.hero-nav .nav-container { max-width: 1020px; padding: 0 30px; height: 76px; animation: hero-enter .65s both; }
     header.hero-nav .wordmark { font-size: 25px; letter-spacing: -.05em; }
-    header.hero-nav .nav-links, header.hero-nav .btn-secondary, header.hero-nav .menu-toggle { display: none; }
+    header.hero-nav .btn-secondary { display: none; }
+    /* En la portada solo se ven «Servicios» (escritorio) y el menú ☰ (móvil). */
+    header.hero-nav .nav-links > a { display: none; }
+    header.hero-nav .nav-links.active { background: #09090b; border-color: #ffffff1c; }
+    header.hero-nav .nav-links.active > a { display: block; }
+    header.hero-nav .menu-toggle { color: #fff; }
     header.hero-nav .btn-primary { padding: 10px 18px; font-size: 12px; border-radius: 8px; background: #7c3aed; }
     @keyframes hero-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes hero-background { from { transform: scale(1.025); } to { transform: scale(1); } }
@@ -483,6 +503,15 @@
         <nav class="nav-links" id="main-nav">
             <a href="#inicio">Home</a>
             <a href="#el-proceso">Come funziona</a>
+            <div class="nav-services">
+                <button type="button" class="nav-services-toggle" aria-expanded="false" aria-controls="nav-services-menu">Servizi <span aria-hidden="true">▾</span></button>
+                <div class="nav-services-menu" id="nav-services-menu">
+                    <a href="/showroom-virtual-inmobiliario/">Showroom immobiliare virtuale</a>
+                    <a href="/tour-virtual-360-obra-nueva/">Tour virtuale a 360º</a>
+                    <a href="/selector-de-viviendas-3d/">Selettore di abitazioni 3D</a>
+                    <a href="/proyectos/serra-residencial/">Progetto Serra Residencial</a>
+                </div>
+            </div>
             <a href="#preguntas-frecuentes">FAQ</a>
             <a href="#solicitar-demo">Contatti</a>
         </nav>
@@ -880,6 +909,12 @@
             menuToggle.setAttribute('aria-expanded', String(!expanded));
             navLinks.classList.toggle('active');
         });
+        const services = navLinks.querySelector('.nav-services');
+        const servicesToggle = services.querySelector('.nav-services-toggle');
+        const setServices = open => { services.classList.toggle('open', open); servicesToggle.setAttribute('aria-expanded', String(open)); };
+        servicesToggle.addEventListener('click', () => setServices(!services.classList.contains('open')));
+        document.addEventListener('click', event => { if (!services.contains(event.target)) setServices(false); });
+        services.addEventListener('keydown', event => { if (event.key === 'Escape') { setServices(false); servicesToggle.focus(); } });
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
