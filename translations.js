@@ -1,5 +1,10 @@
 // Spanish source strings and reviewed English/Italian translations.
 window.PROSPECTUS_TRANSLATIONS = {
+  "Servicios": {"en": "Services", "it": "Servizi"},
+  "Showroom virtual inmobiliario": {"en": "Virtual real estate showroom", "it": "Showroom immobiliare virtuale"},
+  "Tour virtual 360º": {"en": "360º virtual tour", "it": "Tour virtuale a 360º"},
+  "Selector de viviendas 3D": {"en": "3D home selector", "it": "Selettore di abitazioni 3D"},
+  "Proyecto Serra Residencial": {"en": "Serra Residencial project", "it": "Progetto Serra Residencial"},
   "Prospectus 3D: showroom 3D interactivo para promociones de obra nueva": {"en": "Prospectus 3D: interactive 3D showroom for new-build developments", "it": "Prospectus 3D: showroom 3D interattivo per progetti di nuova costruzione"},
   "© 2026 Prospectus 3D · Tarragona, España": {"en": "© 2026 Prospectus 3D · Tarragona, Spain", "it": "© 2026 Prospectus 3D · Tarragona, Spagna"},
   "Preguntas frecuentes": {"en": "Frequently asked questions", "it": "Domande frequenti"},
