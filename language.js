@@ -51,6 +51,8 @@
         // Query parameters preserve the selection even when localStorage is unavailable.
         localLinks.forEach(([link, original]) => {
             const url = new URL(original, location.href);
+            // Only the home page and the legal pages exist in several languages.
+            if (!/^\/(?:(?:en|it)\/)?(?:index\.html|aviso-legal\.html|privacidad\.html|cookies\.html|404\.html)?$/.test(url.pathname)) return;
             // Links to the home page point to the indexable URL of each language.
             if (/^\/(?:(?:en|it)\/)?(?:index\.html)?$/.test(url.pathname)) url.pathname = homePath(language);
             url.searchParams.set('lang', language);
