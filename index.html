@@ -6,11 +6,17 @@
 <title>Showroom 3D interactivo para obra nueva | Prospectus 3D</title>
 <meta name="description" content="Convertimos los planos de tu promoción de obra nueva en un showroom 3D interactivo: edificio 3D, tour 360º, plantas, comparador y disponibilidad. Pide tu demo.">
 <link rel="canonical" href="https://prospectus3d.com/">
+<link rel="alternate" hreflang="es" href="https://prospectus3d.com/">
+<link rel="alternate" hreflang="en" href="https://prospectus3d.com/en/">
+<link rel="alternate" hreflang="it" href="https://prospectus3d.com/it/">
+<link rel="alternate" hreflang="x-default" href="https://prospectus3d.com/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#09090b">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Prospectus 3D">
 <meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="it_IT">
 <meta property="og:url" content="https://prospectus3d.com/">
 <meta property="og:title" content="Showroom 3D interactivo para obra nueva | Prospectus 3D">
 <meta property="og:description" content="Convertimos los planos de tu promoción de obra nueva en un showroom 3D interactivo: edificio 3D, tour 360º, plantas, comparador y disponibilidad. Pide tu demo.">
@@ -327,11 +333,14 @@
         content: ''; position: absolute; inset: 0 0 140px; z-index: -2;
         background: url('assets/hero/serra-residencial.webp') center center / cover no-repeat;
         animation: hero-background 2.4s ease-out both;
+        /* La foto se funde con el fondo para que no quede una línea con la sección siguiente. */
+        -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
     }
     #inicio::after {
         content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-        background: linear-gradient(to bottom, rgba(8,12,23,.68), rgba(13,15,29,.53) 28%, rgba(10,10,19,.72) 55%, #09090b 88%),
-            linear-gradient(110deg, rgba(15,37,55,.32), rgba(70,37,106,.2) 55%, rgba(15,20,30,.14));
+        background: linear-gradient(to bottom, rgba(9,9,11,.72), rgba(9,9,11,.6) 28%, rgba(9,9,11,.8) 58%, #09090b 90%),
+            linear-gradient(110deg, rgba(15,25,40,.16), rgba(45,25,75,.1) 55%, rgba(9,9,11,.06));
     }
     #inicio .hero-content { max-width: 1000px; margin: 0 auto 58px; }
     #inicio .eyebrow {
@@ -357,7 +366,7 @@
     #inicio .vsl-overlay:hover { background: transparent; }
     #inicio .play-btn { width: 68px; height: 68px; box-shadow: 0 0 0 9px rgba(255,255,255,.12), 0 8px 30px #0005; }
     #inicio .play-btn svg { width: 26px; height: 26px; }
-    #inicio .hero-transition { height: 80px; margin: 0 -20px; background: #09090b; }
+    #inicio .hero-transition { height: 80px; margin: 0 -20px; background: transparent; }
     header.hero-nav { background: transparent; border-color: transparent; backdrop-filter: none; color: #fff; }
     header.hero-nav .nav-container { max-width: 1020px; padding: 0 30px; height: 76px; animation: hero-enter .65s both; }
     header.hero-nav .wordmark { font-size: 25px; letter-spacing: -.05em; }
@@ -372,7 +381,7 @@
         #inicio .eyebrow { font-size: 10px; padding: 7px 12px; margin-bottom: 25px; }
         #inicio h1 { font-size: clamp(36px, 9.6vw, 43px); line-height: 1.1; letter-spacing: -.05em; }
         #inicio h1 .hero-line { display: inline; }
-        #inicio .vsl-container { border-radius: 12px; }
+            #inicio .vsl-container { border-radius: 12px; }
         #inicio .play-btn { width: 52px; height: 52px; box-shadow: 0 0 0 6px #ffffff20, 0 8px 25px #0005; }
         #inicio .play-btn svg { width: 22px; height: 22px; }
         #inicio .hero-transition { height: 56px; }
@@ -798,7 +807,7 @@
 </main>
 <footer id="closing-footer">
     <div class="closing-footer-inner">
-        <div><a class="closing-wordmark" href="#inicio">Prospectus<span>.</span></a><p class="closing-copyright">© Prospectus</p></div>
+        <div><a class="closing-wordmark" href="#inicio">Prospectus<span>.</span></a><p class="closing-copyright">© 2026 Prospectus 3D · Tarragona, España</p></div>
         <div class="closing-footer-contact"><a href="mailto:prospectus3d.es@gmail.com">prospectus3d.es@gmail.com</a><a href="tel:+34633716169">+34 633 716 169</a></div>
     </div>
     <nav class="legal-links footer-sections" aria-label="Secciones"><a href="#demo">Ver demo</a><a href="#el-proceso">Cómo funciona</a><a href="#preguntas-frecuentes">Preguntas frecuentes</a><a href="#solicitar-demo">Contacto</a></nav>

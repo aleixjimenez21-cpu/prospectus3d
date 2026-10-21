@@ -22,6 +22,8 @@ Estado del SEO técnico y pasos pendientes que requieren acceso a cuentas extern
 | Core Web Vitals | Precarga con prioridad alta de la imagen del hero (candidata a LCP). Los vídeos ya usan `preload="none"`. |
 | Móvil | Revisado a 390 px y 1440 px. |
 | URLs | Rutas cortas y legibles (`/aviso-legal.html`, etc.). No se cambian para no romper enlaces existentes. |
+| Idiomas | `/en/` y `/it/` son páginas estáticas generadas con `npm run build:languages`, con canonical, `hreflang` y schema propios. La portada española sigue traduciéndose en el navegador con `?lang=`. |
+| Vídeos | Los 4 clips de «En movimiento» se han recomprimido (de 39 MB a 13,5 MB). El VSL se mantiene en su calidad original. |
 
 ## Pendiente: requiere tus cuentas
 

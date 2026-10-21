@@ -31,3 +31,4 @@
 @media(prefers-reduced-motion:reduce) { #hablemos .closing-reveal,#hablemos.is-prepared .closing-reveal { opacity:1; transform:none; transition:none; } #whatsapp-float { transition:none; } }
 #closing-footer nav.footer-sections { margin-top:24px; padding-top:0; padding-bottom:0; border-top:0; }
 #closing-footer nav.footer-sections + .legal-links { margin-top:20px; }
+@media(min-width:481px) { #closing-footer .closing-footer-inner > div:first-child { text-align:left; } }

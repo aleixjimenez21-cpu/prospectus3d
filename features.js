@@ -18,7 +18,7 @@
   ['catalog','GESTIONA','Panel de viviendas','Consulta el catálogo de la promoción y accede a las fichas y al comparador desde una misma lista.']
  ];
  let active=0, timer, visible=false, paused=reduced.matches;
- const path=(i,ext)=>`assets/features/${items[i][0]}.${ext}`;
+ const path=(i,ext)=>`/assets/features/${items[i][0]}.${ext}`;
  function labels(){
   pause.textContent=t(paused?'Reproducir':'Pausar');
   pause.setAttribute('aria-label',t(paused?'Reproducir demostración':'Pausar demostración'));
