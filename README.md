@@ -46,3 +46,7 @@ Validación: cambio entre los tres idiomas a 1440, 768, 390 y 320 px; textos est
 ## Formulario con almacenamiento persistente
 
 El código de integración, las pruebas y el estado real del despliegue se documentan en [docs/contact-deployment.md](docs/contact-deployment.md). No publicar el formulario nuevo con `contact-config.js` incompleto. Las pruebas locales no sustituyen la comprobación de entrega en Gmail.
+
+## SEO
+
+Título, descripción, Open Graph (`assets/og-image.jpg`), JSON-LD (`WebSite`, `Organization`/`ProfessionalService`, `Service`, `WebPage`, `FAQPage`), `sitemap.xml` con imágenes y `404.html`. Las imágenes se sirven en WebP. Si cambias las preguntas frecuentes, actualiza también el bloque `FAQPage` del `<head>` de `index.html`. Estado y pasos pendientes (Search Console, Perfil de Empresa en Google, analítica, backlinks): [docs/seo.md](docs/seo.md).

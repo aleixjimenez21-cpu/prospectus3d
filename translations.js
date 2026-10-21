@@ -1,5 +1,13 @@
 // Spanish source strings and reviewed English/Italian translations.
 window.PROSPECTUS_TRANSLATIONS = {
+  "Preguntas frecuentes": {"en": "Frequently asked questions", "it": "Domande frequenti"},
+  "Página no encontrada": {"en": "Page not found", "it": "Pagina non trovata"},
+  "La página que buscas no existe o ha cambiado de dirección.": {"en": "The page you are looking for does not exist or has moved.", "it": "La pagina che cerchi non esiste o è stata spostata."},
+  "Enlaces principales": {"en": "Main links", "it": "Link principali"},
+  "Secciones": {"en": "Sections", "it": "Sezioni"},
+  "Página no encontrada · Prospectus 3D": {"en": "Page not found · Prospectus 3D", "it": "Pagina non trovata · Prospectus 3D"},
+  "Showroom 3D interactivo para obra nueva | Prospectus 3D": {"en": "Interactive 3D showroom for new-build developments | Prospectus 3D", "it": "Showroom 3D interattivo per nuove costruzioni | Prospectus 3D"},
+  "Convertimos los planos de tu promoción de obra nueva en un showroom 3D interactivo: edificio 3D, tour 360º, plantas, comparador y disponibilidad. Pide tu demo.": {"en": "We turn the plans of your new-build development into an interactive 3D showroom: 3D building, 360º tour, floor plans, comparison tool and availability. Book your demo.", "it": "Trasformiamo le planimetrie del tuo progetto di nuova costruzione in uno showroom 3D interattivo: edificio 3D, tour a 360º, piani, comparatore e disponibilità. Prenota la tua demo."},
   "Prospectus 3D convierte los planos de una promoción inmobiliaria en un showroom 3D interactivo para promotoras e inmobiliarias.": {
     "en": "Prospectus 3D turns property development plans into interactive 3D showrooms for developers and real estate agencies.",
     "it": "Prospectus 3D trasforma le planimetrie dei progetti immobiliari in showroom 3D interattivi per promotori e agenzie immobiliari."

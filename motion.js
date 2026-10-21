@@ -30,7 +30,7 @@
   root.classList.add('changing');
   timer=setTimeout(()=>{
    const item=items[index];
-   image.src='assets/motion/'+item[0]+'.png';
+   image.src='assets/motion/'+item[0]+'.webp';
    root.querySelector('#motion-count').textContent='0'+(index+1)+' / 04';
    caption();
    root.classList.remove('changing');
@@ -56,7 +56,7 @@
  // Original PNGs are preloaded lazily near the section; videos remain on demand.
  new IntersectionObserver((entries,observer)=>{
   if(!entries.some(e=>e.isIntersecting))return;
-  items.slice(1).forEach(item=>{const img=new Image();img.src='assets/motion/'+item[0]+'.png';});
+  items.slice(1).forEach(item=>{const img=new Image();img.src='assets/motion/'+item[0]+'.webp';});
   observer.disconnect();
  },{rootMargin:'300px'}).observe(root);
  window.addEventListener('prospectus:languagechange',caption);
